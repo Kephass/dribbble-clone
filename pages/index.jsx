@@ -1,5 +1,11 @@
+import Banner from '../components/Banner'
+
 function Home() {
-  return <div>This is the landing page!</div>
+  return (
+    <div>
+      <Banner />
+    </div>
+  )
 }
 
 export default Home

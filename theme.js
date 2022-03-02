@@ -5,7 +5,9 @@ const theme = extendTheme({
     transparent: 'transparent',
     black: '#000',
     white: '#fff',
-    gray: '#f7fafc',
+    purple: {
+      50: '#f9f8fd',
+    },
   },
   fonts: {
     heading: 'Barlow, sans-serif',
