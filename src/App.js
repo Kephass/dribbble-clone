@@ -8,6 +8,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path='/' element={<Landing />} />
+					Test
 				</Routes>
 			</Router>
 		</Box>
