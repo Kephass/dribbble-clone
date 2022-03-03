@@ -8,6 +8,7 @@ const theme = extendTheme({
     purple: {
       50: '#f9f8fd',
     },
+    siteGray: '#6e6d7a',
     red: {
       50: '#fafafb',
     },
