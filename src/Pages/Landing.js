@@ -1,7 +1,12 @@
 import { Box } from '@chakra-ui/react';
+import Banner from '../components/Banner';
 
 function Landing() {
-	return <Box textAlign='center'>This is the landing page</Box>;
+  return (
+    <Box>
+      <Banner />
+    </Box>
+  );
 }
 
 export default Landing;
