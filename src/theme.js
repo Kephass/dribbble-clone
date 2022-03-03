@@ -8,6 +8,9 @@ const theme = extendTheme({
     purple: {
       50: '#f9f8fd',
     },
+    red: {
+      50: '#fafafb',
+    },
   },
   fonts: {
     heading: 'Barlow, sans-serif',
