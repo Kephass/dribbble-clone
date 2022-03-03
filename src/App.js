@@ -1,18 +1,29 @@
 import { Box } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
 import Landing from './Pages/Landing';
+import Inspiration from './Pages/Inspiration';
 
 function App() {
-	return (
-		<Box>
-			<Router>
-				<Routes>
-					<Route path='/' element={<Landing />} />
-					Test
-				</Routes>
-			</Router>
-		</Box>
-	);
+  return (
+    <Box>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="inspiration" element={<Inspiration />} />
+          {/* 
+		  <Route path="findWork" element={<FindWork />} />
+          <Route path="learnDesign" element={<LearnDesign />} />
+          <Route path="goPro" element={<GoPro />} />
+          <Route path="marketplace" element={<MarketPlace />} />
+          <Route path="hireDesigners" element={<HireDesigners />} />
+		  <Route path='upload' element={Upload} /> 
+		  */}
+        </Routes>
+      </Router>
+    </Box>
+  );
 }
 
 export default App;
