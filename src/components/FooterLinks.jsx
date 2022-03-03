@@ -1,17 +1,17 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, Text } from '@chakra-ui/react';
 import React from 'react';
 
 function FooterLinks({ title, text }) {
   const arr = text.split(',');
   return (
     <Box>
-      <Text fontSize="1rem" fontWeight="bold" my="3">
+      <Text fontSize="1rem" fontWeight="bold" mb="3" mt="5">
         {title}
       </Text>
       {arr.map((item) => (
-        <Text fontSize="0.9rem" mb="2" cursor="pointer">
+        <Link fontSize="0.9rem" mb="2" display="block">
           {item}
-        </Text>
+        </Link>
       ))}
     </Box>
   );
