@@ -9,6 +9,7 @@ import {
   Avatar,
   Image,
 } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   return (
@@ -21,25 +22,27 @@ const Header = () => {
       fontWeight="bold"
       color="siteGray"
       fontSize="1rem"
+      borderBottom="1px"
+      borderColor="gray.200"
     >
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="/">
           <Image src="logo.svg" height="25px" />
         </NavLink>
-        <NavLink to="inspiration">Inspiration</NavLink>
-        <NavLink to="findWork">Find Work</NavLink>
-        <NavLink to="learnDesign">Learn Design</NavLink>
-        <NavLink to="goPro">GoPro</NavLink>
+        <NavLink to="shots">Inspiration</NavLink>
+        <NavLink to="jobs">Find Work</NavLink>
+        <NavLink to="learn">Learn Design</NavLink>
+        <NavLink to="pro">GoPro</NavLink>
         <NavLink to="marketPlace">Marketplace</NavLink>
-        <NavLink to="hireDesigners">Hire Designers</NavLink>
+        <NavLink to="hiring">Hire Designers</NavLink>
       </Stack>
       <Spacer />
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="user">
           <Avatar name="Felix" src="avatarr.jpeg" height="35px" />
         </NavLink>
-        <NavLink to="upload">
-          <Button>Upload</Button>
+        <NavLink to="uploads">
+          <Button colorScheme="pink">Upload</Button>
         </NavLink>
       </Stack>
     </Flex>
