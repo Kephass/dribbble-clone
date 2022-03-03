@@ -9,7 +9,7 @@ function FooterLinks({ title, text }) {
         {title}
       </Text>
       {arr.map((item) => (
-        <Link fontSize="0.9rem" mb="2" display="block">
+        <Link key={item} fontSize="0.9rem" mb="2" display="block">
           {item}
         </Link>
       ))}
