@@ -1,12 +1,11 @@
 import {
   Button,
   Image,
-  Link,
   Box,
   Container,
   Flex,
   VStack,
-  Text
+  Text,
 } from '@chakra-ui/react';
 
 export const Banner = () => (

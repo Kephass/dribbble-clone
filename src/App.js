@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="inspiration" element={<Inspiration />} />
-          <Route path="findWork" element={<FindWork />} />
+          <Route path="find-work" element={<FindWork />} />
           <Route path="learnDesign" element={<LearnDesign />} />
           {/* 
           <Route path="goPro" element={<GoPro />} />

@@ -18,7 +18,7 @@ export const Header = () => {
           <Image src="images/brand/logo.svg" height="25px" />
         </NavLink>
         <NavLink to="inspiration">Inspiration</NavLink>
-        <NavLink to="findWork">Find Work</NavLink>
+        <NavLink to="find-work">Find Work</NavLink>
         <NavLink to="learnDesign">Learn Design</NavLink>
         <NavLink to="goPro">GoPro</NavLink>
         <NavLink to="marketPlace">Marketplace</NavLink>
