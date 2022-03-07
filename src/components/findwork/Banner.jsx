@@ -20,7 +20,7 @@ export const Banner = () => (
           width={{ base: '100%', lg: '50%' }}
           h="full"
           py="10"
-          px={{ base: '0', md: '10' }}
+          pr="20"
           spacing="10"
           alignItems="flex-start"
         >

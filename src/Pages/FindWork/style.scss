@@ -1,0 +1,21 @@
+.findwork-item {
+    transition: 0.25s ease-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #fafafb;
+
+        .findwork-item-buttons {
+            display: flex;
+            padding-right: 2em;
+        }
+
+        .findwork-item-info {
+            display: none;
+        }
+    }
+}
+
+.findwork-divider {
+    margin: 0 !important;
+}

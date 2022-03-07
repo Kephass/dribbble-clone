@@ -10,6 +10,7 @@ const theme = extendTheme({
     },
     siteGray: '#6e6d7a',
     btnGray: '#f3f3f4',
+    lightGray: '#fafafb',
     red: {
       50: '#fafafb',
     },
