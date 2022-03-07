@@ -1,5 +1,4 @@
 import {
-  DribbbleCircleFilled,
   DribbbleOutlined,
   FacebookFilled,
   InstagramOutlined,
@@ -15,9 +14,9 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react';
-import FooterLinks from './FooterLinks';
+import { FooterLinks } from '@components';
 
-function Footer() {
+export function Footer() {
   return (
     <Box bg="red.50" minH="50vh" py="10" px={{ base: '5', xl: '20' }}>
       <Container maxW="8xl">
@@ -136,5 +135,3 @@ function Footer() {
     </Box>
   );
 }
-
-export default Footer;

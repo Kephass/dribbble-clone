@@ -1,5 +1,5 @@
-import Card from '../Card';
-import { getPosts } from '../../features/listSlice';
+import { Card } from '@components';
+import { getPosts } from '@features/listSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@chakra-ui/react';
@@ -25,4 +25,3 @@ export function Body() {
     </Grid>
   );
 }
-

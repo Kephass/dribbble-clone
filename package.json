@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@chakra-ui/react": "^1.8.6",
+    "@craco/craco": "^6.4.3",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@reduxjs/toolkit": "^1.8.0",
@@ -23,10 +24,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "prettier": "prettier '{config,src}/**/*.{js,jsx,ts,tsx}' --write"
   },
   "eslintConfig": {
     "extends": [

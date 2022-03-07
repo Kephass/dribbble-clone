@@ -1,8 +1,3 @@
-
-// pages
-export * from './landing';
-export * from './findwork';
-
 // global
 export * from './Header';
 export * from './Card';

@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
-import {Banner, Body} from '../components/landing';
-import Footer from '../components/Footer';
+import { Banner, Body } from '@components/landing';
+import { Footer } from '@components';
 
 function Landing() {
   return (

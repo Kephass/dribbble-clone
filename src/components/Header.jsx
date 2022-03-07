@@ -1,16 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  Box,
-  Flex,
-  Stack,
-  Spacer,
-  Button,
-  Avatar,
-  Image,
-} from '@chakra-ui/react';
+import { Flex, Stack, Spacer, Button, Avatar, Image } from '@chakra-ui/react';
 
-const Header = () => {
+export const Header = () => {
   return (
     <Flex
       bg="#white"
@@ -20,7 +12,6 @@ const Header = () => {
       margin="auto"
       fontWeight="bold"
       color="siteGray"
-      fontSize="1rem"
     >
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="/">
@@ -45,5 +36,3 @@ const Header = () => {
     </Flex>
   );
 };
-
-export default Header;
