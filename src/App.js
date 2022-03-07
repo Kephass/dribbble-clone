@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import { Header } from '@components';
 import Landing from './Pages/Landing';
 import Inspiration from './Pages/Inspiration';
 import FindWork from './Pages/FindWork';
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="inspiration" element={<Inspiration />} />
-          <Route path="findWork" element={<FindWork />} />
+          <Route path="find-work" element={<FindWork />} />
           <Route path="learnDesign" element={<LearnDesign />} />
           {/* 
           <Route path="goPro" element={<GoPro />} />

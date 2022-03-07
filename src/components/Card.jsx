@@ -1,8 +1,8 @@
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
-import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Image, Text, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
-function Card({ img, title, text }) {
+export function Card({ img, title, text }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
@@ -41,5 +41,3 @@ function Card({ img, title, text }) {
     </Box>
   );
 }
-
-export default Card;
