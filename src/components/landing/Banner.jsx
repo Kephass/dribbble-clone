@@ -9,7 +9,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 
-function Banner() {
+export function Banner() {
   const handleClick = () => {
     alert('I was clicked!');
   };
@@ -71,4 +71,3 @@ function Banner() {
   );
 }
 
-export default Banner;

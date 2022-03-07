@@ -1,7 +1,15 @@
 import React from 'react';
+import { Box } from '@chakra-ui/react';
+import Footer from '../components/Footer';
 
 const FindWork = () => {
-  return <div>Find Work</div>;
+  return (
+    <Box>
+
+
+      <Footer />
+    </Box>
+  );
 };
 
 export default FindWork;
