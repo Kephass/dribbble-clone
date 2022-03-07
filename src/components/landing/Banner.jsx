@@ -55,7 +55,7 @@ export function Banner() {
               width="800px"
               height="522px"
               fit="contain"
-              src="bannerImage.png"
+              src="images/banners/landing.png"
               mb="-14"
             />
             <Text color="gray.400" align={{ base: 'center', md: 'right' }}>
