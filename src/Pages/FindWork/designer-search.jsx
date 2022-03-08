@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { Footer } from '@components';
-import { Banner, Body, Filter } from '@components/findwork';
+import { Footer, Banner } from '@components';
+import { Body, Filter } from '@components/findwork';
 import './style.scss';
 
-const FindWork = () => {
+export const DesignerSearch = () => {
   return (
     <Box>
       <Filter />
@@ -14,5 +14,3 @@ const FindWork = () => {
     </Box>
   );
 };
-
-export default FindWork;
