@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from '@components';
 import Landing from './Pages/Landing';
 import Inspiration from './Pages/Inspiration';
-import FindWork from './Pages/FindWork';
+import { Jobs, Freelance, DesignerSearch } from './Pages/FindWork';
 import LearnDesign from './Pages/LearnDesign';
 import UserProfile from './Pages/UserProfile';
 
@@ -15,7 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="shots" element={<Inspiration />} />
-          <Route path="jobs" element={<FindWork />} />
+          <Route path="jobs" element={<Jobs />} />
+          <Route path="freelance-jobs" element={<Freelance />} />
+          <Route path="designers" element={<DesignerSearch />} />
           <Route path="learn" element={<LearnDesign />} />
           <Route path="learnDesign" element={<LearnDesign />} />
           {/* 

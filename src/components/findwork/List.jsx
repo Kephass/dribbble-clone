@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Container,
   Flex,
   VStack,
   StackDivider,
@@ -20,8 +19,9 @@ export function List({ jobs }) {
       align="stretch"
       width="100%"
     >
-      {jobs.map(({ title, timeStamp, post, type, location, logo }) => (
+      {jobs.map(({ title, timeStamp, post, type, location, logo }, i) => (
         <Box
+          key={`jobs${i}`}
           width="100%"
           className="findwork-item"
           py="24px"
@@ -45,23 +45,25 @@ export function List({ jobs }) {
               <Text fontWeight="bold" fontSize="xl" mb="1">
                 {title}
               </Text>
-              <Text
-                display="flex"
-                fontSize="lg"
-                fontWeight="bold"
-                color="siteGray"
-              >
-                {post}
+              <Flex align="center" justify="flex-end">
+                <Text
+                  display="flex"
+                  fontSize="lg"
+                  fontWeight="bold"
+                  color="siteGray"
+                >
+                  {post}
+                </Text>
                 <Text ml="1" fontWeight="light" color="gray">
                   • {type}
                 </Text>
-              </Text>
+              </Flex>
             </Box>
             <Spacer />
             {/* RIGHT */}
             <Box className="findwork-item-info">
-              <Text fontWeight="normal" fontSize="md" mb="1" align="right">
-                <Flex align="center" justify="flex-end">
+              <Flex align="center" justify="flex-end">
+                <Text fontWeight="normal" fontSize="md" mb="1" align="right">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     style={{ width: '15px', height: '15px' }}
@@ -69,14 +71,22 @@ export function List({ jobs }) {
                     fill="currentColor"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
-                  <Text ml="2">{location}</Text>
-                </Flex>
-              </Text>
+                </Text>
+                <Text
+                  fontWeight="normal"
+                  fontSize="md"
+                  mb="1"
+                  align="right"
+                  ml="1"
+                >
+                  {location}
+                </Text>
+              </Flex>
               <Box color="siteGray" fontSize="md" fontWeight="medium">
                 <TimeAgo live={false} date={timeStamp} />
               </Box>
