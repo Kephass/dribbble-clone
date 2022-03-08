@@ -1,12 +1,10 @@
-import Card from './Card';
-import { getPosts } from '../features/listSlice';
+import { Card, CardText } from '@components';
+import { getPosts } from '@features/listSlice';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { Box, Container, Flex, Grid, HStack, VStack } from '@chakra-ui/react';
-import CardText from './CardText';
+import { useDispatch, useSelector } from 'react-redux';
+import { Container, Flex, Grid } from '@chakra-ui/react';
 
-function Body() {
+export function Body() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,5 +40,3 @@ function Body() {
     </Container>
   );
 }
-
-export default Body;

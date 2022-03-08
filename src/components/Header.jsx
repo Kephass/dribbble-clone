@@ -1,16 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  Box,
-  Flex,
-  Stack,
-  Spacer,
-  Button,
-  Avatar,
-  Image,
-} from '@chakra-ui/react';
+import { Flex, Stack, Spacer, Button, Avatar, Image } from '@chakra-ui/react';
 
-const Header = () => {
+export const Header = () => {
   return (
     <Flex
       bg="#white"
@@ -20,14 +12,13 @@ const Header = () => {
       margin="auto"
       fontWeight="bold"
       color="siteGray"
-      fontSize="1rem"
     >
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="/">
-          <Image src="logo.svg" height="25px" />
+          <Image src="images/brand/logo.svg" height="25px" />
         </NavLink>
         <NavLink to="inspiration">Inspiration</NavLink>
-        <NavLink to="findWork">Find Work</NavLink>
+        <NavLink to="find-work">Find Work</NavLink>
         <NavLink to="learnDesign">Learn Design</NavLink>
         <NavLink to="goPro">GoPro</NavLink>
         <NavLink to="marketPlace">Marketplace</NavLink>
@@ -36,7 +27,7 @@ const Header = () => {
       <Spacer />
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="user">
-          <Avatar name="Felix" src="avatarr.jpeg" height="35px" />
+          <Avatar name="Felix" src="images/default/avatar.jpeg" height="35px" />
         </NavLink>
         <NavLink to="upload">
           <Button>Upload</Button>
@@ -45,5 +36,3 @@ const Header = () => {
     </Flex>
   );
 };
-
-export default Header;

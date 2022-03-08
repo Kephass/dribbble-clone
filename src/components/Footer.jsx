@@ -1,5 +1,4 @@
 import {
-  DribbbleCircleFilled,
   DribbbleOutlined,
   FacebookFilled,
   InstagramOutlined,
@@ -15,15 +14,15 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react';
-import FooterLinks from './FooterLinks';
+import { FooterLinks } from '@components';
 
-function Footer() {
+export function Footer() {
   return (
     <Box bg="red.50" minH="50vh" py="10" px={{ base: '5', xl: '20' }}>
       <Container maxW="8xl">
         <Flex justify="space-between" direction={{ base: 'column', xl: 'row' }}>
           <Box flexShrink="0" mr="4" mb="4">
-            <Image height="30px" src="logo.svg" mb="4"></Image>
+            <Image height="30px" src="images/brand/logo.svg" mb="4"></Image>
             <Box mb="4">
               <Text>Dribbble is the world's leading</Text>
               <Text>community for creatives to share, grow,</Text>
@@ -128,7 +127,7 @@ function Footer() {
               <Text>
                 <Link fontWeight="bold">17,638,100</Link> shots dribbbled
               </Text>
-              <Image height="24px" src="logo-ball.svg"></Image>
+              <Image height="24px" src="images/brand/logo-ball.svg"></Image>
             </Flex>
           </Flex>
         </Box>
@@ -136,5 +135,3 @@ function Footer() {
     </Box>
   );
 }
-
-export default Footer;

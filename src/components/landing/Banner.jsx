@@ -9,7 +9,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 
-function Banner() {
+export function Banner() {
   const handleClick = () => {
     alert('I was clicked!');
   };
@@ -55,7 +55,7 @@ function Banner() {
               width="800px"
               height="522px"
               fit="contain"
-              src="bannerImage.png"
+              src="images/banners/landing.png"
               mb="-14"
             />
             <Text color="gray.400" align={{ base: 'center', md: 'right' }}>
@@ -70,5 +70,3 @@ function Banner() {
     </Box>
   );
 }
-
-export default Banner;
