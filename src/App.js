@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from '@components';
 import Landing from './Pages/Landing';
 import Inspiration from './Pages/Inspiration';
-import {Jobs, Freelance, DesignerSearch} from './Pages/FindWork';
+import { Jobs, Freelance, DesignerSearch } from './Pages/FindWork';
 import LearnDesign from './Pages/LearnDesign';
 import UserProfile from './Pages/UserProfile';
 
