@@ -50,7 +50,11 @@ export const Banner = ({
           <Text
             align={descriptionOptions?.align || 'left'}
             fontSize={
-              descriptionOptions?.fontSize || { base: 'lg', md: 'xl', lg: '2xl' }
+              descriptionOptions?.fontSize || {
+                base: 'lg',
+                md: 'xl',
+                lg: '2xl',
+              }
             }
             lineHeight={descriptionOptions?.lineHeight || 'normal'}
             fontWeight={descriptionOptions?.fontWeight || 'medium'}
@@ -106,15 +110,14 @@ export const Banner = ({
   </Box>
 );
 
-
 Banner.propTypes = {
   title: PropTypes.string.isRequired,
   titleOptions: PropTypes.object,
   descriptionOptions: PropTypes.object,
-  description:PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   image: PropTypes.string,
   video: PropTypes.string,
   mediaOptions: PropTypes.object,
   buttons: PropTypes.array,
   children: PropTypes.node,
-}
+};
