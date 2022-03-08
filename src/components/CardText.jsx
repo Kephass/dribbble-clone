@@ -1,7 +1,7 @@
 import { EyeFilled, HeartFilled } from '@ant-design/icons';
 import { Box, Flex, HStack, Image, Text } from '@chakra-ui/react';
 
-function CardText({ img, text, likes, views }) {
+export function CardText({ img, text, likes, views }) {
   return (
     <Flex alignItems="center" justify="space-between">
       <HStack isTruncated alignItems="center">
@@ -23,5 +23,3 @@ function CardText({ img, text, likes, views }) {
     </Flex>
   );
 }
-
-export default CardText;
