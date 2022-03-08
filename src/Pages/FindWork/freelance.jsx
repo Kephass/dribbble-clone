@@ -3,11 +3,12 @@ import { Box, Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import { Footer, Banner } from '@components';
 import { Body, Filter } from '@components/findwork';
 import './style.scss';
+import {links} from './index';
 
 export const Freelance = () => {
   return (
     <Box>
-      <Filter />
+      <Filter links={links}/>
       <Banner
         title={'Freelance Graphic Design Jobs'}
         description="The project board is an exclusive resource for contract work. It’s perfect for freelancers, agencies, and moonlighters on Dribbble."

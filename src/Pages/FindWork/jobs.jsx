@@ -3,11 +3,12 @@ import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { Footer, Banner } from '@components';
 import { Body, Filter } from '@components/findwork';
 import './style.scss';
+import {links} from './index';
 
 export const Jobs = () => {
   return (
     <Box>
-      <Filter />
+      <Filter links={links}/>
       <Banner
         title={"The #1 Job Board for Graphic Design Jobs"}
         description="Dribbble is the heart of the design community and the best resource
