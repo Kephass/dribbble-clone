@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
-const Header = () => {
+export const Header = () => {
   return (
     <Flex
       bg="#white"
@@ -27,7 +27,7 @@ const Header = () => {
     >
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="/">
-          <Image src="logo.svg" height="25px" />
+          <Image src="images/brand/logo.svg" height="25px" />
         </NavLink>
         <NavLink to="shots">Inspiration</NavLink>
         <NavLink to="jobs">Find Work</NavLink>
@@ -39,7 +39,7 @@ const Header = () => {
       <Spacer />
       <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
         <NavLink to="user">
-          <Avatar name="Felix" src="avatarr.jpeg" height="35px" />
+          <Avatar name="Felix" src="images/default/avatar.jpeg" height="35px" />
         </NavLink>
         <NavLink to="uploads">
           <Button colorScheme="pink">Upload</Button>
@@ -48,5 +48,3 @@ const Header = () => {
     </Flex>
   );
 };
-
-export default Header;

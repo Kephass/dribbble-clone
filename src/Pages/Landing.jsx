@@ -1,11 +1,12 @@
 import { Box } from '@chakra-ui/react';
-import Banner from '../components/Banner';
-import Footer from '../components/Footer';
+import { Banner, Body } from '@components/landing';
+import { Footer } from '@components';
 
 function Landing() {
   return (
     <Box>
       <Banner />
+      <Body />
       <Footer />
     </Box>
   );
