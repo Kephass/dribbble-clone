@@ -1,7 +1,7 @@
 import { Container, Flex, Button } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-export function Filter({}) {
+export function Filter() {
   return (
     <Container maxW="container.xl" mt="5">
       <Flex>

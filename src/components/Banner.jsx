@@ -6,9 +6,10 @@ import {
   Flex,
   VStack,
   Text,
-  AspectRatio,
+  AspectRatio
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 export const Banner = ({
   title,
@@ -19,7 +20,7 @@ export const Banner = ({
   video = null,
   mediaOptions = null,
   buttons = [],
-  children = null,
+  children = null
 }) => (
   <Box py={10}>
     <Container maxW="container.xl" centerContent>
@@ -33,7 +34,7 @@ export const Banner = ({
           h="full"
           py="10"
           pr="20"
-          spacing="10"
+          spacing="8"
           alignItems="flex-start"
         >
           <Text
@@ -50,24 +51,30 @@ export const Banner = ({
           <Text
             align={descriptionOptions?.align || 'left'}
             fontSize={
-              descriptionOptions?.fontSize || { base: 'lg', md: 'xl', lg: '2xl' }
+              descriptionOptions?.fontSize || {
+                base: 'lg',
+                md: 'xl',
+                lg: '2xl'
+              }
             }
             lineHeight={descriptionOptions?.lineHeight || 'normal'}
             fontWeight={descriptionOptions?.fontWeight || 'medium'}
+            mt="0px"
           >
             {description}
           </Text>
           <Flex>
             {buttons &&
               buttons.map((btn, i) => (
-                <Button
-                  key={`btn${i}`}
-                  colorScheme={btn.color || 'pink'}
-                  variant={btn.variant || 'solid'}
-                  mr="3"
-                >
-                  {btn.text}
-                </Button>
+                <NavLink to={btn.link || '/'} key={`btn${i}`}>
+                  <Button
+                    colorScheme={btn.color || 'pink'}
+                    variant={btn.variant || 'solid'}
+                    mr="3"
+                  >
+                    {btn.text}
+                  </Button>
+                </NavLink>
               ))}
           </Flex>
         </VStack>
@@ -106,15 +113,14 @@ export const Banner = ({
   </Box>
 );
 
-
 Banner.propTypes = {
   title: PropTypes.string.isRequired,
   titleOptions: PropTypes.object,
   descriptionOptions: PropTypes.object,
-  description:PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   image: PropTypes.string,
   video: PropTypes.string,
   mediaOptions: PropTypes.object,
   buttons: PropTypes.array,
-  children: PropTypes.node,
-}
+  children: PropTypes.node
+};
