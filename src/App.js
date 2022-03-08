@@ -5,6 +5,7 @@ import Landing from './Pages/Landing';
 import Inspiration from './Pages/Inspiration';
 import FindWork from './Pages/FindWork';
 import LearnDesign from './Pages/LearnDesign';
+import GoPro from './Pages/GoPro';
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
           <Route path="inspiration" element={<Inspiration />} />
           <Route path="find-work" element={<FindWork />} />
           <Route path="learnDesign" element={<LearnDesign />} />
-          {/* 
           <Route path="goPro" element={<GoPro />} />
+          {/* 
           <Route path="marketplace" element={<MarketPlace />} />
           <Route path="hireDesigners" element={<HireDesigners />} />
 		  <Route path='upload' element={Upload} /> 
