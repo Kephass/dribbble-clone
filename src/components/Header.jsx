@@ -1,50 +1,133 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
 import {
   Box,
   Flex,
-  Stack,
-  Spacer,
-  Button,
   Avatar,
+  HStack,
+  IconButton,
   Image,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+
+const Links = [
+  {
+    title: 'Inspiration',
+    url: 'shots',
+  },
+  {
+    title: 'Find Work',
+    url: 'jobs',
+  },
+  {
+    title: 'Learn Design',
+    url: 'learn',
+  },
+  {
+    title: 'Go Pro',
+    url: 'pro',
+  },
+  {
+    title: 'Marketplace',
+    url: 'marketplace',
+  },
+  {
+    title: 'Hire Designers',
+    url: 'hiring',
+  },
+];
 
 export const Header = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <Flex
-      bg="#white"
-      h="5rem"
-      fontSize="1.1rem"
-      maxW="1440px"
-      margin="auto"
-      fontWeight="bold"
-      color="siteGray"
-      fontSize="1rem"
-      borderBottom="1px"
-      borderColor="gray.200"
-    >
-      <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
-        <NavLink to="/">
-          <Image src="images/brand/logo.svg" height="25px" />
-        </NavLink>
-        <NavLink to="shots">Inspiration</NavLink>
-        <NavLink to="jobs">Find Work</NavLink>
-        <NavLink to="learn">Learn Design</NavLink>
-        <NavLink to="pro">GoPro</NavLink>
-        <NavLink to="marketPlace">Marketplace</NavLink>
-        <NavLink to="hiring">Hire Designers</NavLink>
-      </Stack>
-      <Spacer />
-      <Stack direction={['column', 'row']} spacing="1.5rem" alignSelf="center">
-        <NavLink to="user">
-          <Avatar name="Felix" src="images/default/avatar.jpeg" height="35px" />
-        </NavLink>
-        <NavLink to="uploads">
-          <Button colorScheme="pink">Upload</Button>
-        </NavLink>
-      </Stack>
-    </Flex>
+    <>
+      <Box
+        borderBottom="1px"
+        borderColor="gray.200"
+        fontWeight="bold"
+        fontSize="sm"
+        color="siteGray"
+        px={4}
+        py={2}
+      >
+        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={'center'}>
+            <Link to="/">
+              <Image src="images/brand/logo.svg" height="25px" />
+            </Link>
+            <HStack
+              as={'nav'}
+              spacing={4}
+              display={{ base: 'none', md: 'flex' }}
+            >
+              {Links.map((link) => (
+                <Link to={link.url} key={link.url}>
+                  {link.title}
+                </Link>
+              ))}
+            </HStack>
+          </HStack>
+          <Flex alignItems={'center'}>
+            <Menu>
+              <MenuButton
+                mr={4}
+                as={Button}
+                rounded={'full'}
+                variant={'link'}
+                cursor={'pointer'}
+                minW={0}
+              >
+                <Avatar
+                  name="Felix"
+                  src="images/default/avatar.jpeg"
+                  size={'sm'}
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Profile</MenuItem>
+                <MenuDivider />
+                <MenuItem>Edit Profile</MenuItem>
+                <MenuItem>Edit Work Preferences</MenuItem>
+                <MenuDivider />
+                <MenuItem>My Likes</MenuItem>
+              </MenuList>
+            </Menu>
+            <Link to="uploads">
+              <Button variant={'solid'} colorScheme={'pink'} size={'sm'}>
+                Upload
+              </Button>
+            </Link>
+          </Flex>
+        </Flex>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <Link to={link.url} key={link.url}>
+                  {link.title}
+                </Link>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
+      </Box>
+    </>
   );
 };
