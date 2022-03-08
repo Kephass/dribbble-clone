@@ -9,6 +9,7 @@ import {
   Checkbox,
   Stack,
 } from '@chakra-ui/react';
+import { InputUi } from '@components/ui';
 
 export const Search = () => {
   return (
@@ -23,12 +24,8 @@ export const Search = () => {
     >
       <FormControl>
         <Box my="2">
-          <FormLabel htmlFor="first-name" fontWeight="bold" fontSize="md">
-            Filter
-          </FormLabel>
-          <Input id="first-name" placeholder="Company, skill, tag..." />
+          <InputUi placeholder="Company, skill, tag..." label="Filter" />
         </Box>
-
         <Divider my="4" />
         <Box my="2">
           <FormLabel htmlFor="first-name" fontWeight="bold" fontSize="md">
@@ -65,10 +62,7 @@ export const Search = () => {
         </Box>
         <Divider my="4" />
         <Box my="2">
-          <FormLabel htmlFor="first-name" fontWeight="bold" fontSize="md">
-            Location
-          </FormLabel>
-          <Input id="first-name" placeholder="Enter Location…" />
+          <InputUi placeholder="Enter Location…" label="Location" />
           <Checkbox size="lg" value="open-to-remote" mt="4">
             Open to remote
           </Checkbox>

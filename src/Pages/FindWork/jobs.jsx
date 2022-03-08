@@ -10,7 +10,7 @@ export const Jobs = () => {
     <Box>
       <Filter links={links}/>
       <Banner
-        title={"The #1 Job Board for Graphic Design Jobs"}
+        title={'The #1 Job Board for Graphic Design Jobs'}
         description="Dribbble is the heart of the design community and the best resource
             to discover and connect with designers and jobs worldwide."
         image="images/banners/jobs.png"

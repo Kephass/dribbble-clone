@@ -54,7 +54,7 @@ export const Banner = ({
               descriptionOptions?.fontSize || {
                 base: 'lg',
                 md: 'xl',
-                lg: '2xl'
+                lg: '2xl',
               }
             }
             lineHeight={descriptionOptions?.lineHeight || 'normal'}
@@ -122,5 +122,5 @@ Banner.propTypes = {
   video: PropTypes.string,
   mediaOptions: PropTypes.object,
   buttons: PropTypes.array,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

@@ -3,29 +3,29 @@ import { Box, Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import { Footer, Banner } from '@components';
 import { Body, Filter } from '@components/findwork';
 import './style.scss';
-import {links} from './index';
+import { links } from './index';
 
 export const Freelance = () => {
   return (
     <Box>
-      <Filter links={links}/>
+      <Filter links={links} />
       <Banner
         title={'Freelance Graphic Design Jobs'}
         description="The project board is an exclusive resource for contract work. It’s perfect for freelancers, agencies, and moonlighters on Dribbble."
         image="images/banners/freelance.png"
         buttons={[
           { text: 'Create a project - Free', link: '/create-project' },
-          { text: 'Are you a freelancer?', color: 'gray', link: '/projects' }
+          { text: 'Are you a freelancer?', color: 'gray', link: '/projects' },
         ]}
         titleOptions={{
           fontSize: { base: '2xl', md: '2xl', lg: '2rem' },
           align: 'left',
-          fontWeight: 'extrabold'
+          fontWeight: 'extrabold',
         }}
         descriptionOptions={{
           fontSize: { base: 'lg', md: 'xl', lg: '2xl' },
           align: 'left',
-          fontWeight: 'medium'
+          fontWeight: 'medium',
         }}
       >
         <Box
