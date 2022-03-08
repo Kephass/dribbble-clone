@@ -8,6 +8,7 @@ import {
   Text,
   AspectRatio,
 } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
 export const Banner = ({
   title,
@@ -36,23 +37,23 @@ export const Banner = ({
           alignItems="flex-start"
         >
           <Text
-            align={titleOptions.align || 'left'}
+            align={titleOptions?.align || 'left'}
             fontSize={
-              titleOptions.fontSize || { base: '2xl', md: '2xl', lg: '2rem' }
+              titleOptions?.fontSize || { base: '2xl', md: '2xl', lg: '2rem' }
             }
-            lineHeight={titleOptions.lineHeight || 'normal'}
-            fontWeight={titleOptions.fontWeight || 'extrabold'}
+            lineHeight={titleOptions?.lineHeight || 'normal'}
+            fontWeight={titleOptions?.fontWeight || 'extrabold'}
           >
             {title}
           </Text>
 
           <Text
-            align={descriptionOptions.align || 'left'}
+            align={descriptionOptions?.align || 'left'}
             fontSize={
-              descriptionOptions.fontSize || { base: 'lg', md: 'xl', lg: '2xl' }
+              descriptionOptions?.fontSize || { base: 'lg', md: 'xl', lg: '2xl' }
             }
-            lineHeight={descriptionOptions.lineHeight || 'normal'}
-            fontWeight={descriptionOptions.fontWeight || 'medium'}
+            lineHeight={descriptionOptions?.lineHeight || 'normal'}
+            fontWeight={descriptionOptions?.fontWeight || 'medium'}
           >
             {description}
           </Text>
@@ -80,11 +81,11 @@ export const Banner = ({
 
           {video && (
             <AspectRatio
-              width={mediaOptions.width || '100%'}
-              ratio={mediaOptions.ratio || 1}
+              width={mediaOptions?.width || '100%'}
+              ratio={mediaOptions?.ratio || 1}
             >
               <iframe
-                title={mediaOptions.title || ''}
+                title={mediaOptions?.title || ''}
                 src={video}
                 allowFullScreen
               />
@@ -92,11 +93,11 @@ export const Banner = ({
           )}
           {image && (
             <Image
-              width={mediaOptions.width || '100%'}
-              fit={mediaOptions.width || 'contain'}
+              width={mediaOptions?.width || '100%'}
+              fit={mediaOptions?.width || 'contain'}
               src={image}
-              alt={mediaOptions.title || ''}
-              borderRadius={mediaOptions.borderRadius || '32'}
+              alt={mediaOptions?.title || ''}
+              borderRadius={mediaOptions?.borderRadius || '32'}
             />
           )}
         </Box>
@@ -104,3 +105,16 @@ export const Banner = ({
     </Container>
   </Box>
 );
+
+
+Banner.propTypes = {
+  title: PropTypes.string.isRequired,
+  titleOptions: PropTypes.object,
+  descriptionOptions: PropTypes.object,
+  description:PropTypes.string.isRequired,
+  image: PropTypes.string,
+  video: PropTypes.string,
+  mediaOptions: PropTypes.object,
+  buttons: PropTypes.array,
+  children: PropTypes.node,
+}
