@@ -4,3 +4,4 @@ export * from './Card';
 export * from './Footer';
 export * from './FooterLinks';
 export * from './CardText';
+export * from './Banner';

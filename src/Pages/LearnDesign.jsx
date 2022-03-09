@@ -1,7 +1,8 @@
 import React from 'react';
+import Banner from '../components/learnDesign/Banner';
 
 const LearnDesign = () => {
-  return <div>Learn Design</div>;
+  return <Banner />;
 };
 
 export default LearnDesign;

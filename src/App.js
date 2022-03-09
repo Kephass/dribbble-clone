@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from '@components';
 import Landing from './Pages/Landing';
 import Inspiration from './Pages/Inspiration';
-import FindWork from './Pages/FindWork';
+import { Jobs, Freelance, DesignerSearch } from './Pages/FindWork';
 import LearnDesign from './Pages/LearnDesign';
 import GoPro from './Pages/GoPro';
+import UserProfile from './Pages/UserProfile';
 
 function App() {
   return (
@@ -14,14 +15,20 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="inspiration" element={<Inspiration />} />
-          <Route path="find-work" element={<FindWork />} />
+          <Route path="shots" element={<Inspiration />} />
+          <Route path="jobs" element={<Jobs />} />
+          <Route path="freelance-jobs" element={<Freelance />} />
+          <Route path="designers" element={<DesignerSearch />} />
+          <Route path="learn" element={<LearnDesign />} />
           <Route path="learnDesign" element={<LearnDesign />} />
           <Route path="goPro" element={<GoPro />} />
           {/* 
           <Route path="marketplace" element={<MarketPlace />} />
-          <Route path="hireDesigners" element={<HireDesigners />} />
-		  <Route path='upload' element={Upload} /> 
+          <Route path="hiring" element={<HireDesigners />} />
+		      */}
+          <Route path="/users/:userId" element={<UserProfile />} />
+          {/* 
+		  <Route path='uploads' element={Upload} /> 
 		  */}
         </Routes>
       </Router>
