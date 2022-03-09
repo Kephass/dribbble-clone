@@ -24,8 +24,8 @@ export function Body() {
         gap="10"
         templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
       >
-        {posts.map((item) => (
-          <Flex direction="column" gap="2">
+        {posts.map((item,i) => (
+          <Flex direction="column" gap="2" key={`projects${i}`}>
             <Card title={item.title} key={item.id} img={item.url} />
             <CardText
               key={item.id}
