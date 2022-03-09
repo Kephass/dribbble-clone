@@ -6,7 +6,7 @@ import {
   Flex,
   VStack,
   Text,
-  AspectRatio
+  AspectRatio,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const Banner = ({
   video = null,
   mediaOptions = null,
   buttons = [],
-  children = null
+  children = null,
 }) => (
   <Box py={10}>
     <Container maxW="container.xl" centerContent>

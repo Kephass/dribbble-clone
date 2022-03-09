@@ -7,12 +7,17 @@ export function Filter({ links }) {
       {links && (
         <Container maxW="container.xl" mt="5">
           <Flex>
-            {links.map((link, i) =>  <NavLink to={link.url || '/'} key={`filternav${i}`}>
-              <Button fontSize={link.textSize || 'sm'} mr="2" className="filter-btn" >
-                {link.title}
-              </Button>
-            </NavLink> )}
-
+            {links.map((link, i) => (
+              <NavLink to={link.url || '/'} key={`filternav${i}`}>
+                <Button
+                  fontSize={link.textSize || 'sm'}
+                  mr="2"
+                  className="filter-btn"
+                >
+                  {link.title}
+                </Button>
+              </NavLink>
+            ))}
           </Flex>
         </Container>
       )}

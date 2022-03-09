@@ -47,7 +47,9 @@ export const Body = () => {
 
       <Flex my="10" width="100%">
         <List jobs={jobsDummy} />
-        <Search />
+        <Box ml="5">
+          <Search border="1px solid" />
+        </Box>
       </Flex>
     </Container>
   );

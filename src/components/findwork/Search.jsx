@@ -4,21 +4,24 @@ import {
   Box,
   FormControl,
   FormLabel,
-  Input,
   CheckboxGroup,
   Checkbox,
   Stack,
 } from '@chakra-ui/react';
 import { InputUi } from '@components/ui';
 
-export const Search = () => {
+export const Search = ({
+  width,
+  border = '0px solid',
+  borderColor = 'gray.200',
+}) => {
   return (
     <Box
       display={{ base: 'none', md: 'block' }}
-      ml="12"
       minWidth="300px"
-      border={'1px solid'}
-      borderColor="gray.200"
+      width={width}
+      border={border}
+      borderColor={borderColor}
       borderRadius="10"
       p="32px"
     >
