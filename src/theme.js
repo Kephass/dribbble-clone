@@ -14,6 +14,7 @@ const theme = extendTheme({
     red: {
       50: '#fafafb',
     },
+    bgFAQ: '#fbf5f3',
   },
   fonts: {
     heading: 'Barlow, sans-serif',

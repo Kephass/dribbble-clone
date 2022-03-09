@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import React from 'react';
+import { motion } from 'framer-motion';
 
 const Banner = () => {
   return (
@@ -31,22 +31,23 @@ const Banner = () => {
             flex={1}
             objectFit="cover"
             bgRepeat="no-repeat"
-            bgImage="url('learn-design-hero.png')"
+            bgImage="url('/images/learn-design/learn-design-hero.png')"
             height="600px"
           >
             <Image
               boxSize="100px"
               position="relative"
-              src="sprinkle-doodle.png"
+              src="/images/learn-design/sprinkle-doodle.png"
               top="-40px"
               left="1px"
             />
-            <Image
-              boxSize="100px"
-              position="absolute"
-              src="tornado-doodle.png"
-              mt="20rem"
-            />
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 2 }}>
+              <Image
+                boxSize="100px"
+                position="absolute"
+                src="/images/learn-design/tornado-doodle.png"
+              />
+            </motion.div>
           </Box>
         </Stack>
       </Container>

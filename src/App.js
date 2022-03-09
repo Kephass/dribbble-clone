@@ -20,8 +20,7 @@ function App() {
           <Route path="freelance-jobs" element={<Freelance />} />
           <Route path="designers" element={<DesignerSearch />} />
           <Route path="learn" element={<LearnDesign />} />
-          <Route path="learnDesign" element={<LearnDesign />} />
-          <Route path="goPro" element={<GoPro />} />
+          <Route path="pro" element={<GoPro />} />
           {/* 
           <Route path="marketplace" element={<MarketPlace />} />
           <Route path="hiring" element={<HireDesigners />} />
