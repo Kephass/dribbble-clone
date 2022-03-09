@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none" class="icon">
+<ellipse cx="13.8004" cy="8.4" rx="8.4" ry="8.4" fill="#FEBA57"></ellipse>
+<ellipse cx="22.2008" cy="30.6" rx="8.4" ry="8.4" fill="#026D7B"></ellipse>
+<ellipse cx="36.0006" cy="16.7999" rx="8.4" ry="8.4" fill="#787EFF"></ellipse>
+<ellipse cx="45.6002" cy="34.8" rx="8.4" ry="8.4" fill="#FEBA57"></ellipse>
+<circle cx="58.2008" cy="12.0001" r="8.4" fill="#4BB7BF"></circle>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M25.4921 62.6141L6.8225 47.9141C2.34806 44.391 4.8393 37.2 10.5343 37.2H61.0633C66.7736 37.2 69.2554 44.4231 64.751 47.9329L45.8849 62.6329C45.7065 62.7719 45.5211 62.9001 45.3297 63.0173V66C45.3297 69.3137 42.6434 72 39.3297 72H32.0545C28.7408 72 26.0545 69.3137 26.0545 66V63.007C25.8605 62.8873 25.6726 62.7562 25.4921 62.6141Z" fill="#ED7EA6"></path>
+</svg>
