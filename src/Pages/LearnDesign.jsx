@@ -1,7 +1,6 @@
 import { Box, Container, Heading } from '@chakra-ui/react';
 import React from 'react';
-import Banner from '../components/learnDesign/Banner';
-import Faqs from '../components/learnDesign/Faqs';
+import { Banner, Faqs } from '@components/learnDesign';
 
 const LearnDesign = () => {
   return (

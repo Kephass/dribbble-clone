@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
-const Banner = () => {
+export const Banner = () => {
   return (
     <Box>
       <Container maxW="container.xl" my="4rem" mx="auto">
@@ -54,5 +54,3 @@ const Banner = () => {
     </Box>
   );
 };
-
-export default Banner;
