@@ -1,5 +1,11 @@
 import { Container } from '@chakra-ui/react';
-import { Banner, Hero, Benefits, Pricing } from '@components/gopro';
+import {
+  Banner,
+  Hero,
+  Benefits,
+  Pricing,
+  Testimonials,
+} from '@components/gopro';
 
 function GoPro() {
   return (
@@ -8,6 +14,7 @@ function GoPro() {
       <Benefits />
       <Hero />
       <Pricing />
+      <Testimonials />
     </Container>
   );
 }

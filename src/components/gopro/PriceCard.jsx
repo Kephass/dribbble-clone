@@ -11,51 +11,62 @@ import {
 } from '@chakra-ui/react';
 import { ReactComponent as Arrow } from '../../svg/arrow.svg';
 
-export function PriceCard({ title, desc, price, options, percentage }) {
+export function PriceCard({
+  title,
+  desc,
+  euro,
+  dollar,
+  options,
+  percentage,
+  yearly,
+  stateChanger,
+}) {
   console.log(options);
   return (
     <Box
       border="1px lightgray solid"
-      p="4"
+      p="8"
       borderRadius="xl"
       my="10"
       flex="0.5"
+      maxW="350px"
     >
-      <Flex direction="column" alignItems="center" gap="4">
+      <Flex direction="column" alignItems="center" gap="2">
         <Text fontSize="2xl" fontWeight="bold">
           {title}
         </Text>
         <Text>{desc}</Text>
-        <Flex align="baseline" gap="1">
-          <Text fontSize="6xl" fontWeight="bold">
-            €{price}
+        <Flex align="baseline">
+          <Text fontSize="6xl" fontWeight="extrabold">
+            €{euro}
           </Text>
-          <Text fontSize="xl" fontWeight="bold">
+          <Text fontSize="xl" fontWeight="extrabold">
             EUR
           </Text>
         </Flex>
-        <HStack color="#ea4c89">
-          <Text
-            fontWeight="medium"
-            py="2"
-            px="3"
-            bg="pink.50"
-            borderRadius="3xl"
-          >
-            {percentage}% Savings
-          </Text>
-          <Icon fontSize="3xl" as={Arrow} />
-        </HStack>
-        <Link color="#ea4c89">Switch to montly billing</Link>
-        <Button
-          my="5"
-          color="white"
-          bgGradient="linear(to-r, orange.400, pink.400)"
+        <Text fontSize="sm">
+          ${dollar} USD per month{yearly && ', paid annually'}{' '}
+        </Text>
+        {yearly && (
+          <Flex color="#ea4c89" alignItems="center">
+            <Text py="2" px="3" bg="pink.50" borderRadius="3xl">
+              {percentage}% Savings
+            </Text>
+            <Icon fontSize="3xl" as={Arrow} />
+          </Flex>
+        )}
+        <Link
+          fontWeight="medium"
+          onClick={() => stateChanger(!yearly)}
+          color="#ea4c89"
         >
+          Switch to {yearly ? 'montly' : 'yearly'} billing
+        </Link>
+        <Button color="white" bgGradient="linear(to-r, orange.400, pink.400)">
           Get started
         </Button>
       </Flex>
-      <Flex direction="column" gap="4" ml="4">
+      <Flex direction="column" gap="4" ml="4" mt="8">
         {options?.map((option) => (
           <Flex gap="2" key={option}>
             <Icon fontSize="2xl" color="#4bb7bf" as={CheckCircleFilled} />
