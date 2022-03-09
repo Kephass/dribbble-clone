@@ -49,11 +49,18 @@ export function Pricing() {
         </FormLabel>
       </FormControl>
 
-      <Flex gap="4" direction={{ base: 'column', md: 'row' }}>
+      <Flex
+        gap="4"
+        direction={{ base: 'column', md: 'row' }}
+        alignItems={{ base: 'center', md: 'flex-start' }}
+      >
         <PriceCard
+          stateChanger={setYearly}
+          yearly={yearly}
           title="Dribbble Pro"
           desc="Upgrade your social portfolio with a stunning profile & enhanced shots."
-          price={yearly ? '5' : '11'}
+          euro={yearly ? '5' : '11'}
+          dollar={yearly ? '5' : '12'}
           percentage="58"
           options={[
             'Upgraded profile',
@@ -63,9 +70,12 @@ export function Pricing() {
           ]}
         />
         <PriceCard
+          stateChanger={setYearly}
+          yearly={yearly}
           title="Pro Business"
           desc="Perfect for freelancers, agencies, and design teams."
-          price={yearly ? '14' : '18'}
+          euro={yearly ? '14' : '18'}
+          dollar={yearly ? '15' : '20'}
           percentage="25"
           options={[
             'Pro benefits plus',
