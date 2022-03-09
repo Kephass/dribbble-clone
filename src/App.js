@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Header } from '@components';
+import { Header, Footer } from '@components';
 import Landing from './Pages/Landing';
 import Inspiration from './Pages/Inspiration';
 import { Jobs, Freelance, DesignerSearch } from './Pages/FindWork';
@@ -30,6 +30,7 @@ function App() {
 		  <Route path='uploads' element={Upload} /> 
 		  */}
         </Routes>
+        <Footer />
       </Router>
     </Box>
   );

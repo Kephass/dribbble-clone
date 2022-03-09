@@ -41,7 +41,7 @@ export const Banner = () => {
               top="-40px"
               left="1px"
             />
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 2 }}>
+            <motion.div>
               <Image
                 boxSize="100px"
                 position="absolute"
