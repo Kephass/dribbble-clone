@@ -9,7 +9,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { Footer } from '@components';
 import { DesignerList,Search } from '@components/findwork';
 
 import './style.scss';
@@ -132,7 +131,6 @@ export const DesignerSearch = () => {
           </Box>
         </Flex>
       </Container>
-      <Footer />
     </Box>
   );
 };
