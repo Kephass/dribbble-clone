@@ -4,7 +4,7 @@ import React from 'react';
 export function Banner() {
   return (
     <Flex
-      my="40"
+      my={{ base: '20', md: '40' }}
       direction={{
         base: 'column',
         md: 'row',
