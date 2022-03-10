@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { Box } from '@chakra-ui/react';
-import { Header, Footer } from '@components';
-import Landing from './Pages/Landing';
+import { Footer, Header } from '@components';
+
 import { DesignerSearch, Freelance, Jobs } from './Pages/FindWork';
 import GoPro from './Pages/GoPro';
 import Inspiration from './Pages/Inspiration';
