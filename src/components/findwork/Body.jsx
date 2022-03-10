@@ -5,8 +5,7 @@ import { Search } from './Search';
 
 export const Body = () => {
   const jobsDummy = [
-    {
-      title: 'Web & Product Designer',
+    { title: 'Web & Product Designer',
       location: 'Austin TX',
       logo: 'https://cdn.dribbble.com/users/732492/avatars/normal/7bb885b4424533a2d8806b1f90f97704.png?1613640457&compress=1&resize=96x96',
       post: 'The Graphic Standard',

@@ -112,9 +112,9 @@ export const Banner = ({
 
 Banner.propTypes = {
   title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   titleOptions: PropTypes.object,
   descriptionOptions: PropTypes.object,
-  description: PropTypes.string.isRequired,
   image: PropTypes.string,
   video: PropTypes.string,
   mediaOptions: PropTypes.object,

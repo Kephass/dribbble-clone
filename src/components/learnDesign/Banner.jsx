@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   Box,
   Button,
@@ -8,7 +10,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import React from 'react';
 
 const Banner = () => {
   return (

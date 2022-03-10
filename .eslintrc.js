@@ -39,9 +39,22 @@ module.exports = {
       }
     ],
     'no-console': 'warn',
+    'no-empty-function': 'error',
+    'no-unused-vars': 'off',
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
-    'no-unused-vars': 'off',
+    'react/jsx-no-duplicate-props': 1,
+    'object-curly-spacing': ['error', 'always'],
+    'react/sort-prop-types': [
+      2,
+      {
+        callbacksLast: true,
+        ignoreCase: true,
+        requiredFirst: true,
+        sortShapeProp: true,
+        noSortAlphabetically: true
+      }
+    ],
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
