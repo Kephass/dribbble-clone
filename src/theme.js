@@ -15,6 +15,7 @@ const theme = extendTheme({
     red: {
       50: '#fafafb',
     },
+    bgFAQ: '#fbf5f3',
     gradient: 'linear-gradient(100deg, #ff874f 0%, #ec5e95 100%)',
   },
   fonts: {
