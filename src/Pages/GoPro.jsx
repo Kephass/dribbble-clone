@@ -18,8 +18,8 @@ function GoPro() {
         <Hero />
         <Pricing />
         <Testimonials />
-        <Community />
       </Container>
+      <Community />
       <Footer />
     </>
   );
