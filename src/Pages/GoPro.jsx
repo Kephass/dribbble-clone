@@ -1,13 +1,13 @@
 import { Container } from '@chakra-ui/react';
+import { Footer } from '@components';
 import {
   Banner,
-  Hero,
   Benefits,
+  Community,
+  Hero,
   Pricing,
   Testimonials,
-  Community,
 } from '@components/gopro';
-import { Footer } from '@components';
 
 function GoPro() {
   return (

@@ -15,7 +15,6 @@ import {
   MenuItem,
   MenuList,
   Stack,
-  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
 

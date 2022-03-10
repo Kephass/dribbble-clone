@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 
-export function Card({ img, title, text }) {
+export function Card({ img, title }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (

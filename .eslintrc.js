@@ -11,7 +11,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react', 'simple-import-sort', 'import'],
+  plugins: ['react', 'simple-import-sort', 'import', 'unused-imports'],
   rules: {
     'simple-import-sort/exports': 'error',
     'import/first': 'error',
@@ -40,6 +40,17 @@ module.exports = {
     ],
     'no-console': 'warn',
     'react/prop-types': 0,
-    'react/react-in-jsx-scope': 0
+    'react/react-in-jsx-scope': 0,
+    'no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_'
+      }
+    ]
   }
 };
