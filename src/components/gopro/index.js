@@ -7,3 +7,4 @@ export * from './Pricing';
 export * from './PriceCard';
 export * from './Testimonials';
 export * from './Community';
+export * from './SlidingWords';
