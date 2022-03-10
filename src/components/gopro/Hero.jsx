@@ -1,12 +1,10 @@
 import {
   Box,
-  Container,
   Flex,
-  HStack,
   Image,
+  Link,
   Text,
   VStack,
-  Link,
 } from '@chakra-ui/react';
 
 export function Hero() {
@@ -42,7 +40,7 @@ export function Hero() {
         >
           <Text mb="4">
             Want to unlock the key to the next stage of your career in design?
-            Whether you're freelancing or need an always up to date portfolio,
+            Whether you&apos;re freelancing or need an always up to date portfolio,
             Dribbble Pro has something for you.
           </Text>
           <Text>

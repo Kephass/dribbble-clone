@@ -1,5 +1,6 @@
-import { Box, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+
+import { Box, Text } from '@chakra-ui/react';
 
 const MotionBox = motion(Box);
 
@@ -60,8 +61,8 @@ export function SlidingWords({ moveRight, secondList }) {
         color="gray.200"
       >
         {secondList
-          ? arr2.map((item) => <Text>{item}</Text>)
-          : arr.map((item) => <Text>{item}</Text>)}
+          ? arr2.map((item,i) => <Text key={`slidingwordlist1${i}`}>{item}</Text>)
+          : arr.map((item,i) => <Text key={`slidingwordlist2${i}`}>{item}</Text>)}
       </Box>
     </MotionBox>
   );

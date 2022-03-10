@@ -1,14 +1,14 @@
+import { useState } from 'react';
+
 import {
-  Box,
   Container,
   Flex,
   FormControl,
   FormLabel,
-  HStack,
   Switch,
   Text,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+
 import { PriceCard } from './PriceCard';
 
 export function Pricing() {
@@ -24,7 +24,7 @@ export function Pricing() {
         Level up your design career with Dribbble Pro
       </Text>
       <Text fontWeight="medium" fontSize={{ base: 'md', lg: 'lg' }}>
-        Whether you're looking to build your portfolio, find your next freelance
+        Whether you&apos;re looking to build your portfolio, find your next freelance
         client or showcase your teams work -- we have a plan for you.
       </Text>
 

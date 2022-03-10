@@ -1,4 +1,5 @@
-import { Box, Container, Text, VStack } from '@chakra-ui/react';
+import { Box, Container, Text } from '@chakra-ui/react';
+
 import { SlidingWords } from './SlidingWords';
 
 export function Community() {
@@ -19,7 +20,7 @@ export function Community() {
           mb="4"
           align="center"
         >
-          No matter your discipline, Dribbble's got you covered for your unique
+          No matter your discipline, Dribbble&apos;s got you covered for your unique
           career.
         </Text>
       </Container>

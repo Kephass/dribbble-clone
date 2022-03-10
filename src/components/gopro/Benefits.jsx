@@ -1,9 +1,10 @@
-import { Flex, Grid } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import { Card } from '@components/gopro';
-import { ReactComponent as Medal } from '../../svg/medal.svg';
-import { ReactComponent as Target } from '../../svg/target.svg';
-import { ReactComponent as Speaker } from '../../svg/speaker.svg';
+
 import { ReactComponent as Filter } from '../../svg/filter.svg';
+import { ReactComponent as Medal } from '../../svg/medal.svg';
+import { ReactComponent as Speaker } from '../../svg/speaker.svg';
+import { ReactComponent as Target } from '../../svg/target.svg';
 
 export const Benefits = () => (
   <Grid

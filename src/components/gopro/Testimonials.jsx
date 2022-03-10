@@ -1,4 +1,5 @@
-import { Box, Flex, Grid, Text } from '@chakra-ui/react';
+import { Box, Grid, Text } from '@chakra-ui/react';
+
 import ReviewCard from './ReviewCard';
 
 export function Testimonials() {
