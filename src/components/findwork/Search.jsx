@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
+
 import {
-  Divider,
-  Button,
   Box,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Divider,
   FormControl,
   FormLabel,
-  CheckboxGroup,
-  Checkbox,
   Stack,
 } from '@chakra-ui/react';
 import { InputUi } from '@components/ui';
@@ -89,4 +91,10 @@ export const Search = ({
       </FormControl>
     </Box>
   );
+};
+
+Search.propTypes = {
+  width: PropTypes.string.isRequired,
+  border: PropTypes.string.isRequired,
+  borderColor: PropTypes.string.isRequired,
 };

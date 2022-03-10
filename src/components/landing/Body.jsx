@@ -1,8 +1,9 @@
-import { Card, CardText } from '@components';
-import { getPosts } from '@features/listSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Container, Flex, Grid } from '@chakra-ui/react';
+import { Card, CardText } from '@components';
+import { getPosts } from '@features/listSlice';
 
 export function Body() {
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ export function Body() {
   }, []);
 
   const posts = useSelector((state) => state.list.posts);
-  console.log(posts);
   return (
     <Container maxW="8xl">
       <Grid

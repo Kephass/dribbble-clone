@@ -1,15 +1,18 @@
 import React from 'react';
-import {
-  Flex,
-  VStack,
-  StackDivider,
-  Spacer,
-  Text,
-  Box,
-  Image,
-  Button,
-} from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 import TimeAgo from 'react-timeago';
+
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Spacer,
+  StackDivider,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+
 export function DesignerList({ lists }) {
   return (
     <VStack
@@ -116,3 +119,7 @@ export function DesignerList({ lists }) {
     </VStack>
   );
 }
+
+DesignerList.propTypes = {
+  lists: PropTypes.array.isRequired,
+};

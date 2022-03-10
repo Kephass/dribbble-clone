@@ -1,5 +1,7 @@
-import { Container, Flex, Button } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+
+import { Button,Container, Flex } from '@chakra-ui/react';
 
 export function Filter({ links }) {
   return (
@@ -24,3 +26,7 @@ export function Filter({ links }) {
     </div>
   );
 }
+
+Filter.propTypes = {
+  links: PropTypes.array.isRequired,
+};

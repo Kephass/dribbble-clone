@@ -1,22 +1,23 @@
+import { Link } from 'react-router-dom';
+
+import { CloseIcon,HamburgerIcon } from '@chakra-ui/icons';
 import {
-  Box,
-  Flex,
   Avatar,
+  Box,
+  Button,
+  Flex,
   HStack,
   IconButton,
   Image,
-  Button,
   Menu,
   MenuButton,
-  MenuList,
-  MenuItem,
   MenuDivider,
-  useDisclosure,
-  useColorModeValue,
+  MenuItem,
+  MenuList,
   Stack,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 const Links = [
   {

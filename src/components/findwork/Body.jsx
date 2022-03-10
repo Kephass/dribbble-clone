@@ -1,6 +1,7 @@
-import { Container, Flex, Spacer, Text, Box, Button } from '@chakra-ui/react';
-import { Search } from './Search';
+import { Box, Button,Container, Flex, Spacer, Text } from '@chakra-ui/react';
+
 import { List } from './List';
+import { Search } from './Search';
 
 export const Body = () => {
   const jobsDummy = [
@@ -23,6 +24,7 @@ export const Body = () => {
       timeStamp: new Date(),
     },
   ];
+
   return (
     <Container maxW="container.xl" mt="5">
       <Flex>
