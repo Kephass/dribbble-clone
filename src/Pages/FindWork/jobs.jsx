@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
-import { Footer, Banner } from '@components';
+import { Banner } from '@components';
 import { Body, Filter } from '@components/findwork';
 import './style.scss';
 import { links } from './index';
@@ -60,7 +60,6 @@ export const Jobs = () => {
         </Box>
       </Banner>
       <Body />
-      <Footer />
     </Box>
   );
 };

@@ -1,58 +1,83 @@
 import React from 'react';
 
 import {
-  Box,
-  Button,
   Container,
-  Heading,
-  Image,
   Stack,
+  Flex,
+  Box,
+  Heading,
   Text,
-  VStack,
+  Button,
+  Image,
+  Divider,
+  Hide,
 } from '@chakra-ui/react';
 
-const Banner = () => {
+export const Banner = () => {
   return (
-    <Box>
-      <Container maxW="container.xl" my="4rem" mx="auto">
-        <Stack direction={['column', 'row']} spacing="1.5rem" width="100%">
-          <VStack flex={1} maxW="520px" mr="6rem">
-            <Heading as="h1" size="2xl" lineHeight="56px">
-              Learn design alongside industry leaders
-            </Heading>
-            <Text fontSize="lg" mb="2rem">
-              Looking to level up your design skills? Dribbble offers multiple
-              ways for you to enrich and expand your design skills - from live
-              workshops to comprehensive 12 week courses all with your favorite
-              design leaders.
-            </Text>
-            <Button fontSize=".9rem">Browse upcoming courses</Button>
-          </VStack>
+    <Container maxW={'7xl'} marginBottom="20">
+      <Stack
+        align={'center'}
+        spacing={{ base: 8, md: 10 }}
+        py={{ base: 17, md: 24 }}
+        direction={{ base: 'column', md: 'row' }}
+      >
+        <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+          <Heading
+            lineHeight={1.1}
+            fontWeight={600}
+            fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
+          >
+            <br />
+            <Text as={'span'}>Learn design alongside industry leaders</Text>
+            <br />
+          </Heading>
+          <Text>
+            Looking to level up your design skills? Dribbble offers multiple
+            ways for you to enrich and expand your design skills - from live
+            workshops to comprehensive 12 week courses all with your favorite
+            design leaders.
+          </Text>
+          <Button fontSize=".9rem" alignSelf="flex-start">
+            Browse upcoming courses
+          </Button>
+        </Stack>
+        <Flex
+          flex={1}
+          justify={'center'}
+          align={'center'}
+          position={'relative'}
+          w={'full'}
+        >
           <Box
-            flex={1}
+            position={'relative'}
+            height={{ base: '577px', md: '500px' }}
+            width="464px"
             objectFit="cover"
             bgRepeat="no-repeat"
-            bgImage="url('learn-design-hero.png')"
-            height="600px"
+            width={'full'}
+            overflow={'hidden'}
+            bgImage="url('/images/learn-design/learn-design-hero.png')"
           >
-            <Image
-              boxSize="100px"
-              position="relative"
-              src="sprinkle-doodle.png"
-              top="-40px"
-              left="1px"
-            />
-            <Image
-              boxSize="100px"
-              position="absolute"
-              src="tornado-doodle.png"
-              mt="20rem"
-            />
+            <Hide below="md">
+              <Image
+                boxSize="100px"
+                src="/images/learn-design/sprinkle-doodle.png"
+              />
+
+              <Image
+                boxSize="100px"
+                float="right"
+                position="absolute"
+                right="5rem"
+                bottom="100px"
+                src="/images/learn-design/tornado-doodle.png"
+              />
+            </Hide>
           </Box>
-        </Stack>
-      </Container>
-    </Box>
+        </Flex>
+      </Stack>
+      <Divider orientation="horizontal" />
+    </Container>
   );
 };
-
-export default Banner;
