@@ -1,11 +1,11 @@
-import { Container, Flex, Spacer, Text, Box, Button } from '@chakra-ui/react';
-import { Search } from './Search';
+import { Box, Button,Container, Flex, Spacer, Text } from '@chakra-ui/react';
+
 import { List } from './List';
+import { Search } from './Search';
 
 export const Body = () => {
   const jobsDummy = [
-    {
-      title: 'Web & Product Designer',
+    { title: 'Web & Product Designer',
       location: 'Austin TX',
       logo: 'https://cdn.dribbble.com/users/732492/avatars/normal/7bb885b4424533a2d8806b1f90f97704.png?1613640457&compress=1&resize=96x96',
       post: 'The Graphic Standard',
@@ -23,6 +23,7 @@ export const Body = () => {
       timeStamp: new Date(),
     },
   ];
+
   return (
     <Container maxW="container.xl" mt="5">
       <Flex>
@@ -47,7 +48,9 @@ export const Body = () => {
 
       <Flex my="10" width="100%">
         <List jobs={jobsDummy} />
-        <Search />
+        <Box ml="5">
+          <Search border="1px solid" />
+        </Box>
       </Flex>
     </Container>
   );

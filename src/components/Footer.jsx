@@ -24,7 +24,7 @@ export function Footer() {
           <Box flexShrink="0" mr="4" mb="4">
             <Image height="30px" src="images/brand/logo.svg" mb="4"></Image>
             <Box mb="4">
-              <Text>Dribbble is the world's leading</Text>
+              <Text>Dribbble is the world&apos;s leading</Text>
               <Text>community for creatives to share, grow,</Text>
               <Text>and get hired.</Text>
             </Box>

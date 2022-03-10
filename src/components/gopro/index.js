@@ -5,3 +5,6 @@ export * from './Benefits';
 export * from './Hero';
 export * from './Pricing';
 export * from './PriceCard';
+export * from './Testimonials';
+export * from './Community';
+export * from './SlidingWords';

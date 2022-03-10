@@ -1,8 +1,9 @@
-import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
-import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
-export function Card({ img, title, text }) {
+import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
+import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
+
+export function Card({ img, title }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (

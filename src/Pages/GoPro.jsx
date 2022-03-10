@@ -1,14 +1,27 @@
 import { Container } from '@chakra-ui/react';
-import { Banner, Hero, Benefits, Pricing } from '@components/gopro';
+import { Footer } from '@components';
+import {
+  Banner,
+  Benefits,
+  Community,
+  Hero,
+  Pricing,
+  Testimonials,
+} from '@components/gopro';
 
 function GoPro() {
   return (
-    <Container maxW="7xl">
-      <Banner />
-      <Benefits />
-      <Hero />
-      <Pricing />
-    </Container>
+    <>
+      <Container maxW="7xl">
+        <Banner />
+        <Benefits />
+        <Hero />
+        <Pricing />
+        <Testimonials />
+      </Container>
+      <Community />
+      <Footer />
+    </>
   );
 }
 

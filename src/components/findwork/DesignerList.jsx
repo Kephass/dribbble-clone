@@ -13,7 +13,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-export function List({ jobs }) {
+export function DesignerList({ lists }) {
   return (
     <VStack
       divider={
@@ -22,7 +22,7 @@ export function List({ jobs }) {
       align="stretch"
       width="100%"
     >
-      {jobs.map(({ title, timeStamp, post, type, location, logo }, i) => (
+      {lists.map(({ title, timeStamp, post, type, location, logo }, i) => (
         <Box
           key={`jobs${i}`}
           width="100%"
@@ -120,6 +120,6 @@ export function List({ jobs }) {
   );
 }
 
-List.propTypes = {
-  jobs: PropTypes.array.isRequired,
+DesignerList.propTypes = {
+  lists: PropTypes.array.isRequired,
 };

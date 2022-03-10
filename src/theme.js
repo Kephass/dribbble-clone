@@ -6,6 +6,7 @@ const theme = extendTheme({
     black: '#000',
     white: '#fff',
     purple: {
+      100: '#201850',
       50: '#f9f8fd',
     },
     siteGray: '#6e6d7a',
@@ -15,6 +16,7 @@ const theme = extendTheme({
       50: '#fafafb',
     },
     bgFAQ: '#fbf5f3',
+    gradient: 'linear-gradient(100deg, #ff874f 0%, #ec5e95 100%)',
   },
   fonts: {
     heading: 'Barlow, sans-serif',

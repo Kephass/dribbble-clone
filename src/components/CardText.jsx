@@ -1,5 +1,5 @@
 import { EyeFilled, HeartFilled } from '@ant-design/icons';
-import { Box, Flex, HStack, Image, Text } from '@chakra-ui/react';
+import { Flex, HStack, Image, Text } from '@chakra-ui/react';
 
 export function CardText({ img, text, likes, views }) {
   return (

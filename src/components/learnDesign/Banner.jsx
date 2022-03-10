@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   Container,
   Stack,
@@ -10,7 +12,6 @@ import {
   Divider,
   Hide,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
 
 export const Banner = () => {
   return (

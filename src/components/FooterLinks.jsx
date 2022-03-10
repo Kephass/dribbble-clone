@@ -1,5 +1,6 @@
-import { Box, Link, Text } from '@chakra-ui/react';
 import React from 'react';
+
+import { Box, Link, Text } from '@chakra-ui/react';
 
 export function FooterLinks({ title, text }) {
   const arr = text.split(',');
