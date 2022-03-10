@@ -11,7 +11,7 @@ import {
 
 export function Hero() {
   return (
-    <VStack my="40">
+    <VStack my={{ base: '20', md: '40' }}>
       <Text
         maxW="3xl"
         fontWeight="bold"

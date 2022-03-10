@@ -3,7 +3,7 @@ import { SlidingWords } from './SlidingWords';
 
 export function Community() {
   return (
-    <Box my="32">
+    <Box my={{ base: '20', md: '40' }}>
       <Container maxW="7xl">
         <Text
           fontWeight="bold"
