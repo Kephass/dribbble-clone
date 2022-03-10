@@ -1,12 +1,12 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
+  Image,
+  Link,
   Text,
   VStack,
-  Image,
-  Box,
-  Link,
 } from '@chakra-ui/react';
 
 export function Banner() {
@@ -44,7 +44,7 @@ export function Banner() {
               align={{ base: 'center', md: 'left' }}
             >
               Dribbble is the leading destination to find & showcase creative
-              work and home to the world's best design professionals.
+              work and home to the world&apos;`s best design professionals.
             </Text>
             <Button colorScheme="pink" variant="solid" onClick={handleClick}>
               Sign up

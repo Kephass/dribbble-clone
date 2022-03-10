@@ -1,8 +1,9 @@
-import { Card, CardText } from '@components';
-import { getPosts } from '@features/listSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Container, Flex, Grid } from '@chakra-ui/react';
+import { Card, CardText } from '@components';
+import { getPosts } from '@features/listSlice';
 
 export function Body() {
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ export function Body() {
   }, []);
 
   const posts = useSelector((state) => state.list.posts);
-  console.log(posts);
   return (
     <Container maxW="8xl">
       <Grid
@@ -24,7 +24,7 @@ export function Body() {
         gap="10"
         templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
       >
-        {posts.map((item,i) => (
+        {posts.map((item, i) => (
           <Flex direction="column" gap="2" key={`projects${i}`}>
             <Card title={item.title} key={item.id} img={item.url} />
             <CardText
