@@ -7,7 +7,7 @@ import { ReactComponent as Filter } from '../../svg/filter.svg';
 
 export const Benefits = () => (
   <Grid
-    my="40"
+    my={{ base: '20', md: '40' }}
     gap="4"
     gridTemplateColumns="repeat(4, minmax(300px, 1fr))"
     overflowX="auto"

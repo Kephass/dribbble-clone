@@ -27,7 +27,7 @@ export function PriceCard({
       border="1px lightgray solid"
       p="8"
       borderRadius="xl"
-      my="10"
+      my={{ base: '5', md: '10' }}
       flex="0.5"
       maxW="350px"
     >

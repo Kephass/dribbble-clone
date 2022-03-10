@@ -29,7 +29,7 @@ export function Pricing() {
       </Text>
 
       <FormControl
-        my="20"
+        my={{ base: '10', md: '20' }}
         display="flex"
         justifyContent="center"
         gap="3"

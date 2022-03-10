@@ -3,7 +3,7 @@ import ReviewCard from './ReviewCard';
 
 export function Testimonials() {
   return (
-    <Box my="20">
+    <Box my={{ base: '10', md: '20' }}>
       <Text
         fontWeight="bold"
         fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
