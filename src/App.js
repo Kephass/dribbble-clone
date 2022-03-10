@@ -1,11 +1,13 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import { Box } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from '@components';
-import Landing from './Pages/Landing';
-import Inspiration from './Pages/Inspiration';
-import { Jobs, Freelance, DesignerSearch } from './Pages/FindWork';
-import LearnDesign from './Pages/LearnDesign';
+
+import { DesignerSearch, Freelance, Jobs } from './Pages/FindWork';
 import GoPro from './Pages/GoPro';
+import Inspiration from './Pages/Inspiration';
+import Landing from './Pages/Landing';
+import LearnDesign from './Pages/LearnDesign';
 import UserProfile from './Pages/UserProfile';
 
 function App() {
