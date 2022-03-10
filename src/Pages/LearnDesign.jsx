@@ -1,9 +1,10 @@
-import { Box, Container, Heading } from '@chakra-ui/react';
 import React from 'react';
+
+import { Box, Container, Heading } from '@chakra-ui/react';
 import {
   Banner,
-  Faqs,
   CoursesBanner,
+  Faqs,
   WorkshopsBanner,
 } from '@components/learnDesign';
 
