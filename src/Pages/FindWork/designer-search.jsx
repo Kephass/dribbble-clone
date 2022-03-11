@@ -1,11 +1,6 @@
 import React from 'react';
 
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
   Button,
   Container,
@@ -14,7 +9,7 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import { DesignerList, Search } from '@components/findwork';
+import { AccordionNav, DesignerList, SearchDesign } from '@components/findwork';
 
 import './style.scss';
 
@@ -58,6 +53,7 @@ const lists = [
     timeStamp: new Date()
   }
 ];
+
 export const DesignerSearch = () => {
   return (
     <Box>
@@ -76,75 +72,11 @@ export const DesignerSearch = () => {
           >
             <VStack align="left">
               <Flex width="100%" mb="10px" direction="column">
-                <Text>TYPE OF SEARCH</Text>
-                <Box my="24px">
-                  <Accordion defaultIndex={0}>
-                    <AccordionItem border-t="0px" isFocusable="false">
-                      <h2>
-                        <AccordionButton
-                          p="1rem 2rem 1rem 0"
-                          _expanded={{ bg: 'pink', color: 'purple' }}
-                          borderRadius="10px"
-                        >
-                          <Box
-                            flex="1"
-                            textAlign="left"
-                            fontWeight="550"
-                            fontSize="1rem"
-                            p="0px 10px"
-                          >
-                            Full-Time Designers
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel
-                        px="1.5rem"
-                        pb={4}
-                        color="purple"
-                        _expanded={{ bg: 'tomato', color: 'white' }}
-                      >
-                        Add new role
-                      </AccordionPanel>
-                    </AccordionItem>
-                    <AccordionItem border-t="0px">
-                      <h2>
-                        <AccordionButton
-                          p="1rem 2rem 1rem 0"
-                          _expanded={{ bg: 'pink', color: 'purple' }}
-                          borderRadius="10px"
-                        >
-                          <Box
-                            flex="1"
-                            textAlign="left"
-                            fontWeight="550"
-                            fontSize="1rem"
-                          >
-                            Freelance or Agency
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel px="1.5rem" pb={4}>
-                        Add new project
-                      </AccordionPanel>
-                    </AccordionItem>
-                    <AccordionItem>
-                      <h2>
-                        <AccordionButton p="2rem 2rem 2rem 0">
-                          <Box
-                            flex="1"
-                            textAlign="left"
-                            fontWeight="550"
-                            fontSize="1rem"
-                          >
-                            Post Job
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                    </AccordionItem>
-                  </Accordion>
+                <Text fontSize="sm" fontWeight="bold" color="gray">
+                  TYPE OF SEARCH
+                </Text>
+                <Box my="12px">
+                  <AccordionNav />
                 </Box>
               </Flex>
             </VStack>
@@ -217,7 +149,7 @@ export const DesignerSearch = () => {
             borderColor="gray.200"
           >
             <VStack>
-              <Search width="100%" />
+              <SearchDesign width="100%" />
             </VStack>
           </Box>
         </Flex>

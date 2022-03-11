@@ -7,20 +7,24 @@ const theme = extendTheme({
     white: '#fff',
     purple: {
       100: '#201850',
-      50: '#f9f8fd',
+      50: '#f9f8fd'
+    },
+    pink: {
+      100: '#ea4c89',
+      50: '#fef6f9'
     },
     siteGray: '#6e6d7a',
     btnGray: '#f3f3f4',
     lightGray: '#fafafb',
     red: {
-      50: '#fafafb',
+      50: '#fafafb'
     },
     bgFAQ: '#fbf5f3',
-    gradient: 'linear-gradient(100deg, #ff874f 0%, #ec5e95 100%)',
+    gradient: 'linear-gradient(100deg, #ff874f 0%, #ec5e95 100%)'
   },
   fonts: {
     heading: 'Barlow, sans-serif',
-    body: 'Barlow, sans-serif',
+    body: 'Barlow, sans-serif'
   },
   fontSizes: {
     xs: '0.75rem',
@@ -35,7 +39,7 @@ const theme = extendTheme({
     '6xl': '3.75rem',
     '7xl': '4.5rem',
     '8xl': '6rem',
-    '9xl': '8rem',
+    '9xl': '8rem'
   },
   fontWeights: {
     hairline: 100,
@@ -46,7 +50,7 @@ const theme = extendTheme({
     semibold: 600,
     bold: 700,
     extrabold: 800,
-    black: 900,
+    black: 900
   },
   lineHeights: {
     normal: 'normal',
@@ -63,7 +67,7 @@ const theme = extendTheme({
     7: '1.75rem',
     8: '2rem',
     9: '2.25rem',
-    10: '2.5rem',
+    10: '2.5rem'
   },
   letterSpacings: {
     tighter: '-0.05em',
@@ -71,8 +75,8 @@ const theme = extendTheme({
     normal: '0',
     wide: '0.025em',
     wider: '0.05em',
-    widest: '0.1em',
-  },
+    widest: '0.1em'
+  }
 });
 
 export default theme;
