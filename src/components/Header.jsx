@@ -15,6 +15,7 @@ import {
   MenuItem,
   MenuList,
   Stack,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 
@@ -80,7 +81,7 @@ export const Header = () => {
             >
               {Links.map((link) => (
                 <Link to={link.url} key={link.url}>
-                  {link.title}
+                  <Text _hover={{ color: '#E26D5C' }}>{link.title}</Text>
                 </Link>
               ))}
             </HStack>
