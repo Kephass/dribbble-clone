@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { Box } from '@chakra-ui/react';
-import { Header } from '@components';
+import { Footer, Header } from '@components';
 
 import SignUp from './components/auth/SignUp';
 import { DesignerSearch, Freelance, Jobs } from './Pages/FindWork';
@@ -24,7 +24,6 @@ function App() {
           <Route path="freelance-jobs" element={<Freelance />} />
           <Route path="designers" element={<DesignerSearch />} />
           <Route path="learn" element={<LearnDesign />} />
-          <Route path="learnDesign" element={<LearnDesign />} />
           <Route path="pro" element={<GoPro />} />
           {/*
             <Route path="marketplace" element={<MarketPlace />} />
@@ -35,6 +34,7 @@ function App() {
             <Route path='uploads' element={Upload} />
             */}
         </Routes>
+        <Footer />
       </Router>
     </Box>
   );

@@ -1,32 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TimeAgo from 'react-timeago';
 
 import {
   Box,
   Button,
   Flex,
   Image,
+  Link,
   Spacer,
   StackDivider,
   Text,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
 
 export function DesignerList({ lists }) {
   return (
     <VStack
-      divider={
-        <StackDivider borderColor="gray.200" className="findwork-divider" />
-      }
+      divider={<StackDivider borderColor="gray.200" />}
       align="stretch"
       width="100%"
     >
-      {lists.map(({ title, timeStamp, post, type, location, logo }, i) => (
+      {lists.map(({ title, location, price, logo, projects }, i) => (
         <Box
           key={`jobs${i}`}
           width="100%"
-          className="findwork-item"
           py="24px"
           px="24px"
           position="relative"
@@ -55,64 +52,26 @@ export function DesignerList({ lists }) {
                   fontWeight="bold"
                   color="siteGray"
                 >
-                  {post}
+                  {location}
                 </Text>
                 <Text ml="1" fontWeight="light" color="gray">
-                  • {type}
+                  • {price}
                 </Text>
               </Flex>
             </Box>
             <Spacer />
             {/* RIGHT */}
-            <Box className="findwork-item-info">
-              <Flex align="center" justify="flex-end">
-                <Text fontWeight="normal" fontSize="md" mb="1" align="right">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ width: '15px', height: '15px' }}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Text>
-                <Text
-                  fontWeight="normal"
-                  fontSize="md"
-                  mb="1"
-                  align="right"
-                  ml="1"
-                >
-                  {location}
-                </Text>
-              </Flex>
-              <Box color="siteGray" fontSize="md" fontWeight="medium">
-                <TimeAgo live={false} date={timeStamp} />
-              </Box>
+            <Box>
+              <Button>Message</Button>
             </Box>
+          </Flex>
 
-            {/* HOVER */}
-            <Flex
-              position="absolute"
-              right="0"
-              h="100%"
-              display="none"
-              align="center"
-              className="findwork-item-buttons"
-            >
-              <Flex>
-                <Button colorScheme="gray" bg="white" variant="outline" mr="3">
-                  View job
-                </Button>
-                <Button colorScheme="gray" bg="white" variant="outline">
-                  Apply now
-                </Button>
-              </Flex>
-            </Flex>
+          <Flex my="24px">
+            {projects.map(({ img }, index) => (
+              <Link mr="24px" key={`${img}${index}`} w="25%">
+                <Image src={img} w="100%" borderRadius="10px" />
+              </Link>
+            ))}
           </Flex>
         </Box>
       ))}
@@ -121,5 +80,5 @@ export function DesignerList({ lists }) {
 }
 
 DesignerList.propTypes = {
-  lists: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired
 };

@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/react';
-import { Footer } from '@components';
 import { Banner, Body } from '@components/landing';
 
 function Landing() {
@@ -7,7 +6,6 @@ function Landing() {
     <Box>
       <Banner />
       <Body />
-      <Footer />
     </Box>
   );
 }

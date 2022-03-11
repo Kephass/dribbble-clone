@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-/history
+/.history
 
 # testing
 /coverage
@@ -24,3 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
+.vscode/
