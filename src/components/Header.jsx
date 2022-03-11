@@ -99,7 +99,12 @@ export const Header = () => {
                   cursor={'pointer'}
                   minW={0}
                 >
-                  <Avatar name="Felix" src={user?.photoURL} size={'sm'} />
+                  <Avatar
+                    bg="gray"
+                    name={user?.displayName}
+                    src={user?.photoURL}
+                    size={'sm'}
+                  />
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Profile</MenuItem>
