@@ -1,3 +1,4 @@
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
@@ -9,16 +10,18 @@ import {
   HStack,
   IconButton,
   Image,
+  Link as AuthLink,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
   Stack,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { logout } from '../firebase';
+import { auth, logout } from '../firebase';
 
 const Links = [
   {
@@ -48,8 +51,8 @@ const Links = [
 ];
 
 export const Header = () => {
+  const [user] = useAuthState(auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Box
@@ -85,39 +88,56 @@ export const Header = () => {
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={'center'}>
-            <Menu>
-              <MenuButton
-                mr={4}
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                minW={0}
-              >
-                <Avatar
-                  name="Felix"
-                  src="images/default/avatar.jpeg"
-                  size={'sm'}
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Profile</MenuItem>
-                <MenuDivider />
-                <MenuItem>Edit Profile</MenuItem>
-                <MenuItem>Edit Work Preferences</MenuItem>
-                <MenuDivider />
-                <MenuItem>My Likes</MenuItem>
-                <MenuDivider />
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </MenuList>
-            </Menu>
-            <Link to="uploads">
-              <Button variant={'solid'} colorScheme={'pink'} size={'sm'}>
-                Upload
+          {user ? (
+            <Flex alignItems={'center'}>
+              <Menu>
+                <MenuButton
+                  mr={4}
+                  as={Button}
+                  rounded={'full'}
+                  variant={'link'}
+                  cursor={'pointer'}
+                  minW={0}
+                >
+                  <Avatar
+                    name="Felix"
+                    src="images/default/avatar.jpeg"
+                    size={'sm'}
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Profile</MenuItem>
+                  <MenuDivider />
+                  <MenuItem>Edit Profile</MenuItem>
+                  <MenuItem>Edit Work Preferences</MenuItem>
+                  <MenuDivider />
+                  <MenuItem>My Likes</MenuItem>
+                  <MenuDivider />
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+              <Link to="uploads">
+                <Button variant={'solid'} colorScheme={'pink'} size={'sm'}>
+                  Upload
+                </Button>
+              </Link>
+            </Flex>
+          ) : (
+            <Flex align="center">
+              <AuthLink href="/signin" fontWeight="normal">
+                Sign in
+              </AuthLink>
+              <Text mx="5px" fontSize="lg" fontWeight="normal">
+                /
+              </Text>
+              <AuthLink href="/signup" fontWeight="normal">
+                Sign up
+              </AuthLink>
+              <Button ml="20px" my="40px" colorScheme="pink">
+                Start a free project
               </Button>
-            </Link>
-          </Flex>
+            </Flex>
+          )}
         </Flex>
 
         {isOpen ? (

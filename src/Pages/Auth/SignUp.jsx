@@ -3,11 +3,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Flex } from '@chakra-ui/react';
-import { Banner, SignInForm } from '@components/auth';
+import { Banner, SignUpForm } from '@components/auth';
 
 import { auth } from '../../firebase';
 
-export function SignIn() {
+export function SignUp() {
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,7 +18,7 @@ export function SignIn() {
     <Box>
       <Flex>
         <Banner />
-        <SignInForm />
+        <SignUpForm />
       </Flex>
     </Box>
   );
