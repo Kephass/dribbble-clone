@@ -3,14 +3,14 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
 
-import { SignIn, SignUp } from './Pages/Auth';
-import { DesignerSearch, Freelance, Jobs } from './Pages/FindWork';
-import GoPro from './Pages/GoPro';
-import Inspiration from './Pages/Inspiration';
-import Landing from './Pages/Landing';
-import LearnDesign from './Pages/LearnDesign';
-import Marketplace from './Pages/Marketplace';
-import UserProfile from './Pages/UserProfile';
+import { SignIn, SignUp } from './pages/auth';
+import { DesignerSearch, Freelance, Jobs } from './pages/findwork';
+import GoPro from './pages/GoPro';
+import Inspiration from './pages/Inspiration';
+import Landing from './pages/Landing';
+import LearnDesign from './pages/LearnDesign';
+import Marketplace from './pages/Marketplace';
+import UserProfile from './pages/UserProfile';
 
 function Dribbble() {
   const currentLocation = useLocation().pathname;
