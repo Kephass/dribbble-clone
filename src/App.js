@@ -1,11 +1,14 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import { Box } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from '@components';
-import Landing from './Pages/Landing';
-import Inspiration from './Pages/Inspiration';
-import { Jobs, Freelance, DesignerSearch } from './Pages/FindWork';
-import LearnDesign from './Pages/LearnDesign';
+
+import { DesignerSearch, Freelance, Jobs } from './Pages/FindWork';
 import GoPro from './Pages/GoPro';
+import Inspiration from './Pages/Inspiration';
+import Landing from './Pages/Landing';
+import LearnDesign from './Pages/LearnDesign';
+import Marketplace from './Pages/Marketplace';
 import UserProfile from './Pages/UserProfile';
 
 function App() {
@@ -22,10 +25,10 @@ function App() {
           <Route path="learn" element={<LearnDesign />} />
           <Route path="learnDesign" element={<LearnDesign />} />
           <Route path="pro" element={<GoPro />} />
-          {/* 
-          <Route path="marketplace" element={<MarketPlace />} />
-          <Route path="hiring" element={<HireDesigners />} />
-		      */}
+
+          <Route path="marketplace" element={<Marketplace />} />
+          {/* <Route path="hiring" element={<HireDesigners />} /> */}
+
           <Route path="/users/:userId" element={<UserProfile />} />
           {/* 
 		  <Route path='uploads' element={Upload} /> 
