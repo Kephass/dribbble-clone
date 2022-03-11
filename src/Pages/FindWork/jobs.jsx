@@ -1,9 +1,12 @@
 import React from 'react';
+
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { Banner } from '@components';
 import { Body, Filter } from '@components/findwork';
-import './style.scss';
+
 import { links } from './index';
+
+import './style.scss';
 
 export const Jobs = () => {
   return (

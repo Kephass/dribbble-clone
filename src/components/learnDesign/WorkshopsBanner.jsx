@@ -1,12 +1,12 @@
 import {
-  Container,
-  Stack,
-  Flex,
   Box,
-  Heading,
-  Text,
   Button,
+  Container,
+  Flex,
+  Heading,
   Image,
+  Stack,
+  Text,
 } from '@chakra-ui/react';
 
 export const WorkshopsBanner = () => {

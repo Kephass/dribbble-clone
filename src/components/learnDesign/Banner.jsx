@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {
-  Container,
-  Stack,
-  Flex,
   Box,
-  Heading,
-  Text,
   Button,
-  Image,
+  Container,
   Divider,
+  Flex,
+  Heading,
   Hide,
+  Image,
+  Stack,
+  Text,
 } from '@chakra-ui/react';
 
 export const Banner = () => {
@@ -52,7 +52,7 @@ export const Banner = () => {
           <Box
             position={'relative'}
             height={{ base: '577px', md: '500px' }}
-            width="464px"
+            // width="464px"
             objectFit="cover"
             bgRepeat="no-repeat"
             width={'full'}

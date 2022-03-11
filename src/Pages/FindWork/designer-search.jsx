@@ -1,45 +1,67 @@
 import React from 'react';
+
 import {
   Box,
-  Flex,
-  VStack,
-  Text,
-  Container,
-  Spacer,
   Button,
-  StackDivider,
+  Container,
+  Flex,
+  Spacer,
+  Text,
+  VStack
 } from '@chakra-ui/react';
-import { Footer } from '@components';
-import { Search, DesignerList } from '@components/findwork';
+import { AccordionNav, DesignerList, SearchDesign } from '@components/findwork';
+
 import './style.scss';
 
 const lists = [
   {
-    title: 'Web & Product Designer',
-    location: 'Austin TX',
-    logo: 'https://cdn.dribbble.com/users/732492/avatars/normal/7bb885b4424533a2d8806b1f90f97704.png?1613640457&compress=1&resize=96x96',
-    post: 'The Graphic Standard',
-    type: 'Full-time',
+    title: 'Halo UI/UX',
+    location: 'Ukraine',
+    logo:
+      'https://cdn.dribbble.com/users/6234/avatars/normal/25f8d3c2ac3fbb8686429a19219ddfe7.png?1645955093',
+    projects: [
+      {
+        img:
+          'https://cdn.dribbble.com/users/6234/screenshots/16989869/rello_website_1x.png',
+        title: ''
+      },
+      {
+        img:
+          'https://cdn.dribbble.com/users/6234/screenshots/17378032/amateur_website_1x.png',
+        title: ''
+      }
+    ],
+    price: 'The Graphic Standard',
+    isPro: true,
     url: '',
-    timeStamp: new Date(),
+    timeStamp: new Date()
   },
   {
-    title: 'Junior Motion Designer (f/m/d)',
-    location: 'MUNICH',
-    logo: 'https://cdn.dribbble.com/users/9087000/avatars/normal/c17b734294f990fdc39eedf98fc9f780.png?1631056561&compress=1&resize=84x84',
-    post: 'BDA Creative GmbH',
-    type: 'Full-time',
+    title: 'tubik UX',
+    location: 'Dnipro, Ukraine',
+    projects: [
+      {
+        img:
+          'https://cdn.dribbble.com/users/22691/screenshots/17109835/tubik_momatu_web_redesign_1x.jpg',
+        title: ''
+      }
+    ],
+    logo:
+      'https://cdn.dribbble.com/users/22691/avatars/normal/a0ed2c2d2594923d0d2c22705c3b6d05.png?1636992114',
     url: '',
-    timeStamp: new Date(),
-  },
+    isPro: false,
+    timeStamp: new Date()
+  }
 ];
+
 export const DesignerSearch = () => {
   return (
     <Box>
-      <Container maxW="8xl">
+      <Container maxW="1600px">
         <Flex>
           {/* LEFT */}
           <Box
+            minWidth="300px"
             position="sticky"
             top="0px"
             minHeight="100vh"
@@ -48,14 +70,15 @@ export const DesignerSearch = () => {
             borderRight="1px solid"
             borderColor="gray.200"
           >
-            <VStack
-              bg="gray.300"
-              p="2"
-              borderRadius="10"
-              ml="2"
-              color="gray.600"
-            >
-              <Text>TYPE OF SEARCH</Text>
+            <VStack align="left">
+              <Flex width="100%" mb="10px" direction="column">
+                <Text fontSize="sm" fontWeight="bold" color="gray">
+                  TYPE OF SEARCH
+                </Text>
+                <Box my="12px">
+                  <AccordionNav />
+                </Box>
+              </Flex>
             </VStack>
           </Box>
           <Spacer />
@@ -126,12 +149,11 @@ export const DesignerSearch = () => {
             borderColor="gray.200"
           >
             <VStack>
-              <Search width="100%" />
+              <SearchDesign width="100%" />
             </VStack>
           </Box>
         </Flex>
       </Container>
-      <Footer />
     </Box>
   );
 };

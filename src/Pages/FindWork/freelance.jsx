@@ -1,9 +1,12 @@
 import React from 'react';
+
 import { Box, Flex, Image, Spacer, Text } from '@chakra-ui/react';
-import { Footer, Banner } from '@components';
+import { Banner } from '@components';
 import { Body, Filter } from '@components/findwork';
-import './style.scss';
+
 import { links } from './index';
+
+import './style.scss';
 
 export const Freelance = () => {
   return (
@@ -88,7 +91,6 @@ export const Freelance = () => {
         </Box>
       </Banner>
       <Body />
-      <Footer />
     </Box>
   );
 };

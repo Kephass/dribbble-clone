@@ -20,7 +20,6 @@ export function PriceCard({
   yearly,
   stateChanger,
 }) {
-  console.log(options);
   return (
     <Box
       border="1px lightgray solid"
