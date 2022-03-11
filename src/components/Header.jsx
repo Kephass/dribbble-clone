@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { CloseIcon,HamburgerIcon } from '@chakra-ui/icons';
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
   Avatar,
   Box,
@@ -15,8 +15,11 @@ import {
   MenuItem,
   MenuList,
   Stack,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
+
+import { logout } from '../firebase';
 
 const Links = [
   {
@@ -78,7 +81,7 @@ export const Header = () => {
             >
               {Links.map((link) => (
                 <Link to={link.url} key={link.url}>
-                  {link.title}
+                  <Text _hover={{ color: '#E26D5C' }}>{link.title}</Text>
                 </Link>
               ))}
             </HStack>
@@ -106,6 +109,8 @@ export const Header = () => {
                 <MenuItem>Edit Work Preferences</MenuItem>
                 <MenuDivider />
                 <MenuItem>My Likes</MenuItem>
+                <MenuDivider />
+                <MenuItem onClick={logout}>Logout</MenuItem>
               </MenuList>
             </Menu>
             <Link to="uploads">

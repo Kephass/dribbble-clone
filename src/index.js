@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import { Provider } from 'react-redux';
+
 import { ChakraProvider } from '@chakra-ui/react';
+
+import { store } from './app/store';
 import App from './App';
 import theme from './theme';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+
+import './index.scss';
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>

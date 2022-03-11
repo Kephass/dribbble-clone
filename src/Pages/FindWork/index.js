@@ -1,6 +1,6 @@
-export * from './jobs';
-export * from './freelance';
 export * from './designer-search';
+export * from './freelance';
+export * from './jobs';
 
 export const links = [
   {

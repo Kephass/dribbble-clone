@@ -1,5 +1,4 @@
 import { Container } from '@chakra-ui/react';
-import { Footer } from '@components';
 import {
   Banner,
   Benefits,
@@ -20,7 +19,6 @@ function GoPro() {
         <Testimonials />
       </Container>
       <Community />
-      <Footer />
     </>
   );
 }

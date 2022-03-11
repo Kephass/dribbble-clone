@@ -1,4 +1,4 @@
-import { Flex, Grid, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 export function Card({ img, title, desc }) {
   return (

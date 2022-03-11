@@ -3,12 +3,11 @@ import {
   Box,
   Button,
   Flex,
-  HStack,
   Icon,
   Link,
   Text,
-  VStack,
 } from '@chakra-ui/react';
+
 import { ReactComponent as Arrow } from '../../svg/arrow.svg';
 
 export function PriceCard({
@@ -21,7 +20,6 @@ export function PriceCard({
   yearly,
   stateChanger,
 }) {
-  console.log(options);
   return (
     <Box
       border="1px lightgray solid"

@@ -1,10 +1,10 @@
 // global
-export * from './Card';
 export * from './Banner';
 export * from './Benefits';
-export * from './Hero';
-export * from './Pricing';
-export * from './PriceCard';
-export * from './Testimonials';
+export * from './Card';
 export * from './Community';
+export * from './Hero';
+export * from './PriceCard';
+export * from './Pricing';
 export * from './SlidingWords';
+export * from './Testimonials';
