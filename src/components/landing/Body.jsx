@@ -26,9 +26,8 @@ export function Body() {
       >
         {posts.map((item, i) => (
           <Flex direction="column" gap="2" key={`projects${i}`}>
-            <Card title={item.title} key={item.id} img={item.url} />
+            <Card title={item.title} img={item.url} />
             <CardText
-              key={item.id}
               text={item.title}
               img={item.thumbnailUrl}
               likes={item.id}
