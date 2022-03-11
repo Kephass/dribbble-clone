@@ -18,7 +18,7 @@ import {
   MenuList,
   Stack,
   Text,
-  useDisclosure,
+  useDisclosure
 } from '@chakra-ui/react';
 
 import { auth, logout } from '../firebase';
@@ -26,28 +26,28 @@ import { auth, logout } from '../firebase';
 const Links = [
   {
     title: 'Inspiration',
-    url: 'shots',
+    url: 'shots'
   },
   {
     title: 'Find Work',
-    url: 'jobs',
+    url: 'jobs'
   },
   {
     title: 'Learn Design',
-    url: 'learn',
+    url: 'learn'
   },
   {
     title: 'Go Pro',
-    url: 'pro',
+    url: 'pro'
   },
   {
     title: 'Marketplace',
-    url: 'marketplace',
+    url: 'marketplace'
   },
   {
     title: 'Hire Designers',
-    url: 'hiring',
-  },
+    url: 'hiring'
+  }
 ];
 
 export const Header = () => {
@@ -99,11 +99,7 @@ export const Header = () => {
                   cursor={'pointer'}
                   minW={0}
                 >
-                  <Avatar
-                    name="Felix"
-                    src="images/default/avatar.jpeg"
-                    size={'sm'}
-                  />
+                  <Avatar name="Felix" src={user?.photoURL} size={'sm'} />
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Profile</MenuItem>
