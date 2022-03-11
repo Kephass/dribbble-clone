@@ -9,6 +9,7 @@ import GoPro from './Pages/GoPro';
 import Inspiration from './Pages/Inspiration';
 import Landing from './Pages/Landing';
 import LearnDesign from './Pages/LearnDesign';
+import Marketplace from './Pages/Marketplace';
 import UserProfile from './Pages/UserProfile';
 
 function App() {
@@ -25,10 +26,8 @@ function App() {
           <Route path="designers" element={<DesignerSearch />} />
           <Route path="learn" element={<LearnDesign />} />
           <Route path="pro" element={<GoPro />} />
-          {/*
-            <Route path="marketplace" element={<MarketPlace />} />
-            <Route path="hiring" element={<HireDesigners />} />
-                */}
+          <Route path="marketplace" element={<Marketplace />} />
+          {/* <Route path="hiring" element={<HireDesigners />} /> */}
           <Route path="/users/:userId" element={<UserProfile />} />
           {/*
             <Route path='uploads' element={Upload} />
