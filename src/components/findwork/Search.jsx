@@ -8,14 +8,14 @@ import {
   Divider,
   FormControl,
   FormLabel,
-  Stack,
+  Stack
 } from '@chakra-ui/react';
 import { InputUi } from '@components/ui';
 
 export const Search = ({
   width,
   border = '0px solid',
-  borderColor = 'gray.200',
+  borderColor = 'gray.200'
 }) => {
   return (
     <Box
@@ -94,7 +94,7 @@ export const Search = ({
 };
 
 Search.propTypes = {
-  width: PropTypes.string.isRequired,
-  border: PropTypes.string.isRequired,
-  borderColor: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  border: PropTypes.string,
+  borderColor: PropTypes.string
 };
