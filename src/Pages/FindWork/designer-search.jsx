@@ -1,16 +1,17 @@
 import React from 'react';
+
 import {
   Box,
-  Flex,
-  VStack,
-  Text,
-  Container,
-  Spacer,
   Button,
-  StackDivider,
+  Container,
+  Flex,
+  Spacer,
+  Text,
+  VStack,
 } from '@chakra-ui/react';
 import { Footer } from '@components';
-import { Search, DesignerList } from '@components/findwork';
+import { DesignerList, Search } from '@components/findwork';
+
 import './style.scss';
 
 const lists = [

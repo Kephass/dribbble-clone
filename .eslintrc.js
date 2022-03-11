@@ -18,7 +18,7 @@ module.exports = {
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'simple-import-sort/imports': [
-      'error',
+      'warn',
       {
         groups: [
           // `react` first, `next` second, then packages starting with a character
