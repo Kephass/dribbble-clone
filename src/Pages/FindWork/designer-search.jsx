@@ -7,7 +7,7 @@ import {
   Flex,
   Spacer,
   Text,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import { AccordionNav, DesignerList, SearchDesign } from '@components/findwork';
 
@@ -17,41 +17,36 @@ const lists = [
   {
     title: 'Halo UI/UX',
     location: 'Ukraine',
-    logo:
-      'https://cdn.dribbble.com/users/6234/avatars/normal/25f8d3c2ac3fbb8686429a19219ddfe7.png?1645955093',
+    logo: 'https://cdn.dribbble.com/users/6234/avatars/normal/25f8d3c2ac3fbb8686429a19219ddfe7.png?1645955093',
     projects: [
       {
-        img:
-          'https://cdn.dribbble.com/users/6234/screenshots/16989869/rello_website_1x.png',
-        title: ''
+        img: 'https://cdn.dribbble.com/users/6234/screenshots/16989869/rello_website_1x.png',
+        title: '',
       },
       {
-        img:
-          'https://cdn.dribbble.com/users/6234/screenshots/17378032/amateur_website_1x.png',
-        title: ''
-      }
+        img: 'https://cdn.dribbble.com/users/6234/screenshots/17378032/amateur_website_1x.png',
+        title: '',
+      },
     ],
     price: 'The Graphic Standard',
     isPro: true,
     url: '',
-    timeStamp: new Date()
+    timeStamp: new Date(),
   },
   {
     title: 'tubik UX',
     location: 'Dnipro, Ukraine',
     projects: [
       {
-        img:
-          'https://cdn.dribbble.com/users/22691/screenshots/17109835/tubik_momatu_web_redesign_1x.jpg',
-        title: ''
-      }
+        img: 'https://cdn.dribbble.com/users/22691/screenshots/17109835/tubik_momatu_web_redesign_1x.jpg',
+        title: '',
+      },
     ],
-    logo:
-      'https://cdn.dribbble.com/users/22691/avatars/normal/a0ed2c2d2594923d0d2c22705c3b6d05.png?1636992114',
+    logo: 'https://cdn.dribbble.com/users/22691/avatars/normal/a0ed2c2d2594923d0d2c22705c3b6d05.png?1636992114',
     url: '',
     isPro: false,
-    timeStamp: new Date()
-  }
+    timeStamp: new Date(),
+  },
 ];
 
 export const DesignerSearch = () => {

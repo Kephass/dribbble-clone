@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
   Box,
   Button,
@@ -10,9 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 export function Banner() {
-  const handleClick = () => {
-    alert('I was clicked!');
-  };
+  const history = useNavigate();
 
   return (
     <Box bg="purple.50" pb="10">
@@ -46,7 +46,11 @@ export function Banner() {
               Dribbble is the leading destination to find & showcase creative
               work and home to the world&apos;`s best design professionals.
             </Text>
-            <Button colorScheme="pink" variant="solid" onClick={handleClick}>
+            <Button
+              colorScheme="pink"
+              variant="solid"
+              onClick={() => history.push('/signup')}
+            >
               Sign up
             </Button>
           </VStack>
