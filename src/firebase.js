@@ -18,13 +18,13 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDg1m4o6_qATEV44PKFEJZAaa9jbfUbA6U',
-  authDomain: 'dribble-clone-33a3d.firebaseapp.com',
-  projectId: 'dribble-clone-33a3d',
-  storageBucket: 'dribble-clone-33a3d.appspot.com',
-  messagingSenderId: '237649064676',
-  appId: '1:237649064676:web:503677ae5416b5fe33b2f1',
-  measurementId: 'G-NPGC7GE7LK',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

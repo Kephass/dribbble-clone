@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 export function Banner() {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Box bg="purple.50" pb="10">
@@ -49,7 +49,7 @@ export function Banner() {
             <Button
               colorScheme="pink"
               variant="solid"
-              onClick={() => history.push('/signup')}
+              onClick={() => navigate('/signup')}
             >
               Sign up
             </Button>
