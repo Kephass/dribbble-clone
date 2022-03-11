@@ -3,16 +3,16 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
 
-import { SignIn, SignUp } from './pages/auth';
-import { DesignerSearch, Freelance, Jobs } from './pages/findwork';
-import GoPro from './pages/GoPro';
-import Inspiration from './pages/Inspiration';
-import Landing from './pages/Landing';
-import LearnDesign from './pages/LearnDesign';
-import Marketplace from './pages/Marketplace';
-import UserProfile from './pages/UserProfile';
+import { SignIn, SignUp } from './screens/authentication';
+import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
+import GoPro from './screens/GoPro';
+import Inspiration from './screens/Inspiration';
+import Landing from './screens/Landing';
+import LearnDesign from './screens/LearnDesign';
+import Marketplace from './screens/Marketplace';
+import UserProfile from './screens/UserProfile';
 
-function Dribbble() {
+function App() {
   const currentLocation = useLocation().pathname;
   const AuthPaths = ['/signup', '/signin', '/forgotpassword', '/resetpassword'];
   const [isAuthPath, setIsAuthPath] = useState(true);
@@ -47,4 +47,4 @@ function Dribbble() {
   );
 }
 
-export default Dribbble;
+export default App;

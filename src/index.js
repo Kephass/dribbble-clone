@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import { store } from './app/store';
-import Dribbble from './Dribbble';
+import App from './app';
 import theme from './theme';
 
 import './index.scss';
@@ -16,7 +16,7 @@ ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
         <Router>
-          <Dribbble />
+          <App />
         </Router>
       </Provider>
     </React.StrictMode>
