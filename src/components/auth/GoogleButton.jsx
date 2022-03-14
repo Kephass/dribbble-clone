@@ -54,7 +54,7 @@ export function GoogleButton() {
           </g>
         </svg>
       </Box>
-      <Text width="100%">Aanmelden bij Google</Text>
+      <Text width="100%">Inloggen met Google</Text>
     </Button>
   );
 }

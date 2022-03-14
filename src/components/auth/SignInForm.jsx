@@ -12,7 +12,7 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react';
-import { GoogleButton } from '@components/auth';
+import { GoogleButton, TwitterButton } from '@components/auth';
 import { InputUi } from '@components/ui';
 
 import { logInWithEmailAndPassword } from '../../firebase';
@@ -28,7 +28,10 @@ export function SignInForm() {
             <Text fontSize="2xl" fontWeight="bold" mb="40px">
               Sign in to Dribbble
             </Text>
-            <GoogleButton></GoogleButton>
+            <Box display="flex">
+              <GoogleButton></GoogleButton>
+              <TwitterButton></TwitterButton>
+            </Box>
             <Divider
               textAlign="center"
               borderColor="gray"
