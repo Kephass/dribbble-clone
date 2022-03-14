@@ -6,6 +6,7 @@ import { Footer, Header } from '@components';
 import { SignIn, SignUp } from './screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import GoPro from './screens/GoPro';
+import HireDesigners from './screens/HireDesigners';
 import Inspiration from './screens/Inspiration';
 import Landing from './screens/Landing';
 import LearnDesign from './screens/LearnDesign';
@@ -36,7 +37,7 @@ function App() {
         <Route path="learn" element={<LearnDesign />} />
         <Route path="pro" element={<GoPro />} />
         <Route path="marketplace" element={<Marketplace />} />
-        {/* <Route path="hiring" element={<HireDesigners />} /> */}
+        <Route path="hiring" element={<HireDesigners />} />
         <Route path="/users/:userId" element={<UserProfile />} />
         {/*
             <Route path='uploads' element={Upload} />
