@@ -15,6 +15,8 @@ import {
 import { SignIn, SignUp } from '@screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from '@screens/findwork';
 
+import HireDesigners from './screens/HireDesigners';
+
 function App() {
   const currentLocation = useLocation().pathname;
   const AuthPaths = ['/signup', '/signin', '/forgotpassword', '/resetpassword'];
@@ -39,7 +41,7 @@ function App() {
         <Route path="learn" element={<LearnDesign />} />
         <Route path="pro" element={<GoPro />} />
         <Route path="marketplace" element={<Marketplace />} />
-        {/* <Route path="hiring" element={<HireDesigners />} /> */}
+        <Route path="hiring" element={<HireDesigners />} />
         <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
