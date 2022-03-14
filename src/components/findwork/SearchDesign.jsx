@@ -97,7 +97,7 @@ export const SearchDesign = ({
 };
 
 SearchDesign.propTypes = {
-  width: PropTypes.string.isRequired,
-  border: PropTypes.string.isRequired,
-  borderColor: PropTypes.string.isRequired
+  width: PropTypes.string,
+  border: PropTypes.string,
+  borderColor: PropTypes.string
 };
