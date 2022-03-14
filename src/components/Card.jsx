@@ -3,20 +3,31 @@ import React, { useState } from 'react';
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 
-export function Card({ img, title }) {
+export function Card({
+  img,
+  title,
+  width = '100%',
+  height = 'auto',
+  objectFit = 'contain',
+  borderRadius = '10px'
+}) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <Box
+      background="gray"
       position="relative"
       onMouseEnter={() => setIsVisible(true)}
+      borderRadius={borderRadius}
       onMouseLeave={() => setIsVisible(false)}
     >
       <Image
-        width="100%"
-        objectFit="contain"
+        width={width}
+        height={height}
+        objectFit={objectFit}
         src={img}
-        borderRadius="10"
+        fallbackSrc="https://via.placeholder.com/150"
+        borderRadius={borderRadius}
         _hover={{ cursor: 'pointer' }}
       />
       <Box

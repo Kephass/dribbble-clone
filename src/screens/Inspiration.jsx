@@ -1,9 +1,14 @@
 import React from 'react';
 
 import { Box } from '@chakra-ui/react';
+import { Body } from '@components/landing';
 
 const Inspiration = () => {
-  return <Box textAlign="center">Inspiration Page</Box>;
+  return (
+    <Box>
+      <Body />
+    </Box>
+  );
 };
 
 export default Inspiration;

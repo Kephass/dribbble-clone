@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import { Button,Container, Flex } from '@chakra-ui/react';
+import { Button, Container, Flex } from '@chakra-ui/react';
 
-export function Filter({ links }) {
+export function FilterTabs({ links }) {
   return (
     <div>
       {links && (
@@ -27,6 +27,6 @@ export function Filter({ links }) {
   );
 }
 
-Filter.propTypes = {
-  links: PropTypes.array.isRequired,
+FilterTabs.propTypes = {
+  links: PropTypes.array.isRequired
 };
