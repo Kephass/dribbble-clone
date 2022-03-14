@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Footer, Header } from '@components';
 
 import { SignIn, SignUp } from './screens/authentication';
+import Error from './screens/Error';
 import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import GoPro from './screens/GoPro';
 import Inspiration from './screens/Inspiration';
@@ -41,6 +42,7 @@ function App() {
         {/*
             <Route path='uploads' element={Upload} />
             */}
+        <Route path="*" element={<Error />} />
       </Routes>
       {!isAuthPath && <Footer />}
     </>
