@@ -29,7 +29,7 @@ function App() {
 
         {/* content paths */}
         <Route path="/" element={<Landing />} />
-        <Route path="shots" element={<Inspiration />} />
+        <Route path="shots/*" element={<Inspiration />} />
         <Route path="jobs" element={<Jobs />} />
         <Route path="freelance-jobs" element={<Freelance />} />
         <Route path="designers" element={<DesignerSearch />} />

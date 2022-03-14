@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
+import { FilterNav } from '@components/landing';
 import { getPosts } from '@features/listSlice';
 
 export function Body() {
@@ -18,9 +19,10 @@ export function Body() {
 
   const posts = useSelector((state) => state.list.posts);
   return (
-    <Container maxW="8xl">
+    <Container maxW="95%">
+      <FilterNav />
       <Grid
-        p="5"
+        py="32px"
         gap="10"
         templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
       >

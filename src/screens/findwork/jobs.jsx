@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { Banner } from '@components';
-import { Body, Filter } from '@components/findwork';
+import { Body } from '@components/findwork';
+import { FilterTabs } from '@ui';
 
 import { links } from './index';
 
@@ -11,7 +12,7 @@ import './style.scss';
 export const Jobs = () => {
   return (
     <Box>
-      <Filter links={links} />
+      <FilterTabs links={links} />
       <Banner
         title={'The #1 Job Board for Graphic Design Jobs'}
         description="Dribbble is the heart of the design community and the best resource
@@ -19,17 +20,17 @@ export const Jobs = () => {
         image="images/banners/jobs.png"
         buttons={[
           { text: 'Post a job—Starting at $249/mo' },
-          { text: 'Learn more', color: 'gray' },
+          { text: 'Learn more', color: 'gray' }
         ]}
         titleOptions={{
           fontSize: { base: '2xl', md: '2xl', lg: '2rem' },
           align: 'left',
-          fontWeight: 'extrabold',
+          fontWeight: 'extrabold'
         }}
         descriptionOptions={{
           fontSize: { base: 'lg', md: 'xl', lg: '2xl' },
           align: 'left',
-          fontWeight: 'medium',
+          fontWeight: 'medium'
         }}
       >
         <Box
