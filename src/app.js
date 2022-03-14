@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
-import HireDesigners from './screens/HireDesigners';
 import {
   Error,
   GoPro,
@@ -15,6 +14,8 @@ import {
 } from '@screens';
 import { SignIn, SignUp } from '@screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from '@screens/findwork';
+
+import HireDesigners from './screens/HireDesigners';
 
 function App() {
   const currentLocation = useLocation().pathname;
