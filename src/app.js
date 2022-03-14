@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
+import HireDesigners from './screens/HireDesigners';
 import {
   Error,
   GoPro,
@@ -39,7 +40,7 @@ function App() {
         <Route path="learn" element={<LearnDesign />} />
         <Route path="pro" element={<GoPro />} />
         <Route path="marketplace" element={<Marketplace />} />
-        {/* <Route path="hiring" element={<HireDesigners />} /> */}
+        <Route path="hiring" element={<HireDesigners />} />
         <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />

@@ -7,7 +7,7 @@ export default function ReviewCard({ text, name }) {
         {text}
       </Text>
       <HStack>
-        <Avatar />
+        <Avatar name={name} />
         <Box>
           <Text fontWeight="bold">{name}</Text>
           <Text>Freelance graphic design</Text>
