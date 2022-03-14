@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
 import {
+  Error,
   GoPro,
   Inspiration,
   Landing,
@@ -40,6 +41,7 @@ function App() {
         <Route path="marketplace" element={<Marketplace />} />
         {/* <Route path="hiring" element={<HireDesigners />} /> */}
         <Route path="/users/:userId" element={<UserProfile />} />
+        <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
       </Routes>
       {!isAuthPath && <Footer />}
