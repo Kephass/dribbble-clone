@@ -1,11 +1,19 @@
 import { useState } from 'react';
 
-import { Box, Flex, FormControl, FormLabel, Switch } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  FormControl,
+  FormLabel,
+  Switch,
+  Text,
+} from '@chakra-ui/react';
 import { PriceCard } from '@components/hireDesigners';
 
 import { ReactComponent as Arrow } from '../../svg/arrow.svg';
 
-export function Pricing() {
+export function Pricing({ text }) {
   const [quarterly, setQuarterly] = useState(true);
 
   const handleChange = () => {
@@ -13,6 +21,35 @@ export function Pricing() {
   };
   return (
     <Box my={{ base: '10', md: '20' }}>
+      {text && (
+        <Container maxW="4xl">
+          <Text
+            align="center"
+            my="4"
+            lineHeight="normal"
+            fontSize={{
+              base: 'xl',
+              md: '2xl',
+              lg: '3xl',
+            }}
+            fontWeight="extrabold"
+          >
+            Find your next creative professional today
+          </Text>
+          <Text
+            align="center"
+            mb="16"
+            lineHeight="normal"
+            fontSize={{
+              base: 'sm',
+              md: 'md',
+            }}
+          >
+            Tap into our ready-to-hire community of 1 million top designers
+            worldwide with one of our seamless hiring solutions.
+          </Text>
+        </Container>
+      )}
       <FormControl
         display="flex"
         justifyContent="center"

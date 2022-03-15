@@ -1,5 +1,12 @@
 import { Box } from '@chakra-ui/react';
-import { Banner, Companies, Pricing } from '@components/hireDesigners';
+import {
+  Banner,
+  Companies,
+  DesignerSearch,
+  JobBoard,
+  Pricing,
+  Testimonial,
+} from '@components/hireDesigners';
 
 export default function HireDesigners() {
   return (
@@ -7,6 +14,10 @@ export default function HireDesigners() {
       <Banner />
       <Companies />
       <Pricing />
+      <Testimonial />
+      <JobBoard />
+      <DesignerSearch />
+      <Pricing text />
     </Box>
   );
 }
