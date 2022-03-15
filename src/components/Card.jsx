@@ -8,7 +8,8 @@ export function Card({
   title,
   width = '100%',
   height = 'auto',
-  objectFit = 'contain'
+  objectFit = 'contain',
+  borderRadius = '10px'
 }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -17,6 +18,7 @@ export function Card({
       background="gray"
       position="relative"
       onMouseEnter={() => setIsVisible(true)}
+      borderRadius={borderRadius}
       onMouseLeave={() => setIsVisible(false)}
     >
       <Image
@@ -25,7 +27,7 @@ export function Card({
         objectFit={objectFit}
         src={img}
         fallbackSrc="https://via.placeholder.com/150"
-        borderRadius="10"
+        borderRadius={borderRadius}
         _hover={{ cursor: 'pointer' }}
       />
       <Box
