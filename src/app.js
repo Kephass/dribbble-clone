@@ -12,9 +12,9 @@ import {
   Upload,
   UserProfile,
 } from '@screens';
-import { SignIn, SignUp } from '@screens/authentication';
-import { DesignerSearch, Freelance, Jobs } from '@screens/findwork';
 
+import { ForgotPassword, SignIn, SignUp } from './screens/authentication';
+import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import HireDesigners from './screens/HireDesigners';
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
         {/* Authentication paths */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
 
         {/* content paths */}
         <Route path="/" element={<Landing />} />
