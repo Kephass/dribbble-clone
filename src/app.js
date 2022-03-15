@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
-
-import { SignIn, SignUp } from './screens/authentication';
-import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
-import GoPro from './screens/GoPro';
 import HireDesigners from './screens/HireDesigners';
-import Inspiration from './screens/Inspiration';
-import Landing from './screens/Landing';
-import LearnDesign from './screens/LearnDesign';
-import Marketplace from './screens/Marketplace';
-import UserProfile from './screens/UserProfile';
+import {
+  Error,
+  GoPro,
+  Inspiration,
+  Landing,
+  LearnDesign,
+  Marketplace,
+  Upload,
+  UserProfile,
+} from '@screens';
+import { SignIn, SignUp } from '@screens/authentication';
+import { DesignerSearch, Freelance, Jobs } from '@screens/findwork';
 
 function App() {
   const currentLocation = useLocation().pathname;
@@ -39,9 +42,8 @@ function App() {
         <Route path="marketplace" element={<Marketplace />} />
         <Route path="hiring" element={<HireDesigners />} />
         <Route path="/users/:userId" element={<UserProfile />} />
-        {/*
-            <Route path='uploads' element={Upload} />
-            */}
+        <Route path="*" element={<Error />} />
+        <Route path="uploads" element={<Upload />} />
       </Routes>
       {!isAuthPath && <Footer />}
     </>

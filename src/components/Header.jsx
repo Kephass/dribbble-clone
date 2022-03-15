@@ -18,7 +18,7 @@ import {
   MenuList,
   Stack,
   Text,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import { auth, logout } from '../firebase';
@@ -26,28 +26,28 @@ import { auth, logout } from '../firebase';
 const Links = [
   {
     title: 'Inspiration',
-    url: 'shots'
+    url: 'shots',
   },
   {
     title: 'Find Work',
-    url: 'jobs'
+    url: 'jobs',
   },
   {
     title: 'Learn Design',
-    url: 'learn'
+    url: 'learn',
   },
   {
     title: 'Go Pro',
-    url: 'pro'
+    url: 'pro',
   },
   {
     title: 'Marketplace',
-    url: 'marketplace'
+    url: 'marketplace',
   },
   {
     title: 'Hire Designers',
-    url: 'hiring'
-  }
+    url: 'hiring',
+  },
 ];
 
 export const Header = () => {
@@ -107,7 +107,9 @@ export const Header = () => {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Profile</MenuItem>
+                  <MenuItem>
+                    <Link to="/users">Profile</Link>
+                  </MenuItem>
                   <MenuDivider />
                   <MenuItem>Edit Profile</MenuItem>
                   <MenuItem>Edit Work Preferences</MenuItem>
