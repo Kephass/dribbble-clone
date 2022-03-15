@@ -7,6 +7,9 @@ import {
   Pricing,
   Testimonial,
 } from '@components/hireDesigners';
+import { Faqs } from '@components/learnDesign';
+
+import data from '../data/hireDesigners.json';
 
 export default function HireDesigners() {
   return (
@@ -18,6 +21,7 @@ export default function HireDesigners() {
       <JobBoard />
       <DesignerSearch />
       <Pricing text />
+      <Faqs data={data} />
     </Box>
   );
 }
