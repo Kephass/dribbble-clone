@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Container, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import {
   Banner,
   CoursesBanner,
@@ -8,20 +8,15 @@ import {
   WorkshopsBanner,
 } from '@components/learnDesign';
 
+import data from '../data/learnDesign.json';
+
 const LearnDesign = () => {
   return (
     <Box>
       <Banner />
       <CoursesBanner />
       <WorkshopsBanner />
-      <Box bgColor="bgFAQ">
-        <Container maxW="container.lg" py="4rem">
-          <Heading as="h1" size="xl" lineHeight="56px" mb="2rem">
-            FAQs
-          </Heading>
-          <Faqs />
-        </Container>
-      </Box>
+      <Faqs data={data} />
     </Box>
   );
 };

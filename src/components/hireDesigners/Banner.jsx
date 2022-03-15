@@ -9,8 +9,8 @@ export function Banner() {
       align="center"
       overflowX="hidden"
       py="20"
-      gap="10"
-      pl={{ base: '5', md: '20' }}
+      gap="40"
+      pl={{ base: '10', xl: '20' }}
     >
       <Box minW="450px">
         <Text
@@ -18,8 +18,8 @@ export function Banner() {
           lineHeight="normal"
           fontSize={{
             base: '3xl',
-            md: '5xl',
-            lg: '6xl',
+            md: '4xl',
+            lg: '5xl',
           }}
           fontWeight="extrabold"
         >
@@ -28,8 +28,7 @@ export function Banner() {
         <Text
           fontSize={{
             base: 'md',
-            md: 'xl',
-            lg: '2xl',
+            lg: 'xl',
           }}
         >
           With Dribbble Hiring you can attract, engage, and connect with a

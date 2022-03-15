@@ -1,6 +1,6 @@
 import { Avatar, Flex, Text } from '@chakra-ui/react';
 
-export function Person({ name, job }) {
+export function Person({ name, job, small, left }) {
   return (
     <Flex
       boxShadow="sm"
@@ -10,9 +10,11 @@ export function Person({ name, job }) {
       bg="white"
       borderRadius="2xl"
     >
-      <Avatar size="lg" name={name} />
+      <Avatar size={small ? 'md' : 'lg'} name={name} />
       <Flex direction="column">
-        <Text fontWeight="bold">{name}</Text>
+        <Text align={left ? 'left' : 'center'} fontWeight="bold">
+          {name}
+        </Text>
         <Text>{job}</Text>
       </Flex>
     </Flex>
