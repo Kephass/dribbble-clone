@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -12,19 +14,23 @@ import {
 } from '@chakra-ui/react';
 import { FileUpload } from '@components';
 
+import { auth, createPost } from '../firebase';
+
 function Upload() {
+  const navigate = useNavigate();
+  const [user] = useAuthState(auth);
   const [newPostInfo, setNewPostInfo] = useState({
+    title: '',
+    caption: '',
+    likes: [],
+    comments: [],
     images: [],
   });
   const [hasImages, setHasImages] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const updateFiles = (files) => {
     setNewPostInfo({ ...newPostInfo, images: files });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //logic to create new post...
   };
 
   useEffect(() => {
@@ -46,12 +52,17 @@ function Upload() {
           </Button>
           <Button
             fontSize="sm"
-            disabled={!hasImages}
+            disabled={!hasImages || loading ? true : false}
             colorScheme="pink"
             ml="12px"
-            onClick={handleSubmit}
+            onClick={async () => {
+              setLoading(true);
+              await createPost(newPostInfo, user, loading);
+              setLoading(false);
+              navigate(`/users/${user?.uid}`);
+            }}
           >
-            Continue
+            {loading ? 'Uploading...' : 'Save'}
           </Button>
         </Flex>
         {!hasImages ? (
@@ -78,6 +89,9 @@ function Upload() {
         ) : (
           <Container maxW="800px" width="100%" mt="24px">
             <Input
+              onChange={(e) =>
+                setNewPostInfo({ ...newPostInfo, title: e.target.value })
+              }
               isRequired
               p="0"
               fontSize="26px"
@@ -108,6 +122,9 @@ function Upload() {
           {hasImages && (
             <Container maxW="800px" width="100%">
               <Input
+                onChange={(e) =>
+                  setNewPostInfo({ ...newPostInfo, caption: e.target.value })
+                }
                 width="100%"
                 isRequired
                 p="0"
