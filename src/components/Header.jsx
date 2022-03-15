@@ -74,7 +74,10 @@ export const Header = () => {
           />
           <HStack spacing={8} alignItems={'center'}>
             <Link to="/">
-              <Image src="images/brand/logo.svg" height="25px" />
+              <Image
+                src={`${process.env.REACT_APP_DOMAIN}/images/brand/logo.svg`}
+                height="25px"
+              />
             </Link>
             <HStack
               as={'nav'}
