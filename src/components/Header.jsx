@@ -1,5 +1,5 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
@@ -52,6 +52,7 @@ const Links = [
 
 export const Header = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -110,8 +111,12 @@ export const Header = () => {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>
-                    <Link to="/users">Profile</Link>
+                  <MenuItem
+                    onClick={() =>
+                      navigate(`/users/${user.displayName.split(' ')[0]}`)
+                    }
+                  >
+                    Profile
                   </MenuItem>
                   <MenuDivider />
                   <MenuItem>Edit Profile</MenuItem>
