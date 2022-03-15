@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link as Router } from 'react-router-dom';
 
 import {
   Box,
@@ -10,7 +11,7 @@ import {
   Link,
   Text,
 } from '@chakra-ui/react';
-import { GoogleButton } from '@components/auth';
+import { GoogleButton, TwitterButton } from '@components/auth';
 import { InputUi } from '@components/ui';
 
 import { registerWithEmailAndPassword } from '../../firebase';
@@ -27,12 +28,23 @@ export function SignUpForm() {
   return (
     <Box minH="100vh" width="70%" bg="white">
       <Flex width="100%" minH="100vh" align="center" justifyContent="center">
+        <Box position="absolute" top="24px" right="36px">
+          <Text>
+            Already a member?{' '}
+            <Link as={Router} to="/signin" color="purple.150">
+              Sign in
+            </Link>
+          </Text>
+        </Box>
         <Container maxW="500px">
           <Flex direction="column">
             <Text fontSize="2xl" fontWeight="bold" mb="40px">
               Sign up to Dribbble
             </Text>
-            <GoogleButton></GoogleButton>
+            <Box display="flex">
+              <GoogleButton></GoogleButton>
+              <TwitterButton></TwitterButton>
+            </Box>
             <Divider
               textAlign="center"
               borderColor="gray"

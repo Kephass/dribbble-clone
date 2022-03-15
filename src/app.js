@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from '@components';
 
-import { SignIn, SignUp } from './screens/authentication';
+import { ForgotPassword, SignIn, SignUp } from './screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import GoPro from './screens/GoPro';
 import Inspiration from './screens/Inspiration';
@@ -26,6 +26,7 @@ function App() {
         {/* Authentication paths */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
 
         {/* content paths */}
         <Route path="/" element={<Landing />} />

@@ -2,6 +2,6 @@ import React from 'react';
 
 import { Box } from '@chakra-ui/react';
 
-export function Banner() {
-  return <Box minH="100vh" width="30%" bg="pink.100"></Box>;
+export function Banner({ color = '#f1cdd7' }) {
+  return <Box minH="100vh" width="30%" bg={color}></Box>;
 }
