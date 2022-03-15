@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link as Router } from 'react-router-dom';
 
 import {
   Box,
@@ -24,7 +23,7 @@ export function ForgotPasswordForm() {
         <Spacer />
         <Text flex-grow="1" text-align="right">
           Not a member?{' '}
-          <Link as={Router} to="/signup" color="purple.150">
+          <Link to="/signup" color="purple.150">
             Sign up now
           </Link>
         </Text>
