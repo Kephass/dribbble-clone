@@ -11,11 +11,21 @@ import {
 import {
   addDoc,
   collection,
+  doc,
   getDocs,
   getFirestore,
   query,
+  serverTimestamp,
+  updateDoc,
   where,
 } from 'firebase/firestore';
+
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from '@firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -30,6 +40,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
+const storage = getStorage();
 const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -42,6 +53,10 @@ const signInWithGoogle = async () => {
         name: user.displayName,
         authProvider: 'google',
         email: user.email,
+        likedShots: [],
+        following: [],
+        posts: [],
+        collection: [],
       });
     }
   } catch (err) {
@@ -84,12 +99,60 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+// POSTS
+const createPost = async (postData, user, loading) => {
+  if (loading) return;
+  const docRef = await addDoc(collection(db, 'posts'), {
+    uid: user?.uid,
+    title: postData?.title,
+    caption: postData?.caption,
+    profileImg: user?.photoURL,
+    displayName: user?.displayName,
+    timestamp: serverTimestamp(),
+  });
+
+  const imageUrls = [];
+  const upload = new Promise((resolve) => {
+    postData?.images.forEach(async (image, i) => {
+      const imageRef = ref(storage, `posts/${docRef.id}/${docRef.id}${i}`);
+      await uploadBytes(imageRef, image).then(async (snapshot) => {
+        const downloadURL = await getDownloadURL(imageRef);
+        imageUrls.push(downloadURL);
+        if (i === postData?.images.length - 1) resolve();
+      });
+    });
+  });
+  upload.then(async () => {
+    await updateDoc(doc(db, 'posts', docRef.id), {
+      images: imageUrls,
+      timestamp: serverTimestamp(),
+    });
+    return 'Post created';
+  });
+};
+
+const getPosts = async () => {
+  return await getDocs(collection(db, 'posts'))
+    .then((querySnapshot) => {
+      return querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+    })
+    .catch((err) => {
+      console.error('Failed to retrieve data', err);
+    });
+};
 export {
   auth,
+  createPost,
   db,
+  getPosts,
   logInWithEmailAndPassword,
   logout,
   registerWithEmailAndPassword,
   sendPasswordReset,
   signInWithGoogle,
+  storage,
 };
