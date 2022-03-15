@@ -9,6 +9,7 @@ import {
   Heading,
   Hide,
   Image,
+  Link,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -38,9 +39,11 @@ export const Banner = () => {
             workshops to comprehensive 12 week courses all with your favorite
             design leaders.
           </Text>
-          <Button fontSize=".9rem" alignSelf="flex-start">
-            Browse upcoming courses
-          </Button>
+          <Link href="#courses" _hover={{ textDecoration: 'none' }}>
+            <Button fontSize=".9rem" alignSelf="flex-start">
+              Browse upcoming courses
+            </Button>
+          </Link>
         </Stack>
         <Flex
           flex={1}

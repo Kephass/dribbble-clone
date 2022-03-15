@@ -10,7 +10,7 @@ import {
 
 export const CoursesBanner = () => {
   return (
-    <Container maxW={'7xl'} marginBottom="20">
+    <Container id="courses" maxW={'7xl'} marginBottom="20">
       <Heading as="h1" align="center">
         Upcoming certified courses
       </Heading>
