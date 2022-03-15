@@ -22,7 +22,7 @@ export const UserProfileHeader = () => {
           borderRadius="full"
           boxSize="130px"
           src={user?.photoURL}
-          alt="Dan Abramov"
+          alt={title}
         />
       </Box>
       <VStack alignSelf="flex-start">

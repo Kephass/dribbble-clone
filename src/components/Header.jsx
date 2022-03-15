@@ -75,7 +75,7 @@ export const Header = () => {
           />
           <HStack spacing={8} alignItems={'center'}>
             <Link to="/">
-              <Image src="images/brand/logo.svg" height="25px" />
+              <Image src="./images/brand/logo.svg" height="25px" />
             </Link>
             <HStack
               as={'nav'}
@@ -108,7 +108,11 @@ export const Header = () => {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem onClick={() => navigate(`/users/${user.uid}`)}>
+                  <MenuItem
+                    onClick={() =>
+                      navigate(`/users/${user.displayName.split(' ')[0]}`)
+                    }
+                  >
                     Profile
                   </MenuItem>
                   <MenuDivider />

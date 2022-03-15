@@ -42,7 +42,7 @@ function App() {
         <Route path="pro" element={<GoPro />} />
         <Route path="marketplace" element={<Marketplace />} />
         <Route path="hiring" element={<HireDesigners />} />
-        <Route path="/users/:userId" element={<UserProfile />} />
+        <Route path="users/*" element={<UserProfile />} />
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
       </Routes>
