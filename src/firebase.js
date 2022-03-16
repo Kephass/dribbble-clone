@@ -132,6 +132,7 @@ const createPost = async (postData, user, loading) => {
   });
 };
 
+// Get POSTS
 const getPosts = async () => {
   return await getDocs(collection(db, 'posts'))
     .then((querySnapshot) => {

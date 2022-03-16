@@ -19,6 +19,7 @@
     "firebase": "^9.6.8",
     "framer-motion": "^6.2.8",
     "i": "^0.3.7",
+    "lodash": "^4.17.21",
     "node-sass": "^7.0.1",
     "npm": "^8.5.2",
     "prop-types": "^15.8.1",
