@@ -1,5 +1,3 @@
-import { useAuthState } from 'react-firebase-hooks/auth';
-
 import {
   Container,
   Tab,
@@ -8,16 +6,14 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-
-import { auth } from '../../firebase';
+import { Shots } from '@components/userProfile';
 
 export const UserTabs = () => {
-  const [user] = useAuthState(auth);
   return (
-    <Container maxW="8xl" py="2rem">
+    <Container maxW="9xl" p="3rem">
       <Tabs pb="4rem">
         <TabList>
-          <Tab>Shots{}</Tab>
+          <Tab>Shots</Tab>
           <Tab>Boosted Shots</Tab>
           <Tab>Collections</Tab>
           <Tab>Liked Shots</Tab>
@@ -26,7 +22,7 @@ export const UserTabs = () => {
 
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            <Shots />
           </TabPanel>
           <TabPanel>
             <p>two!</p>
