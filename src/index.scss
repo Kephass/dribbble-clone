@@ -10,3 +10,13 @@ html {
 button.filter-btn {
   background-color: white !important;
 }
+
+.hide-overflow-scroll-bar{
+    /* hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.hide-overflow-scroll-bar::-webkit-scrollbar {
+  display: none;
+}

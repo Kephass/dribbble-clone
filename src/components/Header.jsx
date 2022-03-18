@@ -138,13 +138,27 @@ export const Header = () => {
               <AuthLink href="/signin" fontWeight="normal">
                 Sign in
               </AuthLink>
-              <Text mx="5px" fontSize="lg" fontWeight="normal">
+              <Text
+                mx="5px"
+                fontSize="lg"
+                fontWeight="normal"
+                display={{ base: 'none', md: 'flex' }}
+              >
                 /
               </Text>
-              <AuthLink href="/signup" fontWeight="normal">
+              <AuthLink
+                href="/signup"
+                fontWeight="normal"
+                display={{ base: 'none', md: 'flex' }}
+              >
                 Sign up
               </AuthLink>
-              <Button ml="20px" my="40px" colorScheme="pink">
+              <Button
+                ml="20px"
+                my="40px"
+                colorScheme="pink"
+                display={{ base: 'none', md: 'flex' }}
+              >
                 Start a free project
               </Button>
             </Flex>

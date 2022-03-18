@@ -26,7 +26,7 @@ export function Body() {
 
   // const posts = useSelector((state) => state.list.posts);
   return (
-    <Container maxW="95%">
+    <Container maxW="95%" overflow="hidden">
       <FilterNav />
       <Grid
         py="32px"

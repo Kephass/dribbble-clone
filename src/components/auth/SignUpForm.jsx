@@ -4,14 +4,16 @@ import { Link as Router } from 'react-router-dom';
 import {
   Box,
   Button,
+  Center,
   Checkbox,
   Container,
   Divider,
   Flex,
+  Image,
   Link,
   Text,
 } from '@chakra-ui/react';
-import { GoogleButton, TwitterButton } from '@components/auth';
+import { GoogleButton, SignInUpLink, TwitterButton } from '@components/auth';
 import { InputUi } from '@components/ui';
 
 import { registerWithEmailAndPassword } from '../../firebase';
@@ -26,18 +28,31 @@ export function SignUpForm() {
     registerWithEmailAndPassword(name, email, password);
   };
   return (
-    <Box minH="100vh" width="70%" bg="white">
-      <Flex width="100%" minH="100vh" align="center" justifyContent="center">
-        <Box position="absolute" top="24px" right="36px">
-          <Text>
-            Already a member?{' '}
-            <Link as={Router} to="/signin" color="purple.150">
-              Sign in
-            </Link>
-          </Text>
-        </Box>
+    <Flex
+      minH="100vh"
+      width={{ base: '100%', md: '70%' }}
+      bg="white"
+      align={{ base: 'flex-start', md: 'center' }}
+      justifyContent="center"
+    >
+      <Flex
+        width={{ base: '90%', md: '100%' }}
+        minH={{ base: 'auto', md: '100vh' }}
+        mt={{ base: '3em', md: '0' }}
+        align={{ base: 'flex-start', md: 'center' }}
+        justifyContent="center"
+        direction="column"
+      >
         <Container maxW="500px">
           <Flex direction="column">
+            <Link as={Router} to="/">
+              <Image
+                src={`${process.env.REACT_APP_DOMAIN}/images/brand/logo.svg`}
+                height="25px"
+                mb="12px"
+                display={{ md: 'none' }}
+              />
+            </Link>
             <Text fontSize="2xl" fontWeight="bold" mb="40px">
               Sign up to Dribbble
             </Text>
@@ -126,13 +141,21 @@ export function SignUpForm() {
                 colorScheme="pink"
                 onClick={register}
                 disabled={name && email && password ? false : true}
+                width={{ base: '100%', md: 'auto' }}
               >
                 Create Account
               </Button>
             </Box>
           </Flex>
         </Container>
+        <Center width="100%">
+          <SignInUpLink
+            url="/signin"
+            text="Already a member?"
+            linkText="  Sign in"
+          />
+        </Center>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
