@@ -6,11 +6,13 @@ import {
   Button,
   Container,
   Flex,
+  Image,
   Link,
   Spacer,
   Text,
 } from '@chakra-ui/react';
 import { NavButton } from '@components/';
+import { SignInUpLink } from '@components/auth';
 import { InputUi } from '@components/ui';
 
 import { sendPasswordReset } from '../../firebase';
@@ -18,25 +20,32 @@ import { sendPasswordReset } from '../../firebase';
 export function ForgotPasswordForm() {
   const [email, setEmail] = useState('');
   return (
-    <Box minH="100vh" width="70%" bg="white">
-      <Flex flex-grow="0" width="100%" alignItems="center" p="30px 30px 0">
-        <NavButton></NavButton>
-        <Spacer />
-        <Text flex-grow="1" text-align="right">
-          Not a member?{' '}
-          <Link as={Router} to="/signup" color="purple.150">
-            Sign up now
-          </Link>
-        </Text>
-      </Flex>
+    <Flex
+      minH="100vh"
+      width={{ base: '100%', md: '70%' }}
+      bg="white"
+      align={{ base: 'flex-start', md: 'center' }}
+      justifyContent="center"
+    >
       <Flex
-        width="100%"
-        minH="calc(100vh - 70px)"
-        align="center"
+        width={{ base: '90%', md: '100%' }}
+        minH={{ base: 'auto', md: '100vh' }}
+        mt={{ base: '3em', md: '0' }}
+        align={{ base: 'flex-start', md: 'center' }}
         justifyContent="center"
+        direction="column"
+        position="relative"
       >
         <Container maxW="500px">
           <Flex direction="column">
+            <Link as={Router} to="/">
+              <Image
+                src={`${process.env.REACT_APP_DOMAIN}/images/brand/logo.svg`}
+                height="25px"
+                mb="12px"
+                display={{ md: 'none' }}
+              />
+            </Link>
             <Text fontSize="2xl" fontWeight="bold" mb="20px">
               Forgot Password?
             </Text>
@@ -65,13 +74,35 @@ export function ForgotPasswordForm() {
                 colorScheme="pink"
                 onClick={() => sendPasswordReset(email)}
                 disabled={email ? false : true}
+                width={{ base: '100%', md: 'auto' }}
               >
                 Send Reset Instructions
               </Button>
             </Box>
           </Flex>
         </Container>
+        <Flex
+          width={{ base: '90%', md: 'calc(100% - 72px)' }}
+          minH={{ base: 'auto', md: '100vh' }}
+          justifyContent="center"
+          direction="column"
+          position={{ base: 'inherit', md: 'absolute' }}
+          top="24px"
+          left="36px"
+          right="36px"
+          display={{ base: 'none', md: 'flex' }}
+        >
+          <NavButton></NavButton>
+          <Spacer />
+          <SignInUpLink
+            url="/signup"
+            text="Not a member?"
+            linkText="Sign up now"
+            top="0"
+            right="0"
+          />
+        </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
