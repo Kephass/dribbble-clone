@@ -16,9 +16,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const postsCollectionRef = (q = null) => {
+const postsCollectionRef = (q = null, uid = null) => {
   const postsRef = collection(db, 'posts');
   if (q) return query(postsRef, where('tags', 'array-contains', q));
+  if (uid) return query(postsRef, where('uid', '==', uid));
   return postsRef;
 };
 

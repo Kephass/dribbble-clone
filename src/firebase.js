@@ -11,7 +11,6 @@ import {
   collection,
   doc,
   getDocs,
-  onSnapshot,
   query,
   serverTimestamp,
   updateDoc,
@@ -25,7 +24,7 @@ import {
   uploadBytes,
 } from '@firebase/storage';
 
-import { auth, db, postsCollectionRef } from './firestore.collections';
+import { auth, db } from './firestore.collections';
 
 const googleProvider = new GoogleAuthProvider();
 const storage = getStorage();
@@ -121,28 +120,10 @@ const createPost = async (postData, user, loading) => {
   });
 };
 
-// Get POSTS
-const getPosts = async (q = null) => {
-  let postsRef = postsCollectionRef;
-  if (q) {
-    postsRef = query(postsRef, where('tags', 'array-contains', q));
-  }
-  return new Promise((resolve) => {
-    onSnapshot(postsRef, (snapshot) => {
-      resolve(
-        snapshot.docs.map((doc) => {
-          return { id: doc.id, data: doc.data() };
-        })
-      );
-    });
-  });
-};
-
 export {
   auth,
   createPost,
   db,
-  getPosts,
   logInWithEmailAndPassword,
   logout,
   registerWithEmailAndPassword,
