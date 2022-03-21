@@ -20,7 +20,7 @@ export function CardText({ item }) {
       <HStack>
         <HStack>
           <Icon
-            color={likes.includes(user.uid) && 'pink.500'}
+            color={likes?.includes(user.uid) && 'pink.500'}
             as={HeartFilled}
           />
           <Text>{likes?.length}</Text>

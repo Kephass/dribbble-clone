@@ -72,7 +72,7 @@ export function Card({
           </VStack>
           <VStack bg="gray.300" p="2" borderRadius="10" ml="2" color="gray.600">
             <Icon
-              color={likes.includes(user.uid) && 'pink.500'}
+              color={likes?.includes(user.uid) && 'pink.500'}
               onClick={() => likePost(user, id, likes)}
               as={HeartFilled}
             />
