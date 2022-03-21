@@ -18,12 +18,13 @@ export function Card({
   const [isVisible, setIsVisible] = useState(false);
 
   const [user] = useAuthState(auth);
-  const { images, title, likes } = item;
+  const { images, title, likes = [] } = item;
 
   // Like POST
-  const likePost = async (user, id, array) => {
+  const likePost = async (user, id, likes) => {
     const docRef = doc(db, 'posts', id);
-    array.includes(user.uid)
+    if (!user) return console.log('Please log in first');
+    likes.includes(user.uid)
       ? await updateDoc(docRef, {
           likes: arrayRemove(user.uid),
         })
@@ -70,10 +71,16 @@ export function Card({
           <VStack bg="gray.300" p="2" borderRadius="10" ml="2" color="gray.600">
             <FolderAddFilled />
           </VStack>
-          <VStack bg="gray.300" p="2" borderRadius="10" ml="2" color="gray.600">
+          <VStack
+            onClick={() => likePost(user, id, likes)}
+            bg="gray.300"
+            p="2"
+            borderRadius="10"
+            ml="2"
+            color="gray.600"
+          >
             <Icon
-              color={likes?.includes(user.uid) && 'pink.500'}
-              onClick={() => likePost(user, id, likes)}
+              color={user && likes?.includes(user.uid) && 'pink.500'}
               as={HeartFilled}
             />
           </VStack>

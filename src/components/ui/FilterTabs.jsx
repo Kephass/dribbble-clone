@@ -75,6 +75,10 @@ export function FilterTabs({ links, display = { base: 'flex', md: 'flex' } }) {
                 <Button
                   fontSize={link.textSize || 'sm'}
                   mr="2"
+                  _focus={{
+                    outline: 'none',
+                    ring: 'none',
+                  }}
                   className="filter-btn"
                 >
                   {link.title}

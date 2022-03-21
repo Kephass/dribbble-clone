@@ -1,7 +1,5 @@
-import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   GoogleAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -13,7 +11,6 @@ import {
   collection,
   doc,
   getDocs,
-  getFirestore,
   query,
   serverTimestamp,
   updateDoc,
@@ -27,18 +24,8 @@ import {
   uploadBytes,
 } from '@firebase/storage';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyDg1m4o6_qATEV44PKFEJZAaa9jbfUbA6U',
-  authDomain: 'dribble-clone-33a3d.firebaseapp.com',
-  projectId: 'dribble-clone-33a3d',
-  storageBucket: 'dribble-clone-33a3d.appspot.com',
-  messagingSenderId: '237649064676',
-  appId: '1:237649064676:web:503677ae5416b5fe33b2f1',
-  measurementId: 'G-NPGC7GE7LK',
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { auth, db } from './firestore.collections';
+
 const googleProvider = new GoogleAuthProvider();
 const storage = getStorage();
 const signInWithGoogle = async () => {
@@ -109,6 +96,7 @@ const createPost = async (postData, user, loading) => {
     caption: postData?.caption,
     profileImg: user?.photoURL,
     displayName: user?.displayName,
+    tags: postData?.tags,
     timestamp: serverTimestamp(),
   });
 
@@ -132,25 +120,10 @@ const createPost = async (postData, user, loading) => {
   });
 };
 
-// Get POSTS
-const getPosts = async () => {
-  return await getDocs(collection(db, 'posts'))
-    .then((querySnapshot) => {
-      return querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-    })
-    .catch((err) => {
-      console.error('Failed to retrieve data', err);
-    });
-};
-
 export {
   auth,
   createPost,
   db,
-  getPosts,
   logInWithEmailAndPassword,
   logout,
   registerWithEmailAndPassword,
