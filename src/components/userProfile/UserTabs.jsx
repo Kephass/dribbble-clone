@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
+
 import {
   Container,
   Tab,
@@ -22,7 +24,16 @@ export const UserTabs = () => {
 
         <TabPanels>
           <TabPanel>
-            <Shots />
+            <AnimatePresence exitBeforeEnter>
+              <motion.div
+                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Shots />
+              </motion.div>
+            </AnimatePresence>
           </TabPanel>
           <TabPanel>
             <p>two!</p>
