@@ -10,8 +10,6 @@ import {
 } from 'firebase/auth';
 import {
   addDoc,
-  arrayRemove,
-  arrayUnion,
   collection,
   doc,
   getDocs,
@@ -148,23 +146,11 @@ const getPosts = async () => {
     });
 };
 
-// Like POST
-const likePost = async (user, id) => {
-  const docRef = doc(db, 'posts', id);
-  await updateDoc(docRef, {
-    likes: arrayUnion(user.uid),
-  });
-  await updateDoc(docRef, {
-    likes: arrayRemove(user.uid),
-  });
-};
-
 export {
   auth,
   createPost,
   db,
   getPosts,
-  likePost,
   logInWithEmailAndPassword,
   logout,
   registerWithEmailAndPassword,
