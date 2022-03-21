@@ -109,6 +109,7 @@ const createPost = async (postData, user, loading) => {
     caption: postData?.caption,
     profileImg: user?.photoURL,
     displayName: user?.displayName,
+    tags: postData?.tags,
     timestamp: serverTimestamp(),
   });
 
@@ -133,13 +134,19 @@ const createPost = async (postData, user, loading) => {
 };
 
 // Get POSTS
-const getPosts = async () => {
-  return await getDocs(collection(db, 'posts'))
+const getPosts = async (q = null) => {
+  let postsRef = collection(db, 'posts');
+  if (q) {
+    postsRef = query(postsRef, where('tags', 'array-contains', q));
+  }
+  return await getDocs(postsRef)
     .then((querySnapshot) => {
-      return querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+      return querySnapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
     })
     .catch((err) => {
       console.error('Failed to retrieve data', err);

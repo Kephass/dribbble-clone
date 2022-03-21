@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
@@ -7,10 +8,11 @@ import { FilterNav } from '@components/landing';
 import { getPosts } from '../../firebase';
 
 export function Body() {
+  let { tag } = useParams();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    getPosts().then((data) => setPosts(data));
-  }, []);
+    getPosts(tag).then((data) => setPosts(data));
+  }, [tag]);
 
   return (
     <Container maxW="95%" overflow="hidden">

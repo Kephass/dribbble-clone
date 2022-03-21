@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 import {
   Box,
   Button,
   Container,
   Flex,
+  FormLabel,
   Input,
   Link,
   Spacer,
@@ -16,6 +19,18 @@ import { FileUpload } from '@components';
 
 import { auth, createPost } from '../firebase';
 
+const options = [
+  { value: 'animation', label: 'Animation' },
+  { value: 'branding', label: 'Branding' },
+  { value: 'illustration', label: 'Illustration' },
+  { value: 'mobile', label: 'Mobile' },
+  { value: 'product', label: 'Product' },
+  { value: 'design', label: 'Design' },
+  { value: 'typography', label: 'Typography' },
+  { value: 'web', label: 'Web' },
+  { value: 'web-design', label: 'Web-Design' },
+];
+const animatedComponents = makeAnimated();
 function Upload() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
@@ -25,6 +40,7 @@ function Upload() {
     likes: [],
     comments: [],
     images: [],
+    tags: [],
   });
   const [hasImages, setHasImages] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -120,25 +136,40 @@ function Upload() {
             updateFiles={updateFiles}
           />
           {hasImages && (
-            <Container maxW="800px" width="100%">
+            <Container maxW="800px" width="100%" my="12px">
+              <FormLabel htmlFor="Description" fontWeight="bold" fontSize="md">
+                Description
+              </FormLabel>
               <Input
                 onChange={(e) =>
                   setNewPostInfo({ ...newPostInfo, caption: e.target.value })
                 }
                 width="100%"
                 isRequired
-                p="0"
                 fontSize="20px"
                 fontWeight="normal"
                 placeholder="Write what went into this shot, and anything else you’d like to mention"
                 size="lg"
-                border="none"
                 outline="none"
                 _focus={{ outline: 'none' }}
                 _placeholder={{
                   fontWeight: '400',
                   color: 'gray',
                   fontSize: '20px',
+                }}
+                mb="12px"
+              />
+              <FormLabel htmlFor="Tags" fontWeight="bold" fontSize="md">
+                Tags
+              </FormLabel>
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={options}
+                onChange={(tags) => {
+                  tags = tags.map((tag) => tag.value);
+                  setNewPostInfo({ ...newPostInfo, tags: tags });
                 }}
               />
             </Container>
