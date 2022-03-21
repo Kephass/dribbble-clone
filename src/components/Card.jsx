@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
-import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
 
-import { auth, likePost } from '../firebase';
+import { auth, db } from '../firebase';
 
 export function Card({
   item,
+  id,
   width = '100%',
   height = 'auto',
   objectFit = 'contain',
@@ -16,7 +18,19 @@ export function Card({
   const [isVisible, setIsVisible] = useState(false);
 
   const [user] = useAuthState(auth);
-  const { images, title } = item;
+  const { images, title, likes } = item;
+
+  // Like POST
+  const likePost = async (user, id, array) => {
+    const docRef = doc(db, 'posts', id);
+    array.includes(user.uid)
+      ? await updateDoc(docRef, {
+          likes: arrayRemove(user.uid),
+        })
+      : await updateDoc(docRef, {
+          likes: arrayUnion(user.uid),
+        });
+  };
   return (
     <Box
       background="gray"
@@ -57,7 +71,11 @@ export function Card({
             <FolderAddFilled />
           </VStack>
           <VStack bg="gray.300" p="2" borderRadius="10" ml="2" color="gray.600">
-            <HeartFilled onClick={() => likePost(user, item.id)} />
+            <Icon
+              color={likes?.includes(user.uid) && 'pink.500'}
+              onClick={() => likePost(user, id, likes)}
+              as={HeartFilled}
+            />
           </VStack>
         </HStack>
       </Box>

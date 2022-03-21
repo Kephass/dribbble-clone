@@ -1,23 +1,33 @@
-import { EyeFilled, HeartFilled } from '@ant-design/icons';
-import { Flex, HStack, Image, Text } from '@chakra-ui/react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-export function CardText({ img, text, likes, views }) {
+import { EyeFilled, HeartFilled } from '@ant-design/icons';
+import { Flex, HStack, Icon, Image, Text } from '@chakra-ui/react';
+
+import { auth } from '../firebase';
+
+export function CardText({ item }) {
+  const [user] = useAuthState(auth);
+  const { profileImg, displayName, likes, views } = item;
+
   return (
     <Flex alignItems="center" justify="space-between">
       <HStack isTruncated alignItems="center">
-        <Image height="25px" src={img} borderRadius="2xl" />
+        <Image height="25px" src={profileImg} borderRadius="2xl" />
         <Text fontWeight="bold" isTruncated>
-          {text}
+          {displayName}
         </Text>
       </HStack>
       <HStack>
         <HStack>
-          <HeartFilled />
-          <Text>{likes}</Text>
+          <Icon
+            color={likes?.includes(user.uid) && 'pink.500'}
+            as={HeartFilled}
+          />
+          <Text>{likes?.length}</Text>
         </HStack>
         <HStack>
           <EyeFilled />
-          <Text>{views}</Text>
+          <Text>{views?.length}</Text>
         </HStack>
       </HStack>
     </Flex>
