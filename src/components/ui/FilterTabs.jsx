@@ -56,7 +56,11 @@ export function FilterTabs({ links, display = { base: 'flex', md: 'flex' } }) {
               display={{ base: 'flex', md: 'none' }}
               backgroundImage="linear-gradient(to right ,rgba(255,0,0,0),  rgba(255,255,255,1))"
               _active={{ backgroundColor: 'transparent', outline: 'none' }}
-              _focus={{ backgroundColor: 'transparent', outline: 'none' }}
+              _focus={{
+                backgroundColor: 'transparent',
+                outline: 'none',
+                ring: 'none',
+              }}
               _hover={{
                 backgroundImage:
                   'linear-gradient(to right ,rgba(255,0,0,0),  rgba(255,255,255,1))',
