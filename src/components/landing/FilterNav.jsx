@@ -90,6 +90,10 @@ export function FilterNav() {
           variant="outline"
           onClick={toggleOpen}
           leftIcon={<HamburgerIcon />}
+          _focus={{
+            outline: 'none',
+            ring: 'none',
+          }}
         >
           Filters
         </Button>

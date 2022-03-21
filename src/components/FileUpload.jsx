@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import { DeleteIcon } from '@chakra-ui/icons';
 import {
   Center,
-  Container,
   Flex,
   Image,
   Link,
@@ -58,7 +57,8 @@ export function FileUpload({
     }
   };
 
-  const removeFile = (fileName) => {
+  const removeFile = (e, fileName) => {
+    e.stopPropagation();
     delete files[fileName];
     setFiles({ ...files });
     callUpdateFilesCb({ ...files });
@@ -116,53 +116,51 @@ export function FileUpload({
               <ListItem>Only upload media you own the rights to</ListItem>
             </UnorderedList>
           </Flex>
-        </Flex>
-      </Center>
 
-      <Container maxW="800px" width="90%">
-        <Flex>
-          {Object.keys(files).map((fileName, index) => {
-            let file = files[fileName];
-            let isImageFile = file.type.split('/')[0] === 'image';
-            return (
-              <section key={fileName}>
-                {isImageFile && (
-                  <div position="relative">
-                    {isImageFile && (
-                      <Flex align="center" direction="column" mr="12px">
-                        <Image
-                          alt={`file preview ${index}`}
-                          src={URL.createObjectURL(file)}
-                          height="65px"
-                          width="85px"
-                          objectFit="cover"
-                          borderRadius="10px"
-                        />
-                        <DeleteIcon
-                          cursor="pointer"
-                          onClick={() => removeFile(fileName)}
-                          p="1"
-                          width="25px"
-                          height="25px"
-                          border
-                          borderRadius="5px"
-                          color="pink.100"
-                        />
-                      </Flex>
-                    )}
-                    <div>
-                      {/* <span>{file.name}</span> */}
-                      {/* <aside>
+          <Flex mt="32px">
+            {Object.keys(files).map((fileName, index) => {
+              let file = files[fileName];
+              let isImageFile = file.type.split('/')[0] === 'image';
+              return (
+                <section key={fileName}>
+                  {isImageFile && (
+                    <div position="relative">
+                      {isImageFile && (
+                        <Flex align="center" direction="column" mr="12px">
+                          <Image
+                            alt={`file preview ${index}`}
+                            src={URL.createObjectURL(file)}
+                            height="65px"
+                            width="85px"
+                            objectFit="cover"
+                            borderRadius="10px"
+                          />
+                          <DeleteIcon
+                            cursor="pointer"
+                            onClick={(e) => removeFile(e, fileName)}
+                            p="1"
+                            width="25px"
+                            height="25px"
+                            border
+                            borderRadius="5px"
+                            color="pink.100"
+                          />
+                        </Flex>
+                      )}
+                      <div>
+                        {/* <span>{file.name}</span> */}
+                        {/* <aside>
                         <span>{convertBytesToKB(file.size)} kb</span>
                       </aside> */}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </section>
-            );
-          })}
+                  )}
+                </section>
+              );
+            })}
+          </Flex>
         </Flex>
-      </Container>
+      </Center>
     </>
   );
 }

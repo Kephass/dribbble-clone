@@ -18,12 +18,13 @@ export function Card({
   const [isVisible, setIsVisible] = useState(false);
 
   const [user] = useAuthState(auth);
-  const { images, title, likes } = item;
+  const { images, title, likes = [] } = item;
 
   // Like POST
-  const likePost = async (user, id, array) => {
+  const likePost = async (user, id, likes) => {
     const docRef = doc(db, 'posts', id);
-    array.includes(user.uid)
+    if (!user) return console.log('Please log in first');
+    likes.includes(user.uid)
       ? await updateDoc(docRef, {
           likes: arrayRemove(user.uid),
         })

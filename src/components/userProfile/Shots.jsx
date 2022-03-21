@@ -4,13 +4,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 
-import { auth, getPosts } from '../../firebase';
+import { auth } from '../../firebase';
 
 export const Shots = () => {
   const [user] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    getPosts().then((data) => setPosts(data));
+    // getPosts().then((data) => setPosts(data));
   }, []);
 
   return (

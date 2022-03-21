@@ -1,25 +1,26 @@
 import { useEffect, useState } from 'react';
 import { onSnapshot } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 import { FilterNav } from '@components/landing';
 
-// import { getPosts } from '@features/listSlice';
 import { postsCollectionRef } from '../../firestore.collections';
 
 export function Body() {
-  // const dispatch = useDispatch();
+  let { tag } = useParams();
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
-    const unsubscribe = onSnapshot(postsCollectionRef, (snapshot) => {
+    const unsubscribe = onSnapshot(postsCollectionRef(tag), (snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
     });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [tag]);
 
   return (
     <Container maxW="95%" overflow="hidden">
