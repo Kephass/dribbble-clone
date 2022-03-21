@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react';
+import { onSnapshot } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 
-import { auth, getPosts } from '../../firebase';
+import { auth } from '../../firebase';
+import { postsCollectionRef } from '../../firestore.collections';
 
 export const Shots = () => {
   const [user] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    getPosts().then((data) => setPosts(data));
+    const unsubscribe = onSnapshot(postsCollectionRef, (snapshot) => {
+      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
+  //console.log(posts[0].data);
 
   return (
     <Container maxW="100%" my="0" py="0">
@@ -20,19 +29,16 @@ export const Shots = () => {
         gap="10"
         templateColumns="repeat(auto-fill, minmax(334px, 1fr))"
       >
-        {posts.map((item, i) =>
-          item.uid === user.uid ? (
+        {posts.map((item, i, likes, views) =>
+          item.data.uid === user.uid ? (
             <Flex direction="column" gap="2" key={`shots-${i}`}>
               <Card
-                title={item.title}
-                img={item.images}
+                item={item.data}
+                id={item.id}
                 height="250px"
                 objectFit="cover"
               />
-              <CardText
-                likes={item?.likes?.length}
-                views={item?.views?.length}
-              />
+              <CardText item={item.data} />
             </Flex>
           ) : (
             ''
