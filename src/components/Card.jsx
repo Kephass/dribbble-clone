@@ -23,7 +23,10 @@ export function Card({
   // Like POST
   const likePost = async (user, id, array) => {
     const docRef = doc(db, 'posts', id);
-    array.includes(user.uid)
+
+    !user
+      ? console.log('Please log in first')
+      : array.includes(user.uid)
       ? await updateDoc(docRef, {
           likes: arrayRemove(user.uid),
         })
@@ -70,10 +73,16 @@ export function Card({
           <VStack bg="gray.300" p="2" borderRadius="10" ml="2" color="gray.600">
             <FolderAddFilled />
           </VStack>
-          <VStack bg="gray.300" p="2" borderRadius="10" ml="2" color="gray.600">
+          <VStack
+            onClick={() => likePost(user, id, likes)}
+            bg="gray.300"
+            p="2"
+            borderRadius="10"
+            ml="2"
+            color="gray.600"
+          >
             <Icon
               color={user && likes?.includes(user.uid) && 'pink.500'}
-              onClick={() => likePost(user, id, likes)}
               as={HeartFilled}
             />
           </VStack>
