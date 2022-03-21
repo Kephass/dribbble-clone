@@ -4,27 +4,14 @@ import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 import { FilterNav } from '@components/landing';
 
-// import { getPosts } from '@features/listSlice';
 import { getPosts } from '../../firebase';
 
 export function Body() {
-  // const dispatch = useDispatch();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getPosts().then((data) => setPosts(data));
   }, []);
-  // useEffect(() => {
-  //   fetch('https://jsonplaceholder.typicode.com/photos?_limit=10')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       data.map((item) => {
-  //         item.image = `https://source.unsplash.com/random/?${item.title}`;
-  //       });
-  //       dispatch(getPosts(data));
-  //     });
-  // }, []);
 
-  // const posts = useSelector((state) => state.list.posts);
   return (
     <Container maxW="95%" overflow="hidden">
       <FilterNav />
