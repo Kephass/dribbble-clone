@@ -71,7 +71,7 @@ export function Banner() {
             We are donating $50,000 USD to the International Rescue Committee,
             which provides emergency aid for refugees.
           </Text>
-          <Link align="center">Learn how we&#39;re supporting Ukraine</Link>
+          <Link align="center">Learn how we&apos;re supporting Ukraine</Link>
         </Flex>
       </Flex>
     </Flex>
