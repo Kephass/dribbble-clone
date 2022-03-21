@@ -7,9 +7,10 @@ export const InputUi = ({
   inputStyle,
   onChange,
   type = 'text',
+  boxWidth,
 }) => {
   return (
-    <Box>
+    <Box style={boxWidth}>
       <FormLabel htmlFor="first-name" fontWeight="bold" fontSize="md">
         {label}
       </FormLabel>
