@@ -1,20 +1,15 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { Banner } from '@components';
 import { Body } from '@components/findwork';
 import { FilterTabs } from '@ui';
 
-import { userStateAtom } from '../../data/atoms';
-
 import { links } from './index';
 
 import './style.scss';
 
 export const Jobs = () => {
-  const user = useRecoilValue(userStateAtom);
-  console.log(user.uid);
   return (
     <Box>
       <FilterTabs links={links} />

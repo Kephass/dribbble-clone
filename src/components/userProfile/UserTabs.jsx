@@ -13,7 +13,7 @@ import { LikedShots, Shots } from '@components/userProfile';
 export const UserTabs = () => {
   return (
     <Container maxW="9xl" p="3rem">
-      <Tabs pb="4rem">
+      <Tabs pb="4rem" isLazy>
         <TabList>
           <Tab>Shots</Tab>
           <Tab>Boosted Shots</Tab>

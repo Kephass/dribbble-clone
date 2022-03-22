@@ -1,4 +1,3 @@
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
@@ -21,7 +20,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { auth, logout } from '../firebase';
+import { logout } from '../firebase';
 
 const Links = [
   {
@@ -50,8 +49,7 @@ const Links = [
   },
 ];
 
-export const Header = () => {
-  const [user] = useAuthState(auth);
+export const Header = ({ user }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -106,7 +104,7 @@ export const Header = () => {
                   <Avatar
                     bg="gray"
                     name={user?.displayName}
-                    src={user?.photoURL}
+                    src={user?.photoUrl}
                     size={'sm'}
                   />
                 </MenuButton>
