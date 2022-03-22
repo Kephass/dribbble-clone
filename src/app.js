@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
@@ -19,18 +19,20 @@ import { userStateAtom } from './data/atoms';
 import { ForgotPassword, SignIn, SignUp } from './screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import HireDesigners from './screens/HireDesigners';
-import { auth } from './firestore.collections';
 
 function App() {
   const [user, setUserAtom] = useRecoilState(userStateAtom);
+  const auth = getAuth();
 
-  onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      setUserAtom(currentUser.reloadUserInfo);
-    } else {
-      setUserAtom(null);
-    }
-  });
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserAtom(user.reloadUserInfo);
+      } else {
+        setUserAtom(null);
+      }
+    });
+  }, [user]);
 
   const currentLocation = useLocation().pathname;
   const AuthPaths = ['/signup', '/signin', '/forgotpassword', '/resetpassword'];
