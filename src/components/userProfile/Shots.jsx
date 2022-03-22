@@ -1,31 +1,32 @@
-import { useEffect, useState } from 'react';
-import { onSnapshot } from 'firebase/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 
-import { auth } from '../../firebase';
-import { postsCollectionRef } from '../../firestore.collections';
+import { userStateAtom } from '../../data/atoms';
 
 export const Shots = () => {
-  const [user] = useAuthState(auth);
+  const user = useRecoilValue(userStateAtom);
   const [posts, setPosts] = useState([]);
-  useEffect(async () => {
-    if (user) {
-      const unsubscribe = onSnapshot(
-        postsCollectionRef(null, user?.uid),
-        (snapshot) => {
-          setPosts(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          );
-        }
-      );
-      return () => {
-        unsubscribe();
-      };
-    }
-  }, [user]);
+
+  console.log(user);
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log(user);
+  //     const unsubscribe = onSnapshot(
+  //       postsCollectionRef('user', user),
+  //       (snapshot) => {
+  //         setPosts(
+  //           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+  //         );
+  //       }
+  //     );
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   }
+  // }, [user]);
   return (
     <Container maxW="100%" my="0" py="0">
       <Grid

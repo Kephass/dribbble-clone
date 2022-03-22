@@ -1,15 +1,20 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { Banner } from '@components';
 import { Body } from '@components/findwork';
 import { FilterTabs } from '@ui';
 
+import { userStateAtom } from '../../data/atoms';
+
 import { links } from './index';
 
 import './style.scss';
 
 export const Jobs = () => {
+  const user = useRecoilValue(userStateAtom);
+  console.log(user.uid);
   return (
     <Box>
       <FilterTabs links={links} />
@@ -20,17 +25,17 @@ export const Jobs = () => {
         image="images/banners/jobs.png"
         buttons={[
           { text: 'Post a job—Starting at $249/mo' },
-          { text: 'Learn more', color: 'gray' }
+          { text: 'Learn more', color: 'gray' },
         ]}
         titleOptions={{
           fontSize: { base: '2xl', md: '2xl', lg: '2rem' },
           align: 'left',
-          fontWeight: 'extrabold'
+          fontWeight: 'extrabold',
         }}
         descriptionOptions={{
           fontSize: { base: 'lg', md: 'xl', lg: '2xl' },
           align: 'left',
-          fontWeight: 'medium'
+          fontWeight: 'medium',
         }}
       >
         <Box
