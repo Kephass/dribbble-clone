@@ -25,7 +25,11 @@ function App() {
   const [user, setUserAtom] = useRecoilState(userStateAtom);
 
   onAuthStateChanged(auth, (currentUser) => {
-    setUserAtom(currentUser);
+    if (currentUser) {
+      setUserAtom(currentUser.reloadUserInfo);
+    } else {
+      setUserAtom(null);
+    }
   });
 
   const currentLocation = useLocation().pathname;
@@ -36,7 +40,7 @@ function App() {
   }, [currentLocation]);
   return (
     <>
-      {!isAuthPath && <Header />}
+      {!isAuthPath && <Header user={user} />}
       <Routes>
         {/* Authentication paths */}
         <Route path="/signup" element={<SignUp />} />

@@ -1,28 +1,23 @@
 import { useEffect, useState } from 'react';
 import { onSnapshot } from 'firebase/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useRecoilValue } from 'recoil';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 
-import { auth, postsCollectionRef } from '../../firestore.collections';
+import { userStateAtom } from '../../data/atoms';
+import { postsCollectionRef } from '../../firestore.collections';
 
 export const LikedShots = () => {
-  const [user] = useAuthState(auth);
+  const user = useRecoilValue(userStateAtom);
   const [posts, setPosts] = useState([]);
-  useEffect(async () => {
+  useEffect(() => {
     if (user) {
-      const unsubscribe = onSnapshot(
-        postsCollectionRef('likes'),
-        (snapshot) => {
-          setPosts(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          );
-        }
-      );
-      return () => {
-        unsubscribe();
-      };
+      return onSnapshot(postsCollectionRef('likes', user), (snapshot) => {
+        setPosts(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
+      });
     }
   }, [user]);
 

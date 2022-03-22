@@ -18,18 +18,17 @@ const db = getFirestore(app);
 
 const postsCollectionRef = (type = null, user = null, q = null) => {
   const postsRef = collection(db, 'posts');
-  if (user) {
-    switch (type) {
-      case 'tags':
-        if (q) return query(postsRef, where('tags', 'array-contains', q));
-        else return postsRef;
-      case 'likes':
-        return query(postsRef, where('likes', 'array-contains', user.uid));
-      case 'user':
-        return query(postsRef, where('uid', '==', user.uid));
-      default:
-        return postsRef;
-    }
+
+  switch (type) {
+    case 'tags':
+      if (q) return query(postsRef, where('tags', 'array-contains', q));
+      else return postsRef;
+    case 'likes':
+      return query(postsRef, where('likes', 'array-contains', user.localId));
+    case 'user':
+      return query(postsRef, where('uid', '==', user.localId));
+    default:
+      return postsRef;
   }
 };
 
