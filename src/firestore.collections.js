@@ -19,21 +19,19 @@ const user = auth.currentUser;
 
 const postsCollectionRef = (type = null, q = null) => {
   const postsRef = collection(db, 'posts');
-  switch (type) {
-    case 'tags':
-      if (q) return query(postsRef, where('tags', 'array-contains', q));
-      else return postsRef;
-    case 'likes':
-      return query(postsRef, where('likes', 'array-contains', user.uid));
-    case 'user':
-      return query(postsRef, where('uid', '==', user.uid));
-    default:
-      return postsRef;
+  if (user) {
+    switch (type) {
+      case 'tags':
+        if (q) return query(postsRef, where('tags', 'array-contains', q));
+        else return postsRef;
+      case 'likes':
+        return query(postsRef, where('likes', 'array-contains', user.uid));
+      case 'user':
+        return query(postsRef, where('uid', '==', user.uid));
+      default:
+        return postsRef;
+    }
   }
 };
-
-// const likedPostsRef = () => {
-//   return collection(db, 'posts'), where('likes', 'array-contains', user.uid);
-// };
 
 export { auth, db, postsCollectionRef };
