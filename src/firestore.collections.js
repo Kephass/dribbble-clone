@@ -15,9 +15,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const user = auth.currentUser;
 
-const postsCollectionRef = (type = null, q = null) => {
+const postsCollectionRef = (type = null, user = null, q = null) => {
   const postsRef = collection(db, 'posts');
   if (user) {
     switch (type) {
