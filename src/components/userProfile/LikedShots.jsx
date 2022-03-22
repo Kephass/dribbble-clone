@@ -13,14 +13,11 @@ export const LikedShots = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     if (user) {
-      console.log(user);
-      onSnapshot(postsCollectionRef('likes', user), (snapshot) => {
+      return onSnapshot(postsCollectionRef('likes', user), (snapshot) => {
         setPosts(
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-    } else {
-      console.log('loading');
     }
   }, [user]);
 

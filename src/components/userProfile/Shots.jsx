@@ -14,14 +14,11 @@ export const Shots = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
-      onSnapshot(postsCollectionRef('user', user), (snapshot) => {
+      return onSnapshot(postsCollectionRef('user', user), (snapshot) => {
         setPosts(
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-    } else {
-      console.log('loading');
     }
   }, [user]);
 
