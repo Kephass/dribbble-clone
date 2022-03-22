@@ -8,7 +8,7 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-import { Shots } from '@components/userProfile';
+import { LikedShots, Shots } from '@components/userProfile';
 
 export const UserTabs = () => {
   return (
@@ -42,7 +42,7 @@ export const UserTabs = () => {
             <p>three!</p>
           </TabPanel>
           <TabPanel>
-            <p>Four</p>
+            <LikedShots />
           </TabPanel>
           <TabPanel>
             <p>Five</p>

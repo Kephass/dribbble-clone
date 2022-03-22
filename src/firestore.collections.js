@@ -15,12 +15,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const user = auth.currentUser;
 
-const postsCollectionRef = (q = null, uid = null) => {
+const postsCollectionRef = (type = null, q = null) => {
   const postsRef = collection(db, 'posts');
-  if (q) return query(postsRef, where('tags', 'array-contains', q));
-  if (uid) return query(postsRef, where('uid', '==', uid));
-  return postsRef;
+  switch (type) {
+    case 'tags':
+      if (q) return query(postsRef, where('tags', 'array-contains', q));
+      else return postsRef;
+    case 'likes':
+      return query(postsRef, where('likes', 'array-contains', user.uid));
+    case 'user':
+      return query(postsRef, where('uid', '==', user.uid));
+    default:
+      return postsRef;
+  }
 };
+
+// const likedPostsRef = () => {
+//   return collection(db, 'posts'), where('likes', 'array-contains', user.uid);
+// };
 
 export { auth, db, postsCollectionRef };

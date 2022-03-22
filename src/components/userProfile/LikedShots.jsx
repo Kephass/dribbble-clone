@@ -7,22 +7,25 @@ import { Card, CardText } from '@components';
 
 import { auth, postsCollectionRef } from '../../firestore.collections';
 
-export const Shots = () => {
+export const LikedShots = () => {
   const [user] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
-
   useEffect(async () => {
     if (user) {
-      const unsubscribe = onSnapshot(postsCollectionRef('user'), (snapshot) => {
-        setPosts(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-        );
-      });
+      const unsubscribe = onSnapshot(
+        postsCollectionRef('likes'),
+        (snapshot) => {
+          setPosts(
+            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+          );
+        }
+      );
       return () => {
         unsubscribe();
       };
     }
   }, [user]);
+
   return (
     <Container maxW="100%" my="0" py="0">
       <Grid

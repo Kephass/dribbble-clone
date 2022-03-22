@@ -13,9 +13,14 @@ export function Body() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(postsCollectionRef(tag), (snapshot) => {
-      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
-    });
+    const unsubscribe = onSnapshot(
+      postsCollectionRef('tags', tag),
+      (snapshot) => {
+        setPosts(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
+      }
+    );
 
     return () => {
       unsubscribe();
