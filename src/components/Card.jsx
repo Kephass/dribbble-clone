@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
-import { userStateAtom } from '@data/atoms';
+import { allPostsStateAtom, userStateAtom } from '@data/atoms';
 
 import { db } from '../firebase';
 
@@ -17,6 +17,7 @@ export function Card({
   borderRadius = '10px',
 }) {
   const user = useRecoilValue(userStateAtom);
+  const setPosts = useSetRecoilState(allPostsStateAtom);
   const [isVisible, setIsVisible] = useState(false);
 
   const { docId, images, title, likes = [] } = item;
@@ -24,8 +25,10 @@ export function Card({
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    setIsLiked(likes?.includes(user?.localId));
-  }, [likes]);
+    if (user) {
+      setIsLiked(likes?.includes(user?.localId));
+    }
+  }, [docId]);
 
   // Like POST
   const likePost = async () => {
@@ -36,10 +39,32 @@ export function Card({
       await updateDoc(docRef, {
         likes: arrayRemove(user.localId),
       });
+      setPosts((oldPosts) => {
+        const newPosts = [...oldPosts].map((post) => {
+          const newPost = { ...post };
+          if (newPost.docId === docId) {
+            newPost.likes = newPost.likes.filter(
+              (filterPost) => filterPost !== user?.localId
+            );
+          }
+          return newPost;
+        });
+        return newPosts;
+      });
     } else {
       setIsLiked((old) => !old);
       await updateDoc(docRef, {
         likes: arrayUnion(user.localId),
+      });
+      setPosts((oldPosts) => {
+        const newPosts = [...oldPosts].map((post) => {
+          const newPost = { ...post };
+          if (newPost.docId === docId) {
+            newPost.likes = [...newPost.likes, user?.localId];
+          }
+          return newPost;
+        });
+        return newPosts;
       });
     }
   };

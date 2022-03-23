@@ -26,15 +26,15 @@ export function Body() {
         gap="10"
         templateColumns="repeat(auto-fill, minmax(350px, 1fr))"
       >
-        {posts.map((item) => (
-          <Flex direction="column" gap="2" key={item.docId}>
+        {posts.map((post) => (
+          <Flex direction="column" gap="2" key={post.docId}>
             <Card
-              item={item}
-              id={item.docId}
+              item={post}
+              id={post.docId}
               height="250px"
               objectFit="cover"
             />
-            <CardText item={item} id={item.docId} />
+            <CardText item={post} id={post.docId} />
           </Flex>
         ))}
       </Grid>
