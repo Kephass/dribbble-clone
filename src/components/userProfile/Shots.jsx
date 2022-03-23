@@ -1,7 +1,7 @@
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 
-export const Shots = ({ posts }) => {
+export const Shots = ({ posts, setPosts }) => {
   return (
     <Container maxW="100%" my="0" p="0">
       <Grid
@@ -16,6 +16,7 @@ export const Shots = ({ posts }) => {
               id={post.docId}
               height="250px"
               objectFit="cover"
+              setPosts={setPosts}
             />
             <CardText item={post} id={post.docId} />
           </Flex>

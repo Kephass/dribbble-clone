@@ -33,6 +33,7 @@ export function Body() {
               id={post.docId}
               height="250px"
               objectFit="cover"
+              setPosts={setPosts}
             />
             <CardText item={post} id={post.docId} />
           </Flex>
