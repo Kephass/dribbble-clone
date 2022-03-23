@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { collection, getFirestore, query, where } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDg1m4o6_qATEV44PKFEJZAaa9jbfUbA6U',
@@ -16,9 +22,44 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const postsCollectionRef = (type = null, user = null, q = null) => {
-  const postsRef = collection(db, 'posts');
+const postsRef = collection(db, 'posts');
 
+async function getUserAndLikedPosts(user) {
+  let userAndLikePostsArray = [];
+  await Promise.all([
+    await getDocs(postsCollectionRef('likes', user)).then((res) =>
+      res.forEach((doc) => {
+        const docId = doc.id;
+        return userAndLikePostsArray.push({ ...doc.data(), docId });
+      })
+    ),
+    await getDocs(postsCollectionRef('user', user)).then((res) =>
+      res.forEach((doc) => {
+        const docId = doc.id;
+        return userAndLikePostsArray.push({ ...doc.data(), docId });
+      })
+    ),
+  ]);
+  userAndLikePostsArray = userAndLikePostsArray.reduce((item, pos) => {
+    const x = item.find((item) => item.docId === pos.docId);
+    if (!x) return item.concat([pos]);
+    return item;
+  }, []);
+  return userAndLikePostsArray;
+}
+
+async function getAllPosts(tag = null) {
+  return await getDocs(postsCollectionRef('tags', null, tag)).then((res) => {
+    const postArray = [];
+    res.forEach((doc) => {
+      const docId = doc.id;
+      return postArray.push({ ...doc.data(), docId });
+    });
+    return postArray;
+  });
+}
+
+const postsCollectionRef = (type = null, user = null, q = null) => {
   switch (type) {
     case 'tags':
       if (q) return query(postsRef, where('tags', 'array-contains', q));
@@ -32,4 +73,4 @@ const postsCollectionRef = (type = null, user = null, q = null) => {
   }
 };
 
-export { auth, db, postsCollectionRef };
+export { auth, db, getAllPosts, getUserAndLikedPosts, postsCollectionRef };

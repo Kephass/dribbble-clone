@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useRecoilValue } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
+import { userStateAtom } from '@data/atoms';
 
-import { auth, db } from '../firebase';
+import { db } from '../firebase';
 
 export function Card({
   item,
@@ -15,22 +16,32 @@ export function Card({
   objectFit = 'contain',
   borderRadius = '10px',
 }) {
+  const user = useRecoilValue(userStateAtom);
   const [isVisible, setIsVisible] = useState(false);
 
-  const [user] = useAuthState(auth);
-  const { images, title, likes = [] } = item;
+  const { docId, images, title, likes = [] } = item;
+
+  const [isLiked, setIsLiked] = useState(likes?.includes(user.localId));
+
+  useEffect(() => {
+    setIsLiked(likes?.includes(user.localId));
+  }, [likes]);
 
   // Like POST
-  const likePost = async (user, id, likes) => {
-    const docRef = doc(db, 'posts', id);
+  const likePost = async () => {
+    const docRef = doc(db, 'posts', docId);
     if (!user) return console.log('Please log in first');
-    likes.includes(user.uid)
-      ? await updateDoc(docRef, {
-          likes: arrayRemove(user.uid),
-        })
-      : await updateDoc(docRef, {
-          likes: arrayUnion(user.uid),
-        });
+    if (isLiked) {
+      setIsLiked((old) => !old);
+      await updateDoc(docRef, {
+        likes: arrayRemove(user.localId),
+      });
+    } else {
+      setIsLiked((old) => !old);
+      await updateDoc(docRef, {
+        likes: arrayUnion(user.localId),
+      });
+    }
   };
   return (
     <Box
@@ -72,17 +83,14 @@ export function Card({
             <FolderAddFilled />
           </VStack>
           <VStack
-            onClick={() => likePost(user, id, likes)}
+            onClick={() => likePost(id)}
             bg="gray.300"
             p="2"
             borderRadius="10"
             ml="2"
             color="gray.600"
           >
-            <Icon
-              color={user && likes?.includes(user.uid) && 'pink.500'}
-              as={HeartFilled}
-            />
+            <Icon color={user && isLiked && 'pink.500'} as={HeartFilled} />
           </VStack>
         </HStack>
       </Box>
