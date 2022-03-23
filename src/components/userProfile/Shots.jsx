@@ -11,8 +11,13 @@ export const Shots = ({ posts }) => {
       >
         {posts.map((post, i) => (
           <Flex direction="column" gap="2" key={`shots-${i}`}>
-            <Card item={post} id={post.id} height="250px" objectFit="cover" />
-            <CardText item={post} id={post.id} />
+            <Card
+              item={post}
+              id={post.docId}
+              height="250px"
+              objectFit="cover"
+            />
+            <CardText item={post} id={post.docId} />
           </Flex>
         ))}
       </Grid>
