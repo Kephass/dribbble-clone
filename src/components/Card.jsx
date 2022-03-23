@@ -81,7 +81,7 @@ export function Card({
         height={height}
         objectFit={objectFit}
         src={images}
-        fallbackSrc="https://via.placeholder.com/150"
+        fallbackSrc="/images/default/default_card.svg"
         borderRadius={borderRadius}
         _hover={{ cursor: 'pointer' }}
       />
