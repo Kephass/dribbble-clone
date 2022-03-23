@@ -21,10 +21,10 @@ export function Card({
 
   const { docId, images, title, likes = [] } = item;
 
-  const [isLiked, setIsLiked] = useState(likes?.includes(user.localId));
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    setIsLiked(likes?.includes(user.localId));
+    setIsLiked(likes?.includes(user?.localId));
   }, [likes]);
 
   // Like POST
