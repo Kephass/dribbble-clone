@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
-import { allPostsStateAtom, userStateAtom } from '@data/atoms';
+import { userStateAtom } from '@data/atoms';
 
 import { db } from '../firebase';
 
@@ -15,9 +15,10 @@ export function Card({
   height = 'auto',
   objectFit = 'contain',
   borderRadius = '10px',
+  setPosts = null,
 }) {
   const user = useRecoilValue(userStateAtom);
-  const setPosts = useSetRecoilState(allPostsStateAtom);
+  // const setPosts = useSetRecoilState(allPostsStateAtom);
   const [isVisible, setIsVisible] = useState(false);
 
   const { docId, images, title, likes = [] } = item;
