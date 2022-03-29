@@ -4,7 +4,10 @@ import {
   collection,
   getDocs,
   getFirestore,
+  limit,
+  orderBy,
   query,
+  startAfter,
   where,
 } from 'firebase/firestore';
 
@@ -23,7 +26,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const postsRef = collection(db, 'posts');
-
+let lastPost;
 async function getUserAndLikedPosts(user) {
   let userAndLikePostsArray = [];
   await Promise.all([
@@ -49,28 +52,68 @@ async function getUserAndLikedPosts(user) {
 }
 
 async function getAllPosts(tag = null) {
-  return await getDocs(postsCollectionRef('tags', null, tag)).then((res) => {
-    const postArray = [];
-    res.forEach((doc) => {
-      const docId = doc.id;
-      return postArray.push({ ...doc.data(), docId });
-    });
-    return postArray;
-  });
+  return handleNewPost(postsCollectionRef('tags', null, tag));
 }
 
-const postsCollectionRef = (type = null, user = null, q = null) => {
+async function getNewPost(tag = null) {
+  if (lastPost === undefined) return;
+  let nextQuery = query(
+    postsRef,
+    orderBy('timestamp', 'desc'),
+    startAfter(lastPost),
+    limit(6)
+  );
+  if (tag) {
+    nextQuery = query(
+      postsRef,
+      where('tags', 'array-contains', tag),
+      orderBy('timestamp', 'desc'),
+      startAfter(lastPost),
+      limit(6)
+    );
+  }
+  return handleNewPost(nextQuery);
+}
+const handleNewPost = async (querySelector) => {
+  const res = await getDocs(querySelector);
+  lastPost = res.docs[res.docs.length - 1];
+  const postArray = [];
+  res.forEach((doc) => {
+    const docId = doc.id;
+    return postArray.push({ ...doc.data(), docId });
+  });
+  return postArray;
+};
+const postsCollectionRef = (
+  type = null,
+  user = null,
+  q = null,
+  limitNumber = 6
+) => {
   switch (type) {
     case 'tags':
-      if (q) return query(postsRef, where('tags', 'array-contains', q));
-      else return postsRef;
+      if (q)
+        return query(
+          postsRef,
+          where('tags', 'array-contains', q),
+          orderBy('timestamp', 'desc'),
+          limit(limitNumber)
+        );
+      return query(postsRef, orderBy('timestamp', 'desc'), limit(limitNumber));
     case 'likes':
       return query(postsRef, where('likes', 'array-contains', user.localId));
     case 'user':
       return query(postsRef, where('uid', '==', user.localId));
     default:
-      return postsRef;
+      return query(postsRef, orderBy('timestamp', 'desc'), limit(limitNumber));
   }
 };
 
-export { auth, db, getAllPosts, getUserAndLikedPosts, postsCollectionRef };
+export {
+  auth,
+  db,
+  getAllPosts,
+  getNewPost,
+  getUserAndLikedPosts,
+  postsCollectionRef,
+};

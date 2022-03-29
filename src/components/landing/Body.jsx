@@ -3,25 +3,56 @@ import { AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-import { Container, Flex, Grid } from '@chakra-ui/react';
+import { Container, Flex, Grid, Text } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 import { FilterNav } from '@components/landing';
 import { allPostsStateAtom } from '@data/atoms';
 
-import { getAllPosts } from '../../firestore.collections';
+import { getAllPosts, getNewPost } from '../../firestore.collections';
 import Modal from '../ModalPost';
 
 export function Body() {
   let { tag } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
+  const [scrollToBottom, setScrollToBottom] = useState(0);
+  const [bottomReached, setBottomReached] = useState(false);
+  const [hasContent, setHasContent] = useState(false);
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
 
   useEffect(async () => {
     return getAllPosts(tag).then((result) => {
-      setPosts(result);
+      if (result !== undefined) setPosts(result);
     });
   }, [tag]);
+
+  useEffect(() => {
+    if (posts.length > 0) {
+      setHasContent(true);
+    }
+    setBottomReached(false);
+  }, [posts]);
+  useEffect(async () => {
+    return getNewPost(tag).then((result) => {
+      if (result !== undefined) return setPosts((old) => [...old, ...result]);
+    });
+  }, [bottomReached]);
+
+  useEffect(() => {
+    const onScroll = (e) => {
+      setScrollToBottom(window.scrollY);
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 10
+      ) {
+        setBottomReached(true);
+      }
+    };
+    if (!bottomReached && hasContent) {
+      window.addEventListener('scroll', onScroll);
+    }
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [scrollToBottom, hasContent]);
 
   const close = (post) => {
     setModalOpen(false);
@@ -70,6 +101,7 @@ export function Body() {
           />
         )}
       </AnimatePresence>
+      {bottomReached && <Text>Loading...</Text>}
     </Container>
   );
 }
