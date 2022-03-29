@@ -122,43 +122,30 @@ const createPost = async (postData, user, loading) => {
   });
 };
 // Like POST
-const likePost = async (e, user, docId, setPosts, isLiked, setIsLiked) => {
-  e.stopPropagation();
+const likePost = async (user, docId, setPosts, isLiked) => {
   const docRef = doc(db, 'posts', docId);
-  setIsLiked((old) => !old);
-  if (isLiked) {
-    await updateDoc(docRef, {
-      likes: arrayRemove(user.localId),
-    });
-    setPosts((oldPosts) => {
-      const newPosts = [...oldPosts].map((post) => {
-        const newPost = { ...post };
-        if (newPost.docId === docId) {
+  setPost(setPosts, docId, user, isLiked);
+  await updateDoc(docRef, {
+    likes: isLiked ? arrayRemove(user.localId) : arrayUnion(user.localId),
+  });
+};
+const setPost = (setPosts, docId, user, isLiked) => {
+  setPosts((oldPosts) => {
+    return [...oldPosts].map((post) => {
+      const newPost = { ...post };
+      if (newPost.docId === docId) {
+        if (isLiked) {
           newPost.likes = newPost.likes.filter(
             (filterPost) => filterPost !== user?.localId
           );
-        }
-        return newPost;
-      });
-      return newPosts;
-    });
-  } else {
-    await updateDoc(docRef, {
-      likes: arrayUnion(user.localId),
-    });
-    setPosts((oldPosts) => {
-      const newPosts = [...oldPosts].map((post) => {
-        const newPost = { ...post };
-        if (newPost.docId === docId) {
+        } else {
           newPost.likes = [...newPost.likes, user?.localId];
         }
-        return newPost;
-      });
-      return newPosts;
+      }
+      return newPost;
     });
-  }
+  });
 };
-
 export {
   auth,
   createPost,

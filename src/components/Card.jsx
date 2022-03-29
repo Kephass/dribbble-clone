@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
@@ -15,6 +16,7 @@ export function Card({
   borderRadius = '10px',
   setPosts = null,
 }) {
+  const navigate = useNavigate();
   const user = useRecoilValue(userStateAtom);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -26,7 +28,14 @@ export function Card({
     if (user) {
       setIsLiked(likes?.includes(user?.localId));
     }
-  }, [docId]);
+  }, [docId, likes]);
+
+  const handleLikePost = (e) => {
+    e.stopPropagation();
+    if (!user) return navigate(`/signin`);
+    setIsLiked((old) => !old);
+    likePost(user, docId, setPosts, isLiked);
+  };
 
   return (
     <Box
@@ -68,11 +77,7 @@ export function Card({
             <FolderAddFilled />
           </VStack>
           <VStack
-            onClick={(e) =>
-              user
-                ? likePost(e, user, docId, setPosts, isLiked, setIsLiked)
-                : console.log('Please log in first')
-            }
+            onClick={(e) => handleLikePost(e)}
             bg={user && isLiked ? 'pink.50' : 'gray.200'}
             _hover={{
               transition: '0.2s ease-out',
