@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InnerImageZoom from 'react-inner-image-zoom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
@@ -57,9 +58,10 @@ const Modal = ({ handleClose, item }) => {
     displayName,
     caption,
   } = item;
+  const navigate = useNavigate();
+  const setPosts = useSetRecoilState(allPostsStateAtom);
   const user = useRecoilValue(userStateAtom);
   const [activeImage, setActiveImage] = useState(0);
-  const setPosts = useSetRecoilState(allPostsStateAtom);
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -67,15 +69,14 @@ const Modal = ({ handleClose, item }) => {
     if (user) {
       setIsLiked(likes?.includes(user?.localId));
     }
-  }, [docId]);
+  }, [docId, likes]);
 
   const handleLikePost = (e) => {
     e.stopPropagation();
     setLoading(true);
-    if (!user) return console.log('Please log in first');
-    likePost(e, user, docId, setPosts, isLiked, setIsLiked).then(() =>
-      setLoading(false)
-    );
+    if (!user) return navigate(`/signin`);
+    setIsLiked((old) => !old);
+    likePost(user, docId, setPosts, isLiked).then(() => setLoading(false));
   };
   return (
     <Backdrop onClick={handleClose}>
