@@ -6,4 +6,5 @@ export * from './FileUpload';
 export * from './Footer';
 export * from './FooterLinks';
 export * from './Header';
+export * from './ModalNoUser';
 export * from './NavButton';

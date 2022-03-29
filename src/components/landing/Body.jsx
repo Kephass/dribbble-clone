@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
-import { Card, CardText } from '@components';
+import { Card, CardText, ModalNoUser } from '@components';
 import { FilterNav } from '@components/landing';
 import { allPostsStateAtom } from '@data/atoms';
 
@@ -57,6 +57,7 @@ export function Body() {
           </Flex>
         ))}
       </Grid>
+      <ModalNoUser />
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
