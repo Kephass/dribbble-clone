@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRecoilValue } from 'recoil';
+import InnerImageZoom from 'react-inner-image-zoom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
 import { ChatIcon, ExternalLinkIcon, InfoOutlineIcon } from '@chakra-ui/icons';
@@ -14,11 +15,16 @@ import {
   Image,
   Link,
   Spacer,
+  Spinner,
   Text,
 } from '@chakra-ui/react';
-import { userStateAtom } from '@data/atoms';
+import { allPostsStateAtom, userStateAtom } from '@data/atoms';
+
+import { likePost } from '../firebase';
 
 import Backdrop from './Backdrop';
+
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 const dropIn = {
   hidden: {
@@ -53,18 +59,35 @@ const Modal = ({ handleClose, item }) => {
   } = item;
   const user = useRecoilValue(userStateAtom);
   const [activeImage, setActiveImage] = useState(0);
+  const setPosts = useSetRecoilState(allPostsStateAtom);
+  const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (user) {
+      setIsLiked(likes?.includes(user?.localId));
+    }
+  }, [docId]);
+
+  const handleLikePost = (e) => {
+    e.stopPropagation();
+    setLoading(true);
+    if (!user) return console.log('Please log in first');
+    likePost(e, user, docId, setPosts, isLiked, setIsLiked).then(() =>
+      setLoading(false)
+    );
+  };
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
         onClick={(e) => e.stopPropagation()}
-        className="modal orange-gradient"
+        className="modal"
         variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <Box position="relative">
+        <Box position="relative" cursor="initial">
           {/* Post content */}
           <Box p="64px 120px">
             <Container maxW="1172px" w="100%">
@@ -81,10 +104,14 @@ const Modal = ({ handleClose, item }) => {
                       />
                       <Flex direction="column">
                         <Text fontWeight="bold">{displayName}</Text>
-                        <Text fontWeight="light">
-                          Risang Kuncoro for Plainthing Studio • Follow • Hire
-                          Us
-                        </Text>
+                        <Flex>
+                          <Text fontWeight="light">
+                            Risang Kuncoro for Plainthing Studio • Follow •
+                          </Text>
+                          <Text fontWeight="light" color="pink.100" ml="8px">
+                            Hire Us
+                          </Text>
+                        </Flex>
                       </Flex>
                     </Flex>
                   </Box>
@@ -100,32 +127,46 @@ const Modal = ({ handleClose, item }) => {
                         Save
                       </Button>
                     </Link>
-                    <Link to="Like" ml="12px">
-                      <Button
-                        leftIcon={<HeartFilled />}
-                        h="40px"
-                        variant={'solid'}
-                        colorScheme={'pink'}
-                        size={'sm'}
-                        p="10px 16px"
-                      >
-                        Like
-                      </Button>
-                    </Link>
+
+                    <Button
+                      onClick={(e) => handleLikePost(e)}
+                      leftIcon={
+                        loading ? <Spinner size="sm" /> : <HeartFilled />
+                      }
+                      h="40px"
+                      ml="1em"
+                      variant={isLiked ? 'outline' : 'solid'}
+                      _focus={{
+                        ring: 'none',
+                        outline: 'none',
+                      }}
+                      colorScheme={'pink'}
+                      size={'sm'}
+                      p="10px 16px"
+                      minW="90px"
+                    >
+                      {isLiked ? likes.length : 'Like'}
+                    </Button>
                   </Box>
                 </Flex>
               </Container>
               <Container maxW="925px" my="40px">
                 {/* Image */}
                 <Box>
-                  <Image
-                    width="100%"
-                    objectFit="cover"
-                    src={images}
-                    fallbackSrc="/images/default/default_card.svg"
+                  {/* <Image width="100%" objectFit="cover" src={images} /> */}
+                  <Box
                     borderRadius="10px"
                     _hover={{ cursor: 'pointer' }}
-                  />
+                    overflow="hidden"
+                    objectFit="cover"
+                  >
+                    <InnerImageZoom
+                      className="imageZoom"
+                      src={images[activeImage]}
+                      fallbackSrc="/images/default/default_card.svg"
+                    />
+                  </Box>
+
                   <Flex
                     alignItems="center"
                     justifyContent="center"
@@ -140,12 +181,14 @@ const Modal = ({ handleClose, item }) => {
                         objectFit="cover"
                         src={image}
                         border="2px solid"
+                        mx="8px"
                         borderColor={
                           i === activeImage ? 'pink.100' : 'transparent'
                         }
                         fallbackSrc="/images/default/default_card.svg"
                         borderRadius="10px"
                         _hover={{ cursor: 'pointer' }}
+                        onClick={() => setActiveImage(i)}
                       />
                     ))}
                   </Flex>

@@ -10212,6 +10212,11 @@ react-focus-lock@2.5.2:
     use-callback-ref "^1.2.5"
     use-sidecar "^1.0.5"
 
+react-inner-image-zoom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-inner-image-zoom/-/react-inner-image-zoom-3.0.0.tgz#507e00ec0c190951a5a5c7261a36ca059d99f717"
+  integrity sha512-5Xda9xUGAaPHIMpw1hQ66dIXAQfylCgxiEgzcCy0Jy0T/RrMgzIOiBD3ls8R83rTu8cLwZ7jDCtt8xbguQD3OQ==
+
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"

@@ -8,6 +8,8 @@ import {
 } from 'firebase/auth';
 import {
   addDoc,
+  arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDocs,
@@ -119,11 +121,49 @@ const createPost = async (postData, user, loading) => {
     return 'Post created';
   });
 };
+// Like POST
+const likePost = async (e, user, docId, setPosts, isLiked, setIsLiked) => {
+  e.stopPropagation();
+  const docRef = doc(db, 'posts', docId);
+  setIsLiked((old) => !old);
+  if (isLiked) {
+    await updateDoc(docRef, {
+      likes: arrayRemove(user.localId),
+    });
+    setPosts((oldPosts) => {
+      const newPosts = [...oldPosts].map((post) => {
+        const newPost = { ...post };
+        if (newPost.docId === docId) {
+          newPost.likes = newPost.likes.filter(
+            (filterPost) => filterPost !== user?.localId
+          );
+        }
+        return newPost;
+      });
+      return newPosts;
+    });
+  } else {
+    await updateDoc(docRef, {
+      likes: arrayUnion(user.localId),
+    });
+    setPosts((oldPosts) => {
+      const newPosts = [...oldPosts].map((post) => {
+        const newPost = { ...post };
+        if (newPost.docId === docId) {
+          newPost.likes = [...newPost.likes, user?.localId];
+        }
+        return newPost;
+      });
+      return newPosts;
+    });
+  }
+};
 
 export {
   auth,
   createPost,
   db,
+  likePost,
   logInWithEmailAndPassword,
   logout,
   registerWithEmailAndPassword,
