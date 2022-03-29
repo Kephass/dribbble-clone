@@ -18,10 +18,8 @@ export function Card({
 }) {
   const navigate = useNavigate();
   const user = useRecoilValue(userStateAtom);
-  const [isVisible, setIsVisible] = useState(false);
-
   const { docId, images, title, likes = [] } = item;
-
+  const [isVisible, setIsVisible] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {

@@ -1,6 +1,16 @@
 html {
   scroll-behavior: smooth;
 }
+::-moz-selection {
+  /* Code for Firefox */
+  color: white;
+  background: #ea4c89;
+}
+
+::selection {
+  color: white;
+  background: #ea4c89;
+}
 
 .active {
   button.filter-btn {

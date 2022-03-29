@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { allPostsStateAtom, userStateAtom } from '@data/atoms';
 
-import { likePost } from '../firebase';
+import { likePost, viewPost } from '../firebase';
 
 import Backdrop from './Backdrop';
 
@@ -52,8 +52,8 @@ const Modal = ({ handleClose, item }) => {
   const {
     docId,
     images,
-    title,
     likes = [],
+    views = 0,
     profileImg,
     displayName,
     caption,
@@ -63,7 +63,21 @@ const Modal = ({ handleClose, item }) => {
   const user = useRecoilValue(userStateAtom);
   const [activeImage, setActiveImage] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const viewKey = user ? user?.localId : 'views';
+    const currentViews = localStorage.getItem(viewKey);
+    const currentViewsArray = currentViews ? JSON.parse(currentViews) : [];
+    if (!currentViewsArray?.includes(docId)) {
+      localStorage.setItem(
+        viewKey,
+        JSON.stringify([...currentViewsArray, docId])
+      );
+      viewPost(docId, setPosts, views);
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {

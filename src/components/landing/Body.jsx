@@ -17,7 +17,7 @@ export function Body() {
   const [selectedPost, setSelectedPost] = useState({});
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
 
-  useEffect(() => {
+  useEffect(async () => {
     return getAllPosts(tag).then((result) => {
       setPosts(result);
     });
