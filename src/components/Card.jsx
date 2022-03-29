@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { useRecoilValue } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import { userStateAtom } from '@data/atoms';
 
-import { db } from '../firebase';
+import { likePost } from '../firebase';
 
 export function Card({
   item,
-  id,
   width = '100%',
   height = 'auto',
   objectFit = 'contain',
@@ -18,7 +16,6 @@ export function Card({
   setPosts = null,
 }) {
   const user = useRecoilValue(userStateAtom);
-  // const setPosts = useSetRecoilState(allPostsStateAtom);
   const [isVisible, setIsVisible] = useState(false);
 
   const { docId, images, title, likes = [] } = item;
@@ -31,44 +28,6 @@ export function Card({
     }
   }, [docId]);
 
-  // Like POST
-  const likePost = async () => {
-    const docRef = doc(db, 'posts', docId);
-    if (!user) return console.log('Please log in first');
-    if (isLiked) {
-      setIsLiked((old) => !old);
-      await updateDoc(docRef, {
-        likes: arrayRemove(user.localId),
-      });
-      setPosts((oldPosts) => {
-        const newPosts = [...oldPosts].map((post) => {
-          const newPost = { ...post };
-          if (newPost.docId === docId) {
-            newPost.likes = newPost.likes.filter(
-              (filterPost) => filterPost !== user?.localId
-            );
-          }
-          return newPost;
-        });
-        return newPosts;
-      });
-    } else {
-      setIsLiked((old) => !old);
-      await updateDoc(docRef, {
-        likes: arrayUnion(user.localId),
-      });
-      setPosts((oldPosts) => {
-        const newPosts = [...oldPosts].map((post) => {
-          const newPost = { ...post };
-          if (newPost.docId === docId) {
-            newPost.likes = [...newPost.likes, user?.localId];
-          }
-          return newPost;
-        });
-        return newPosts;
-      });
-    }
-  };
   return (
     <Box
       background="gray"
@@ -109,8 +68,16 @@ export function Card({
             <FolderAddFilled />
           </VStack>
           <VStack
-            onClick={() => likePost(id)}
-            bg="gray.300"
+            onClick={(e) =>
+              user
+                ? likePost(e, user, docId, setPosts, isLiked, setIsLiked)
+                : console.log('Please log in first')
+            }
+            bg={user && isLiked ? 'pink.50' : 'gray.200'}
+            _hover={{
+              transition: '0.2s ease-out',
+              backgroundColor: user && isLiked ? 'pink.25' : 'gray.300',
+            }}
             p="2"
             borderRadius="10"
             ml="2"

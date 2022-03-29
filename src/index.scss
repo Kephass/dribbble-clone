@@ -50,3 +50,11 @@ button.filter-btn {
   top: 0;
   right: 40px;
 }
+
+.imageZoom {
+  border-radius: 10px;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
