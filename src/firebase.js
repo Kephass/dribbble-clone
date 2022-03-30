@@ -150,7 +150,8 @@ const setPost = (setPosts, docId, user, isLiked) => {
             (filterPost) => filterPost !== user?.localId
           );
         } else {
-          newPost.likes = [...newPost.likes, user?.localId];
+          const likes = newPost.likes ?? [];
+          newPost.likes = [...likes, user?.localId];
         }
       }
       return newPost;

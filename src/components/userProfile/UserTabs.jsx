@@ -28,10 +28,10 @@ export const UserTabs = () => {
 
   useEffect(() => {
     if (user) {
-      getUserAndLikedPosts(user).then((result) => {
-        setUserPosts(result.filter((posts) => posts.uid === user.localId));
+      getUserAndLikedPosts({ localId }).then((result) => {
+        setUserPosts(result.filter((posts) => posts.uid === localId));
         setUserLikedPosts(
-          result.filter((posts) => posts.likes.includes(user.localId))
+          result.filter((posts) => posts.likes?.includes(localId))
         );
       });
     }
@@ -41,11 +41,46 @@ export const UserTabs = () => {
     <Container maxW="9xl" p="3rem">
       <Tabs pb="4rem" fontWeight="medium" isLazy>
         <TabList>
-          <Tab>Shots {userPosts.length}</Tab>
-          <Tab>Boosted Shots</Tab>
-          <Tab>Collections</Tab>
-          <Tab>Liked Shots {userLikedPosts.length}</Tab>
-          <Tab>About</Tab>
+          <Tab
+            _focus={{
+              outline: 'none',
+              ring: 'none',
+            }}
+          >
+            Shots {userPosts.length}
+          </Tab>
+          <Tab
+            _focus={{
+              outline: 'none',
+              ring: 'none',
+            }}
+          >
+            Boosted Shots
+          </Tab>
+          <Tab
+            _focus={{
+              outline: 'none',
+              ring: 'none',
+            }}
+          >
+            Collections
+          </Tab>
+          <Tab
+            _focus={{
+              outline: 'none',
+              ring: 'none',
+            }}
+          >
+            Liked Shots {userLikedPosts.length}
+          </Tab>
+          <Tab
+            _focus={{
+              outline: 'none',
+              ring: 'none',
+            }}
+          >
+            About
+          </Tab>
         </TabList>
 
         <TabPanels>
