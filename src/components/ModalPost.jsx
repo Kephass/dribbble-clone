@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InnerImageZoom from 'react-inner-image-zoom';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
@@ -21,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { allPostsStateAtom, userStateAtom } from '@data/atoms';
 
+import { userLogInModal } from '../data/atoms';
 import { likePost, viewPost } from '../firebase';
 
 import Backdrop from './Backdrop';
@@ -58,8 +58,8 @@ const Modal = ({ handleClose, item }) => {
     displayName,
     caption,
   } = item;
-  const navigate = useNavigate();
   const setPosts = useSetRecoilState(allPostsStateAtom);
+  const setLogInModal = useSetRecoilState(userLogInModal);
   const user = useRecoilValue(userStateAtom);
   const [activeImage, setActiveImage] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -87,8 +87,11 @@ const Modal = ({ handleClose, item }) => {
 
   const handleLikePost = (e) => {
     e.stopPropagation();
+    if (!user) {
+      handleClose();
+      return setLogInModal(true);
+    }
     setLoading(true);
-    if (!user) return navigate(`/signin`);
     setIsLiked((old) => !old);
     likePost(user, docId, setPosts, isLiked).then(() => setLoading(false));
   };

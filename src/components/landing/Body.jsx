@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   Button,
   Center,
@@ -12,9 +11,9 @@ import {
   Image,
   Spinner,
 } from '@chakra-ui/react';
-import { Card, CardText } from '@components';
+import { Card, CardText, ModalNoUser } from '@components';
 import { FilterNav } from '@components/landing';
-import { allPostsStateAtom } from '@data/atoms';
+import { allPostsStateAtom, userLogInModal } from '@data/atoms';
 
 import {
   getAllPosts,
@@ -29,6 +28,7 @@ export function Body() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
+  const logInModal = useRecoilValue(userLogInModal);
   const [moreShots, setMoreShots] = useState(false);
   const [moreShotsIsLoading, setMoreShotsIsLoading] = useState(false);
 
@@ -97,6 +97,7 @@ export function Body() {
           </Flex>
         ))}
       </Grid>
+      {logInModal && <ModalNoUser />}
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}

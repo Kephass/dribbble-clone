@@ -10,12 +10,14 @@ export function SignInUpLink({
   position = { base: 'inherit', md: 'absolute' },
   top = '24px',
   right = '36px',
+  color = 'purple.150',
+  weight = 'normal',
 }) {
   return (
-    <Box position={position} top={top} right={right}>
+    <Box position={position} top={top} right={right} fontWeight={weight}>
       <Text>
         {text}{' '}
-        <Link as={Router} to={url} color="purple.150">
+        <Link as={Router} to={url} color={color}>
           {linkText}
         </Link>
       </Text>
