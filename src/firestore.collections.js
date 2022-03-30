@@ -42,23 +42,25 @@ async function getUserAndLikedPosts({ localId }) {
   return removeDuplicates([...getLikedPosts, ...getUserPosts]);
 }
 // Get all SHOTS
-async function getAllPosts(tag = null) {
+async function getAllPosts(filter, tag = null) {
+  filter = checkFilterName(filter);
   const querySelector = tag
     ? query(
         postsRef,
         where('tags', 'array-contains', tag),
-        orderBy('timestamp', 'desc'),
+        orderBy(filter, 'desc'),
         limit(limitNumber)
       )
-    : query(postsRef, orderBy('timestamp', 'desc'), limit(limitNumber));
+    : query(postsRef, orderBy(filter, 'desc'), limit(limitNumber));
   return handlePostsFromFirestore(querySelector);
 }
 // Get new SHOTS
-async function getNewPost(tag = null) {
+async function getNewPost(filter, tag = null) {
   if (lastPost === undefined || lastPost === null) return;
+  filter = checkFilterName(filter);
   let querySelector = query(
     postsRef,
-    orderBy('timestamp', 'desc'),
+    orderBy(filter, 'desc'),
     startAfter(lastPost),
     limit(limitNumber)
   );
@@ -66,7 +68,7 @@ async function getNewPost(tag = null) {
     querySelector = query(
       postsRef,
       where('tags', 'array-contains', tag),
-      orderBy('timestamp', 'desc'),
+      orderBy(filter, 'desc'),
       startAfter(lastPost),
       limit(limitNumber)
     );
@@ -93,6 +95,21 @@ const removeDuplicates = (dupArray) => {
     if (!x) return item.concat([pos]);
     return item;
   }, []);
+};
+
+const checkFilterName = (filter) => {
+  switch (filter) {
+    case 'popular':
+      filter = 'views';
+      break;
+    case 'new':
+      filter = 'timestamp';
+      break;
+    default:
+      filter = 'timestamp';
+      break;
+  }
+  return filter;
 };
 
 export { auth, db, getAllPosts, getNewPost, getUserAndLikedPosts, limitNumber };
