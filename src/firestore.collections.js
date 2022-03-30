@@ -12,13 +12,13 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDg1m4o6_qATEV44PKFEJZAaa9jbfUbA6U',
-  authDomain: 'dribble-clone-33a3d.firebaseapp.com',
-  projectId: 'dribble-clone-33a3d',
-  storageBucket: 'dribble-clone-33a3d.appspot.com',
-  messagingSenderId: '237649064676',
-  appId: '1:237649064676:web:503677ae5416b5fe33b2f1',
-  measurementId: 'G-NPGC7GE7LK',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -26,57 +26,59 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const postsRef = collection(db, 'posts');
+const limitNumber = 8;
 let lastPost;
-async function getUserAndLikedPosts(user) {
-  let userAndLikePostsArray = [];
-  await Promise.all([
-    await getDocs(postsCollectionRef('likes', user)).then((res) =>
-      res.forEach((doc) => {
-        const docId = doc.id;
-        return userAndLikePostsArray.push({ ...doc.data(), docId });
-      })
-    ),
-    await getDocs(postsCollectionRef('user', user)).then((res) =>
-      res.forEach((doc) => {
-        const docId = doc.id;
-        return userAndLikePostsArray.push({ ...doc.data(), docId });
-      })
-    ),
-  ]);
-  userAndLikePostsArray = userAndLikePostsArray.reduce((item, pos) => {
-    const x = item.find((item) => item.docId === pos.docId);
-    if (!x) return item.concat([pos]);
-    return item;
-  }, []);
-  return userAndLikePostsArray;
-}
 
+//?  ==== SHOTS ==== //
+// Get user and liked SHOTS
+async function getUserAndLikedPosts({ localId }) {
+  const likePostQuery = query(
+    postsRef,
+    where('likes', 'array-contains', localId)
+  );
+  const userPostQuery = query(postsRef, where('uid', '==', localId));
+  const getLikedPosts = await handlePostsFromFirestore(likePostQuery, true);
+  const getUserPosts = await handlePostsFromFirestore(userPostQuery, true);
+  return removeDuplicates([...getLikedPosts, ...getUserPosts]);
+}
+// Get all SHOTS
 async function getAllPosts(tag = null) {
-  return handleNewPost(postsCollectionRef('tags', null, tag));
+  const querySelector = tag
+    ? query(
+        postsRef,
+        where('tags', 'array-contains', tag),
+        orderBy('timestamp', 'desc'),
+        limit(limitNumber)
+      )
+    : query(postsRef, orderBy('timestamp', 'desc'), limit(limitNumber));
+  return handlePostsFromFirestore(querySelector);
 }
-
+// Get new SHOTS
 async function getNewPost(tag = null) {
-  if (lastPost === undefined) return;
-  let nextQuery = query(
+  if (lastPost === undefined || lastPost === null) return;
+  let querySelector = query(
     postsRef,
     orderBy('timestamp', 'desc'),
     startAfter(lastPost),
-    limit(6)
+    limit(limitNumber)
   );
   if (tag) {
-    nextQuery = query(
+    querySelector = query(
       postsRef,
       where('tags', 'array-contains', tag),
       orderBy('timestamp', 'desc'),
       startAfter(lastPost),
-      limit(6)
+      limit(limitNumber)
     );
   }
-  return handleNewPost(nextQuery);
+  return handlePostsFromFirestore(querySelector);
 }
-const handleNewPost = async (querySelector) => {
+
+//?  ==== HELPERS ==== //
+// Get SHOTS from firestore
+const handlePostsFromFirestore = async (querySelector, isUserData = null) => {
   const res = await getDocs(querySelector);
-  lastPost = res.docs[res.docs.length - 1];
+  lastPost = !isUserData ? res.docs[res.docs.length - 1] : null;
   const postArray = [];
   res.forEach((doc) => {
     const docId = doc.id;
@@ -84,36 +86,13 @@ const handleNewPost = async (querySelector) => {
   });
   return postArray;
 };
-const postsCollectionRef = (
-  type = null,
-  user = null,
-  q = null,
-  limitNumber = 6
-) => {
-  switch (type) {
-    case 'tags':
-      if (q)
-        return query(
-          postsRef,
-          where('tags', 'array-contains', q),
-          orderBy('timestamp', 'desc'),
-          limit(limitNumber)
-        );
-      return query(postsRef, orderBy('timestamp', 'desc'), limit(limitNumber));
-    case 'likes':
-      return query(postsRef, where('likes', 'array-contains', user.localId));
-    case 'user':
-      return query(postsRef, where('uid', '==', user.localId));
-    default:
-      return query(postsRef, orderBy('timestamp', 'desc'), limit(limitNumber));
-  }
+// Remove duplicates
+const removeDuplicates = (dupArray) => {
+  return dupArray.reduce((item, pos) => {
+    const x = item.find((y) => y.docId === pos.docId);
+    if (!x) return item.concat([pos]);
+    return item;
+  }, []);
 };
 
-export {
-  auth,
-  db,
-  getAllPosts,
-  getNewPost,
-  getUserAndLikedPosts,
-  postsCollectionRef,
-};
+export { auth, db, getAllPosts, getNewPost, getUserAndLikedPosts, limitNumber };

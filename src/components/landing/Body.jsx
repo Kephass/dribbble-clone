@@ -3,56 +3,61 @@ import { AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-import { Container, Flex, Grid, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Center,
+  Container,
+  Flex,
+  Grid,
+  Image,
+  Spinner,
+} from '@chakra-ui/react';
 import { Card, CardText } from '@components';
 import { FilterNav } from '@components/landing';
 import { allPostsStateAtom } from '@data/atoms';
 
-import { getAllPosts, getNewPost } from '../../firestore.collections';
+import {
+  getAllPosts,
+  getNewPost,
+  limitNumber,
+} from '../../firestore.collections';
 import Modal from '../ModalPost';
 
 export function Body() {
+  // Variables
   let { tag } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
-  const [scrollToBottom, setScrollToBottom] = useState(0);
-  const [bottomReached, setBottomReached] = useState(false);
-  const [hasContent, setHasContent] = useState(false);
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
+  const [moreShots, setMoreShots] = useState(false);
+  const [moreShotsIsLoading, setMoreShotsIsLoading] = useState(false);
 
   useEffect(async () => {
     return getAllPosts(tag).then((result) => {
-      if (result !== undefined) setPosts(result);
+      if (result.length < limitNumber) {
+        setMoreShots(false);
+      } else {
+        setMoreShots(true);
+      }
+      setPosts(result);
     });
   }, [tag]);
 
-  useEffect(() => {
-    if (posts.length > 0) {
-      setHasContent(true);
-    }
-    setBottomReached(false);
-  }, [posts]);
-  useEffect(async () => {
-    return getNewPost(tag).then((result) => {
-      if (result !== undefined) return setPosts((old) => [...old, ...result]);
-    });
-  }, [bottomReached]);
-
-  useEffect(() => {
-    const onScroll = (e) => {
-      setScrollToBottom(window.scrollY);
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 10
-      ) {
-        setBottomReached(true);
+  // Functions
+  const handleNewPosts = () => {
+    setMoreShotsIsLoading(true);
+    getNewPost(tag).then((result) => {
+      if (result !== undefined) {
+        if (result.length <= 0) {
+          setMoreShots(false);
+        } else {
+          setPosts((old) => [...old, ...result]);
+          setMoreShots(true);
+        }
+        setMoreShotsIsLoading(false);
       }
-    };
-    if (!bottomReached && hasContent) {
-      window.addEventListener('scroll', onScroll);
-    }
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [scrollToBottom, hasContent]);
+    });
+  };
 
   const close = (post) => {
     setModalOpen(false);
@@ -68,13 +73,17 @@ export function Body() {
       <Grid
         py="32px"
         gap="10"
-        templateColumns="repeat(auto-fill, minmax(350px, 1fr))"
+        templateColumns={{
+          base: 'repeat(auto-fill, minmax(250px, 1fr))',
+          md: 'repeat(auto-fill, minmax(350px, 1fr))',
+        }}
       >
-        {posts.map((post) => (
+        {posts.map((post, i) => (
           <Flex
+            width="100%"
             direction="column"
             gap="2"
-            key={post.docId}
+            key={`${post.docId}${i}`}
             onClick={() => (modalOpen ? close(post) : open(post))}
           >
             <Card
@@ -101,7 +110,28 @@ export function Body() {
           />
         )}
       </AnimatePresence>
-      {bottomReached && <Text>Loading...</Text>}
+      {moreShots && (
+        <Center my="2em">
+          <Button onClick={handleNewPosts}>
+            {moreShotsIsLoading ? (
+              <Spinner size="sm" mr="3" />
+            ) : (
+              <Image
+                _focus={{
+                  outline: 'none',
+                  ring: 'none',
+                }}
+                width="20px"
+                mr="3"
+                fit="contain"
+                src="images/brand/logo-ball.svg"
+                borderRadius="10"
+              />
+            )}
+            Load more Shots
+          </Button>
+        </Center>
+      )}
     </Container>
   );
 }
