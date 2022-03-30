@@ -10,7 +10,7 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-import { Shots } from '@components/userProfile';
+import { About, Shots } from '@components/userProfile';
 import {
   userLikedPostsStateAtom,
   userPostsStateAtom,
@@ -36,9 +36,11 @@ export const UserTabs = () => {
       });
     }
   }, [user]);
+
+  console.log(user);
   return (
     <Container maxW="9xl" p="3rem">
-      <Tabs pb="4rem" isLazy>
+      <Tabs pb="4rem" fontWeight="medium" isLazy>
         <TabList>
           <Tab>Shots {userPosts.length}</Tab>
           <Tab>Boosted Shots</Tab>
@@ -70,7 +72,7 @@ export const UserTabs = () => {
             <Shots posts={userLikedPosts} />
           </TabPanel>
           <TabPanel p={0}>
-            <p>Five</p>
+            <About user={user} />
           </TabPanel>
         </TabPanels>
       </Tabs>
