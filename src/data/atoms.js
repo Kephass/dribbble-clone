@@ -16,3 +16,7 @@ export const userLikedPostsStateAtom = atom({
   key: 'userLikedPosts',
   default: [],
 });
+export const userLogInModal = atom({
+  key: 'logInModal',
+  default: false,
+});

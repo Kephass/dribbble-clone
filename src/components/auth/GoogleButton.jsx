@@ -4,7 +4,7 @@ import { Box, Button, Text } from '@chakra-ui/react';
 
 import { signInWithGoogle } from '../../firebase';
 
-export function GoogleButton() {
+export function GoogleButton({ width = '250px' }) {
   return (
     <Button
       borderRadius="4px"
@@ -12,7 +12,7 @@ export function GoogleButton() {
       color="white"
       className="register__btn register__google"
       p="3px 6px 3px 2px"
-      width="250px"
+      width={width}
       fontSize="sm"
       display="flex"
       alignItems="center"

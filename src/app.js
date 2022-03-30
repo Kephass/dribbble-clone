@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Footer, Header } from '@components';
 import {
@@ -15,19 +15,21 @@ import {
   UserProfile,
 } from '@screens';
 
-import { userStateAtom } from './data/atoms';
+import { userLogInModal, userStateAtom } from './data/atoms';
 import { ForgotPassword, SignIn, SignUp } from './screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import HireDesigners from './screens/HireDesigners';
 
 function App() {
   const [user, setUserAtom] = useRecoilState(userStateAtom);
+  const setLogInModal = useSetRecoilState(userLogInModal);
   const auth = getAuth();
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserAtom(user.reloadUserInfo);
+        setLogInModal(false);
       } else {
         setUserAtom(null);
       }
@@ -52,6 +54,7 @@ function App() {
         {/* content paths */}
         <Route path="/" element={<Landing />} />
         <Route path="shots" element={<Inspiration />} />
+        <Route path="shots/:filter" element={<Inspiration />} />
         <Route path="shots/:filter/:tag" element={<Inspiration />} />
         <Route path="jobs" element={<Jobs />} />
         <Route path="freelance-jobs" element={<Freelance />} />
