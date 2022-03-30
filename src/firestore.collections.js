@@ -88,6 +88,22 @@ const handlePostsFromFirestore = async (querySelector, isUserData = null) => {
   });
   return postArray;
 };
+
+// Get Users from firestore
+const handleUserFromFirestore = async (uid) => {
+  const userQuery = query(
+    collection(db, 'users'),
+    where('uid', '==', uid),
+    limit(1)
+  );
+  const res = await getDocs(userQuery);
+  let user;
+  res.forEach((doc) => {
+    user = doc.data();
+  });
+  return user;
+};
+
 // Remove duplicates
 const removeDuplicates = (dupArray) => {
   return dupArray.reduce((item, pos) => {
@@ -112,4 +128,4 @@ const checkFilterName = (filter) => {
   return filter;
 };
 
-export { auth, db, getAllPosts, getNewPost, getUserAndLikedPosts, limitNumber };
+export { auth, db, getAllPosts, getNewPost, getUserAndLikedPosts, handleUserFromFirestore, limitNumber };

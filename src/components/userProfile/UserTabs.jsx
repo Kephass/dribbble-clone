@@ -10,7 +10,7 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-import { Shots } from '@components/userProfile';
+import { About, Shots } from '@components/userProfile';
 import {
   userLikedPostsStateAtom,
   userPostsStateAtom,
@@ -28,18 +28,17 @@ export const UserTabs = () => {
 
   useEffect(() => {
     if (user) {
-      getUserAndLikedPosts({ localId }).then((result) => {
-        setUserPosts(result.filter((posts) => posts.uid === localId));
+      getUserAndLikedPosts(user).then((result) => {
+        setUserPosts(result.filter((posts) => posts.uid === user.localId));
         setUserLikedPosts(
-          result.filter((posts) => posts.likes?.includes(localId))
+          result.filter((posts) => posts.likes?.includes(user.localId))
         );
       });
     }
   }, [user]);
-
   return (
     <Container maxW="9xl" p="3rem">
-      <Tabs pb="4rem" isLazy>
+      <Tabs pb="4rem" fontWeight="medium" isLazy>
         <TabList>
           <Tab
             _focus={{
@@ -106,7 +105,7 @@ export const UserTabs = () => {
             <Shots posts={userLikedPosts} setPosts={setUserLikedPosts} />
           </TabPanel>
           <TabPanel p={0}>
-            <p>Five</p>
+            <About user={user} />
           </TabPanel>
         </TabPanels>
       </Tabs>
