@@ -40,7 +40,7 @@ export function CardText({ item }) {
             color="siteGray"
             fontWeight="bold"
           >
-            {views?.length ?? 0}
+            {views ?? 0}
           </Text>
         </HStack>
       </HStack>

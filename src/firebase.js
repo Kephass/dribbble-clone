@@ -106,7 +106,7 @@ const createPost = async (postData, user, loading) => {
   const upload = new Promise((resolve) => {
     postData?.images.forEach(async (image, i) => {
       const imageRef = ref(storage, `posts/${docRef.id}/${docRef.id}${i}`);
-      await uploadBytes(imageRef, image).then(async (snapshot) => {
+      await uploadBytes(imageRef, image).then(async () => {
         const downloadURL = await getDownloadURL(imageRef);
         imageUrls.push(downloadURL);
         if (i === postData?.images.length - 1) resolve();
@@ -121,10 +121,21 @@ const createPost = async (postData, user, loading) => {
     return 'Post created';
   });
 };
-// Like POST
-const likePost = async (user, docId, setPosts, isLiked) => {
+// Update view POST
+const viewPost = async (docId, setPosts, views = 0) => {
   const docRef = doc(db, 'posts', docId);
+  views += 1;
+  await updateDoc(docRef, { views });
+  setPosts((oldPosts) => {
+    return [...oldPosts].map((post) =>
+      post.docId === docId ? { ...post, views } : post
+    );
+  });
+};
+// Update Like POST
+const likePost = async (user, docId, setPosts, isLiked) => {
   setPost(setPosts, docId, user, isLiked);
+  const docRef = doc(db, 'posts', docId);
   await updateDoc(docRef, {
     likes: isLiked ? arrayRemove(user.localId) : arrayUnion(user.localId),
   });
@@ -139,7 +150,8 @@ const setPost = (setPosts, docId, user, isLiked) => {
             (filterPost) => filterPost !== user?.localId
           );
         } else {
-          newPost.likes = [...newPost.likes, user?.localId];
+          const likes = newPost.likes ?? [];
+          newPost.likes = [...likes, user?.localId];
         }
       }
       return newPost;
@@ -157,4 +169,5 @@ export {
   sendPasswordReset,
   signInWithGoogle,
   storage,
+  viewPost,
 };

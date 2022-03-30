@@ -17,10 +17,8 @@ export function Card({
   setPosts = null,
 }) {
   const user = useRecoilValue(userStateAtom);
-  const [isVisible, setIsVisible] = useState(false);
-
   const { docId, images, title, likes = [] } = item;
-
+  const [isVisible, setIsVisible] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const setLogInModal = useSetRecoilState(userLogInModal);
 
