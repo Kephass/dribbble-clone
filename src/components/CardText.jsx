@@ -23,11 +23,25 @@ export function CardText({ item }) {
             color={user && likes?.includes(user.uid) && 'pink.500'}
             as={HeartFilled}
           />
-          <Text>{likes?.length}</Text>
+          <Text
+            marginInlineStart="5px !important"
+            fontSize="sm"
+            color="siteGray"
+            fontWeight="bold"
+          >
+            {likes?.length ?? 0}
+          </Text>
         </HStack>
         <HStack>
           <EyeFilled />
-          <Text>{views?.length}</Text>
+          <Text
+            marginInlineStart="5px !important"
+            fontSize="sm"
+            color="siteGray"
+            fontWeight="bold"
+          >
+            {views ?? 0}
+          </Text>
         </HStack>
       </HStack>
     </Flex>

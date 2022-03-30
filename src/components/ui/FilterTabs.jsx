@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Button, Container, Flex } from '@chakra-ui/react';
@@ -9,7 +9,7 @@ export function FilterTabs({ links, display = { base: 'flex', md: 'flex' } }) {
   const ref = useRef(null);
   const [canGoToLeft, setCanGoToLeft] = useState(false);
   const [canGoToRight, setCanGoToRight] = useState(true);
-
+  const location = useLocation();
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
 
@@ -71,7 +71,13 @@ export function FilterTabs({ links, display = { base: 'flex', md: 'flex' } }) {
           )}
           <Flex position="relative">
             {links.map((link, i) => (
-              <NavLink to={link.url || '/'} key={`filternav${i}`}>
+              <NavLink
+                to={link.url || '/'}
+                key={`filternav${i}`}
+                className={
+                  link.url === '/' && location.pathname === '/shots' && 'active'
+                }
+              >
                 <Button
                   fontSize={link.textSize || 'sm'}
                   mr="2"

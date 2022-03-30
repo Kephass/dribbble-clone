@@ -37,7 +37,6 @@ export const UserTabs = () => {
     }
   }, [user]);
 
-  console.log(user);
   return (
     <Container maxW="9xl" p="3rem">
       <Tabs pb="4rem" fontWeight="medium" isLazy>
@@ -58,7 +57,7 @@ export const UserTabs = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.15 }}
               >
-                <Shots posts={userPosts} />
+                <Shots posts={userPosts} setPosts={setUserPosts} />
               </motion.div>
             </AnimatePresence>
           </TabPanel>
@@ -69,7 +68,7 @@ export const UserTabs = () => {
             <p>three!</p>
           </TabPanel>
           <TabPanel p={0}>
-            <Shots posts={userLikedPosts} />
+            <Shots posts={userLikedPosts} setPosts={setUserLikedPosts} />
           </TabPanel>
           <TabPanel p={0}>
             <About user={user} />

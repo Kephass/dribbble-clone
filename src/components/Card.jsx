@@ -1,48 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import { userStateAtom } from '@data/atoms';
 
-import { db } from '../firebase';
+import { likePost } from '../firebase';
 
 export function Card({
   item,
-  id,
   width = '100%',
   height = 'auto',
   objectFit = 'contain',
   borderRadius = '10px',
+  setPosts = null,
 }) {
+  const navigate = useNavigate();
   const user = useRecoilValue(userStateAtom);
-  const [isVisible, setIsVisible] = useState(false);
-
   const { docId, images, title, likes = [] } = item;
-
+  const [isVisible, setIsVisible] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    setIsLiked(likes?.includes(user?.localId));
-  }, [likes]);
-
-  // Like POST
-  const likePost = async () => {
-    const docRef = doc(db, 'posts', docId);
-    if (!user) return console.log('Please log in first');
-    if (isLiked) {
-      setIsLiked((old) => !old);
-      await updateDoc(docRef, {
-        likes: arrayRemove(user.localId),
-      });
-    } else {
-      setIsLiked((old) => !old);
-      await updateDoc(docRef, {
-        likes: arrayUnion(user.localId),
-      });
+    if (user) {
+      setIsLiked(likes?.includes(user?.localId));
     }
+  }, [docId, likes]);
+
+  const handleLikePost = (e) => {
+    e.stopPropagation();
+    if (!user) return navigate(`/signin`);
+    setIsLiked((old) => !old);
+    likePost(user, docId, setPosts, isLiked);
   };
+
   return (
     <Box
       background="gray"
@@ -56,7 +48,7 @@ export function Card({
         height={height}
         objectFit={objectFit}
         src={images}
-        fallbackSrc="https://via.placeholder.com/150"
+        fallbackSrc="/images/default/default_card.svg"
         borderRadius={borderRadius}
         _hover={{ cursor: 'pointer' }}
       />
@@ -83,8 +75,12 @@ export function Card({
             <FolderAddFilled />
           </VStack>
           <VStack
-            onClick={() => likePost(id)}
-            bg="gray.300"
+            onClick={(e) => handleLikePost(e)}
+            bg={user && isLiked ? 'pink.50' : 'gray.200'}
+            _hover={{
+              transition: '0.2s ease-out',
+              backgroundColor: user && isLiked ? 'pink.25' : 'gray.300',
+            }}
             p="2"
             borderRadius="10"
             ml="2"
