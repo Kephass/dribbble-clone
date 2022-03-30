@@ -1,3 +1,5 @@
+import { useSetRecoilState } from 'recoil';
+
 import {
   Box,
   Flex,
@@ -11,17 +13,19 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
+import { userLogInModal } from '../data/atoms';
 import { ReactComponent as Logo } from '../svg/logo.svg';
 
 import { ModalSignIn } from './auth/ModalSignIn';
 
 export function ModalNoUser() {
+  const setLogInModal = useSetRecoilState(userLogInModal);
   return (
     <>
       <Modal blockScrollOnMount={false} motionPreset="slideInBottom" isOpen>
         <ModalOverlay />
         <ModalContent borderRadius="2xl">
-          <ModalCloseButton />
+          <ModalCloseButton onClick={() => setLogInModal(false)} />
           <ModalBody bg="#f4c062" borderTopRadius="2xl" color="#2a2a2b">
             <VStack my="2">
               <Text

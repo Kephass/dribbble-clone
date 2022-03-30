@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
 import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import { userStateAtom } from '@data/atoms';
 
+import { userLogInModal } from '../data/atoms';
 import { likePost } from '../firebase';
 
 export function Card({
@@ -16,13 +16,13 @@ export function Card({
   borderRadius = '10px',
   setPosts = null,
 }) {
-  const navigate = useNavigate();
   const user = useRecoilValue(userStateAtom);
   const [isVisible, setIsVisible] = useState(false);
 
   const { docId, images, title, likes = [] } = item;
 
   const [isLiked, setIsLiked] = useState(false);
+  const setLogInModal = useSetRecoilState(userLogInModal);
 
   useEffect(() => {
     if (user) {
@@ -32,7 +32,7 @@ export function Card({
 
   const handleLikePost = (e) => {
     e.stopPropagation();
-    if (!user) return navigate(`/signin`);
+    if (!user) return setLogInModal(true);
     setIsLiked((old) => !old);
     likePost(user, docId, setPosts, isLiked);
   };

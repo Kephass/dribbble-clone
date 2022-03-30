@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link as Router } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 import {
   Box,
@@ -13,11 +14,13 @@ import {
 import { GoogleButton, SignInUpLink, TwitterButton } from '@components/auth';
 import { InputUi } from '@components/ui';
 
+import { userLogInModal } from '../../data/atoms';
 import { logInWithEmailAndPassword } from '../../firebase';
 
 export function ModalSignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setLogInModal = useSetRecoilState(userLogInModal);
 
   const login = () => {
     if (!email) alert('Please enter email');
@@ -58,6 +61,7 @@ export function ModalSignIn() {
                 as={Router}
                 to="/forgotpassword"
                 color="pink.500"
+                onClick={() => setLogInModal(false)}
               >
                 Forgot your password?
               </Link>
@@ -77,6 +81,7 @@ export function ModalSignIn() {
           linkText="  Sign up"
           color="pink.500"
           weight="bold"
+          onClick={() => setLogInModal(false)}
         />
       </Center>
     </Flex>

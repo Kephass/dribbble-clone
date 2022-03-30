@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText, ModalNoUser } from '@components';
 import { FilterNav } from '@components/landing';
-import { allPostsStateAtom } from '@data/atoms';
+import { allPostsStateAtom, userLogInModal } from '@data/atoms';
 
 import { getAllPosts } from '../../firestore.collections';
 import Modal from '../ModalPost';
@@ -16,6 +16,7 @@ export function Body() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
+  const logInModal = useRecoilValue(userLogInModal);
 
   useEffect(() => {
     return getAllPosts(tag).then((result) => {
@@ -57,7 +58,7 @@ export function Body() {
           </Flex>
         ))}
       </Grid>
-      <ModalNoUser />
+      {logInModal && <ModalNoUser />}
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
