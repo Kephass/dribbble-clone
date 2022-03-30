@@ -24,7 +24,7 @@ import Modal from '../ModalPost';
 
 export function Body() {
   // Variables
-  let { tag } = useParams();
+  let { tag, filter } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
@@ -33,7 +33,7 @@ export function Body() {
   const [moreShotsIsLoading, setMoreShotsIsLoading] = useState(false);
 
   useEffect(async () => {
-    return getAllPosts(tag).then((result) => {
+    return getAllPosts(filter, tag).then((result) => {
       if (result.length < limitNumber) {
         setMoreShots(false);
       } else {
@@ -41,12 +41,12 @@ export function Body() {
       }
       setPosts(result);
     });
-  }, [tag]);
+  }, [filter, tag]);
 
   // Functions
   const handleNewPosts = () => {
     setMoreShotsIsLoading(true);
-    getNewPost(tag).then((result) => {
+    getNewPost(filter, tag).then((result) => {
       if (result !== undefined) {
         if (result.length <= 0) {
           setMoreShots(false);
@@ -67,9 +67,19 @@ export function Body() {
     setModalOpen(true);
     setSelectedPost(post);
   };
+  const checkMenuItemLabel = (f) => {
+    switch (f) {
+      case 'popular':
+        return 'Popular';
+      case 'new':
+        return 'New & Noteworthy';
+      default:
+        return 'New & Noteworthy';
+    }
+  };
   return (
     <Container maxW="95%" overflow="hidden">
-      <FilterNav />
+      <FilterNav tag={tag} filter={checkMenuItemLabel(filter)} />
       <Grid
         py="32px"
         gap="10"
@@ -125,7 +135,7 @@ export function Body() {
                 width="20px"
                 mr="3"
                 fit="contain"
-                src="images/brand/logo-ball.svg"
+                src="/images/brand/logo-ball.svg"
                 borderRadius="10"
               />
             )}

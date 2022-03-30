@@ -54,6 +54,7 @@ function App() {
         {/* content paths */}
         <Route path="/" element={<Landing />} />
         <Route path="shots" element={<Inspiration />} />
+        <Route path="shots/:filter" element={<Inspiration />} />
         <Route path="shots/:filter/:tag" element={<Inspiration />} />
         <Route path="jobs" element={<Jobs />} />
         <Route path="freelance-jobs" element={<Freelance />} />

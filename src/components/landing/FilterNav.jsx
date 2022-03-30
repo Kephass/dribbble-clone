@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ChevronDownIcon,
@@ -28,8 +29,9 @@ import { FilterTabs } from '@ui';
 
 import { links } from './index';
 
-export function FilterNav() {
+export function FilterNav({ tag, filter = 'New & Noteworthy' }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleOpen = () => setIsOpen(!isOpen);
   return (
@@ -70,20 +72,34 @@ export function FilterNav() {
                 color="grey"
                 whiteSpace="nowrap"
               >
-                Following {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                {filter} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </MenuButton>
               <MenuList>
-                <MenuItem>Following</MenuItem>
-                <MenuItem>Popular</MenuItem>
-                <MenuItem>New & Noteworthy</MenuItem>
+                <MenuItem onClick={() => console.log('Following')}>
+                  Following
+                </MenuItem>
+                <MenuItem
+                  onClick={() =>
+                    navigate(tag ? `/shots/popular/${tag}` : `/shots/popular`)
+                  }
+                >
+                  Popular
+                </MenuItem>
+                <MenuItem
+                  onClick={() =>
+                    navigate(tag ? `/shots/new/${tag}` : `/shots/new`)
+                  }
+                >
+                  New & Noteworthy
+                </MenuItem>
                 <MenuDivider />
-                <MenuItem>Goods for Sale</MenuItem>
+                <MenuItem onClick={() => null}>Goods for Sale</MenuItem>
               </MenuList>
             </>
           )}
         </Menu>
         <Spacer />
-        <FilterTabs links={links} display={{ base: 'none', md: 'flex' }} />
+        <FilterTabs links={links} display={{ base: 'none', xl: 'flex' }} />
         <Spacer />
 
         <Button
@@ -98,8 +114,8 @@ export function FilterNav() {
           Filters
         </Button>
       </Flex>
-      <Divider my="1em" display={{ base: 'flex', md: 'none' }} />
-      <FilterTabs links={links} display={{ base: 'flex', md: 'none' }} />
+      <Divider my="1em" display={{ base: 'flex', xl: 'none' }} />
+      <FilterTabs links={links} display={{ base: 'flex', xl: 'none' }} />
       <AnimatePresence>{isOpen && <Content />}</AnimatePresence>
     </>
   );

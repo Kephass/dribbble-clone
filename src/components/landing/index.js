@@ -9,38 +9,38 @@ export const links = [
   },
   {
     title: 'Animation',
-    url: '/shots/popular/animation',
+    url: '/shots/new/animation',
   },
   {
     title: 'Branding',
-    url: '/shots/popular/branding',
+    url: '/shots/new/branding',
   },
   {
     title: 'Illustration',
-    url: '/shots/popular/illustration',
+    url: '/shots/new/illustration',
   },
   {
     title: 'Mobile',
-    url: '/shots/popular/mobile',
+    url: '/shots/new/mobile',
   },
   {
     title: 'Product',
-    url: '/shots/popular/product',
+    url: '/shots/new/product',
   },
   {
     title: 'Design',
-    url: '/shots/popular/design',
+    url: '/shots/new/design',
   },
   {
     title: 'Typography',
-    url: '/shots/popular/typography',
+    url: '/shots/new/typography',
   },
   {
     title: 'Web',
-    url: '/shots/popular/web',
+    url: '/shots/new/web',
   },
   {
     title: 'Web Design',
-    url: '/shots/popular/web-design',
+    url: '/shots/new/web-design',
   },
 ];
