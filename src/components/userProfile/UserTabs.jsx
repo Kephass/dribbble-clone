@@ -28,15 +28,14 @@ export const UserTabs = () => {
 
   useEffect(() => {
     if (user) {
-      getUserAndLikedPosts({ localId }).then((result) => {
-        setUserPosts(result.filter((posts) => posts.uid === localId));
+      getUserAndLikedPosts(user).then((result) => {
+        setUserPosts(result.filter((posts) => posts.uid === user.localId));
         setUserLikedPosts(
-          result.filter((posts) => posts.likes?.includes(localId))
+          result.filter((posts) => posts.likes?.includes(user.localId))
         );
       });
     }
   }, [user]);
-
   return (
     <Container maxW="9xl" p="3rem">
       <Tabs pb="4rem" fontWeight="medium" isLazy>

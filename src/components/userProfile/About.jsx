@@ -1,9 +1,6 @@
-import {
-  FacebookFilled,
-  LinkOutlined,
-  ProfileFilled,
-  PushpinFilled,
-} from '@ant-design/icons';
+import { useEffect, useState } from 'react';
+
+import { FacebookFilled, LinkOutlined, ProfileFilled } from '@ant-design/icons';
 import {
   Button,
   Container,
@@ -15,9 +12,21 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { LocationMarkerIcon } from '@heroicons/react/solid';
+
+import { handleUserFromFirestore } from '../../firestore.collections';
 
 export const About = ({ user }) => {
-  console.log(user);
+  const [userInfo, setUserInfo] = useState(user);
+
+  useEffect(() => {
+    user &&
+      handleUserFromFirestore(user.localId).then((res) => {
+        console.log(res);
+        setUserInfo(res);
+      });
+  }, []);
+
   return (
     <Container maxW={'7xl'} marginBottom="15">
       <Stack
@@ -30,11 +39,27 @@ export const About = ({ user }) => {
           <Text fontSize="md" fontWeight="bold">
             Biography
           </Text>
-          <Text color="pink.100">{user.localId}</Text>
-          <Text fontSize="md" fontWeight="bold">
+          {userInfo.biography ? (
+            <Text as={'span'} mt="10px !important">
+              {userInfo.biography}
+            </Text>
+          ) : (
+            <Text as={'span'} color="pink.100" mt="10px !important">
+              Add biography
+            </Text>
+          )}
+          <Text as={'span'} fontSize="md" fontWeight="bold">
             Skills
           </Text>
-          <Text color="pink.100">Add Skills</Text>
+          {userInfo.skills ? (
+            <Text as={'span'} mt="10px !important">
+              {userInfo.skills}
+            </Text>
+          ) : (
+            <Text as={'span'} color="pink.100" mt="10px !important">
+              Add Skills
+            </Text>
+          )}
           <Divider />
           <HStack color="siteGray" gap="5">
             <Text>0 followers</Text>
@@ -73,15 +98,16 @@ export const About = ({ user }) => {
           </HStack>
           <Flex bgColor="#fafafb" width="100%" borderRadius="8px" p="2rem">
             <VStack align="left" gap="2">
-              <Text>
-                <PushpinFilled style={{ marginRight: '5px' }} />
-                {} Antwerp
-              </Text>
-              <Text>
-                <ProfileFilled style={{ marginRight: '5px' }} />
-                Member since
-                {}
-              </Text>
+              <HStack>
+                <LocationMarkerIcon
+                  style={{ marginRight: '5px', width: '20px' }}
+                />{' '}
+                <Text>{userInfo.location}</Text>
+              </HStack>
+              <HStack>
+                <ProfileFilled style={{ marginRight: '5px' }} align="left" />
+                <Text>Member since</Text>
+              </HStack>
             </VStack>
           </Flex>
           <VStack width="fill-available" align="left" pt="2rem">
