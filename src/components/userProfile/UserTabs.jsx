@@ -102,7 +102,16 @@ export const UserTabs = () => {
             <p>three!</p>
           </TabPanel>
           <TabPanel p={0}>
-            <Shots posts={userLikedPosts} setPosts={setUserLikedPosts} />
+            <AnimatePresence exitBeforeEnter>
+              <motion.div
+                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Shots posts={userLikedPosts} setPosts={setUserLikedPosts} />
+              </motion.div>
+            </AnimatePresence>
           </TabPanel>
           <TabPanel p={0}>
             <About user={user} />

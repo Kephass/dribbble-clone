@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
+
 import {
   Button,
   Center,
@@ -89,22 +90,31 @@ export function Body() {
         }}
       >
         {posts.map((post, i) => (
-          <Flex
-            width="100%"
-            direction="column"
-            gap="2"
-            key={`${post.docId}${i}`}
-            onClick={() => (modalOpen ? close(post) : open(post))}
-          >
-            <Card
-              item={post}
-              id={post.docId}
-              height="250px"
-              objectFit="cover"
-              setPosts={setPosts}
-            />
-            <CardText item={post} id={post.docId} />
-          </Flex>
+          <AnimatePresence key={`${post.docId}${i}`} exitBeforeEnter>
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Flex
+                width="100%"
+                direction="column"
+                gap="2"
+                key={`${post.docId}${i}`}
+                onClick={() => (modalOpen ? close(post) : open(post))}
+              >
+                <Card
+                  item={post}
+                  id={post.docId}
+                  height="250px"
+                  objectFit="cover"
+                  setPosts={setPosts}
+                />
+                <CardText item={post} id={post.docId} />
+              </Flex>
+            </motion.div>
+          </AnimatePresence>
         ))}
       </Grid>
       {logInModal && <ModalNoUser />}
