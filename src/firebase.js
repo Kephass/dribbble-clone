@@ -133,12 +133,13 @@ const viewPost = async (docId, setPosts, views = 0) => {
   });
 };
 // Update Like POST
-const likePost = async (user, docId, setPosts, isLiked) => {
+const likePost = async (user, docId, setPosts, isLiked, likes) => {
   setPost(setPosts, docId, user, isLiked);
   const docRef = doc(db, 'posts', docId);
   await updateDoc(docRef, {
     likes: isLiked ? arrayRemove(user.localId) : arrayUnion(user.localId),
   });
+  return isLiked ? likes.length : likes.length + 1;
 };
 const setPost = (setPosts, docId, user, isLiked) => {
   setPosts((oldPosts) => {

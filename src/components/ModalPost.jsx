@@ -18,7 +18,7 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { allPostsStateAtom, userStateAtom } from '@data/atoms';
+import { userStateAtom } from '@data/atoms';
 
 import { userLogInModal } from '../data/atoms';
 import { likePost, viewPost } from '../firebase';
@@ -48,7 +48,7 @@ const dropIn = {
   },
 };
 
-const Modal = ({ handleClose, item }) => {
+const Modal = ({ handleClose, item, setPosts }) => {
   const {
     docId,
     images,
@@ -58,15 +58,16 @@ const Modal = ({ handleClose, item }) => {
     displayName,
     caption,
   } = item;
-  const setPosts = useSetRecoilState(allPostsStateAtom);
   const setLogInModal = useSetRecoilState(userLogInModal);
   const user = useRecoilValue(userStateAtom);
   const [activeImage, setActiveImage] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLikeCount(likes.length);
     const viewKey = user ? user?.localId : 'views';
     const currentViews = localStorage.getItem(viewKey);
     const currentViewsArray = currentViews ? JSON.parse(currentViews) : [];
@@ -93,7 +94,10 @@ const Modal = ({ handleClose, item }) => {
     }
     setLoading(true);
     setIsLiked((old) => !old);
-    likePost(user, docId, setPosts, isLiked).then(() => setLoading(false));
+    likePost(user, docId, setPosts, isLiked, likes).then((res) => {
+      setLikeCount(res);
+      setLoading(false);
+    });
   };
   return (
     <Backdrop onClick={handleClose}>
@@ -163,7 +167,7 @@ const Modal = ({ handleClose, item }) => {
                       p="10px 16px"
                       minW="90px"
                     >
-                      {isLiked ? likes.length : 'Like'}
+                      {isLiked ? likeCount : 'Like'}
                     </Button>
                   </Box>
                 </Flex>
