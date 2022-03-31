@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InnerImageZoom from 'react-inner-image-zoom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
@@ -21,7 +22,7 @@ import {
 import { selectedPostAtom, userStateAtom } from '@data/atoms';
 
 import { userLogInModal } from '../data/atoms';
-import { likePost, viewPost } from '../firebase';
+import { deletePost, likePost, viewPost } from '../firebase';
 
 import Backdrop from './Backdrop';
 
@@ -49,13 +50,14 @@ const dropIn = {
 };
 
 const Modal = ({ handleClose, setPosts }) => {
+  const navigate = useNavigate();
   const setLogInModal = useSetRecoilState(userLogInModal);
   const [selectedPost, setSelectedPost] = useRecoilState(selectedPostAtom);
   const user = useRecoilValue(userStateAtom);
   const [activeImage, setActiveImage] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [isUserPost, setIsUserPost] = useState(false);
   const {
     docId,
     images,
@@ -64,6 +66,8 @@ const Modal = ({ handleClose, setPosts }) => {
     profileImg,
     displayName,
     caption,
+    title,
+    uid,
   } = selectedPost;
 
   useEffect(() => {
@@ -76,6 +80,12 @@ const Modal = ({ handleClose, setPosts }) => {
         JSON.stringify([...currentViewsArray, docId])
       );
       viewPost(docId, setPosts, views);
+    }
+    // Check if is user post
+    if (user) {
+      if (user.localId === uid) {
+        setIsUserPost(true);
+      }
     }
   }, []);
 
@@ -194,11 +204,17 @@ const Modal = ({ handleClose, setPosts }) => {
                     overflow="hidden"
                     objectFit="cover"
                   >
-                    <InnerImageZoom
-                      className="imageZoom"
-                      src={images[activeImage]}
-                      fallbackSrc="/images/default/default_card.svg"
-                    />
+                    {images && (
+                      <InnerImageZoom
+                        className="imageZoom"
+                        src={
+                          images.length > 0
+                            ? images?.[activeImage]
+                            : '/images/default/default_card.svg'
+                        }
+                        fallbackSrc="/images/default/default_card.svg"
+                      />
+                    )}
                   </Box>
 
                   <Flex
@@ -231,6 +247,51 @@ const Modal = ({ handleClose, setPosts }) => {
                 <Box>
                   <Text>{caption}</Text>
                 </Box>
+                {/* USER EDIT POST */}
+                {isUserPost && (
+                  <Flex justifyContent="center" my="2em">
+                    <Box borderRadius="10px" bg="lightgray" overflow="hidden">
+                      <Button
+                        color="siteGray"
+                        fontWeight="normal"
+                        borderRadius={0}
+                        bg="lightGray"
+                        py="2em"
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        color="siteGray"
+                        fontWeight="normal"
+                        borderRadius={0}
+                        bg="lightGray"
+                        py="2em"
+                      >
+                        Edit shot details
+                      </Button>
+                      <Button
+                        color="red.100"
+                        fontWeight="normal"
+                        borderRadius={0}
+                        bg="lightGray"
+                        py="2em"
+                        onClick={async () => {
+                          let result = confirm(
+                            'Are you sure you want to delete this screenshot?'
+                          );
+                          if (result) {
+                            deletePost(selectedPost).then(() => {
+                              handleClose();
+                              location.reload(true);
+                            });
+                          }
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </Box>
+                  </Flex>
+                )}
               </Container>
             </Container>
           </Box>

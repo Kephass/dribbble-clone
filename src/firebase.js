@@ -11,6 +11,7 @@ import {
   arrayRemove,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   query,
@@ -121,6 +122,12 @@ const createPost = async (postData, user, loading) => {
     return 'Post created';
   });
 };
+// Delete POST
+const deletePost = async ({ docId, title }) => {
+  await deleteDoc(doc(db, 'posts', docId)).then(() => {
+    return `${title} deleted succesfully`;
+  });
+};
 // Update view POST
 const viewPost = async (docId, setPosts, views = 0) => {
   const docRef = doc(db, 'posts', docId);
@@ -164,6 +171,7 @@ export {
   auth,
   createPost,
   db,
+  deletePost,
   likePost,
   logInWithEmailAndPassword,
   logout,

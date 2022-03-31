@@ -18,7 +18,7 @@ import { FooterLinks } from '@components';
 
 export function Footer() {
   return (
-    <Box bg="red.50" minH="50vh" py="10" px={{ base: '5', xl: '20' }}>
+    <Box bg="lightGray" minH="50vh" py="10" px={{ base: '5', xl: '20' }}>
       <Container maxW="8xl">
         <Flex justify="space-between" direction={{ base: 'column', xl: 'row' }}>
           <Box flexShrink="0" mr="4" mb="4">

@@ -21,7 +21,8 @@ const theme = extendTheme({
     btnGray: '#f3f3f4',
     lightGray: '#fafafb',
     red: {
-      50: '#fafafb',
+      100: '#DC143C',
+      50: '#FF6347',
     },
     bgFAQ: '#fbf5f3',
     gradient: 'linear-gradient(100deg, #ff874f 0%, #ec5e95 100%)',
