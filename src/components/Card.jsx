@@ -32,7 +32,7 @@ export function Card({
     e.stopPropagation();
     if (!user) return setLogInModal(true);
     setIsLiked((old) => !old);
-    likePost(user, docId, setPosts, isLiked);
+    likePost(user, docId, setPosts, isLiked, likes);
   };
 
   return (
