@@ -4,6 +4,10 @@ export const userStateAtom = atom({
   key: 'user',
   default: null,
 });
+export const selectedPostAtom = atom({
+  key: 'selectedPost',
+  default: {},
+});
 export const allPostsStateAtom = atom({
   key: 'allPosts',
   default: [],

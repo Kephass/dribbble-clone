@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { useSetRecoilState } from 'recoil';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
 import { Card, CardText } from '@components';
+import { selectedPostAtom } from '@data/atoms';
 
 import Modal from '../ModalPost';
 
 export const Shots = ({ posts, setPosts }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState({});
-  const close = (post) => {
+  const setSelectedPost = useSetRecoilState(selectedPostAtom);
+  const close = () => {
     setModalOpen(false);
-    setSelectedPost(post);
   };
   const open = (post) => {
     setModalOpen(true);
@@ -55,7 +56,6 @@ export const Shots = ({ posts, setPosts }) => {
           <Modal
             modalOpen={modalOpen}
             handleClose={close}
-            item={selectedPost}
             setPosts={setPosts}
           />
         )}

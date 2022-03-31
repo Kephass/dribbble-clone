@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InnerImageZoom from 'react-inner-image-zoom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
 import { ChatIcon, ExternalLinkIcon, InfoOutlineIcon } from '@chakra-ui/icons';
@@ -18,7 +18,7 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { userStateAtom } from '@data/atoms';
+import { selectedPostAtom, userStateAtom } from '@data/atoms';
 
 import { userLogInModal } from '../data/atoms';
 import { likePost, viewPost } from '../firebase';
@@ -48,7 +48,14 @@ const dropIn = {
   },
 };
 
-const Modal = ({ handleClose, item, setPosts }) => {
+const Modal = ({ handleClose, setPosts }) => {
+  const setLogInModal = useSetRecoilState(userLogInModal);
+  const [selectedPost, setSelectedPost] = useRecoilState(selectedPostAtom);
+  const user = useRecoilValue(userStateAtom);
+  const [activeImage, setActiveImage] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const {
     docId,
     images,
@@ -57,17 +64,9 @@ const Modal = ({ handleClose, item, setPosts }) => {
     profileImg,
     displayName,
     caption,
-  } = item;
-  const setLogInModal = useSetRecoilState(userLogInModal);
-  const user = useRecoilValue(userStateAtom);
-  const [activeImage, setActiveImage] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-
-  const [loading, setLoading] = useState(false);
+  } = selectedPost;
 
   useEffect(() => {
-    setLikeCount(likes.length);
     const viewKey = user ? user?.localId : 'views';
     const currentViews = localStorage.getItem(viewKey);
     const currentViewsArray = currentViews ? JSON.parse(currentViews) : [];
@@ -94,10 +93,23 @@ const Modal = ({ handleClose, item, setPosts }) => {
     }
     setLoading(true);
     setIsLiked((old) => !old);
-    likePost(user, docId, setPosts, isLiked, likes).then((res) => {
-      setLikeCount(res);
-      setLoading(false);
+    setSelectedPost((oldPosts) => {
+      const newPost = { ...oldPosts };
+      if (newPost.docId === docId) {
+        if (isLiked) {
+          newPost.likes = newPost.likes.filter(
+            (filterPost) => filterPost !== user?.localId
+          );
+        } else {
+          const likes = newPost.likes ?? [];
+          newPost.likes = [...likes, user?.localId];
+        }
+      }
+      return newPost;
     });
+    likePost(user, docId, setPosts, isLiked, likes).then((res) =>
+      setLoading(false)
+    );
   };
   return (
     <Backdrop onClick={handleClose}>
@@ -167,7 +179,7 @@ const Modal = ({ handleClose, item, setPosts }) => {
                       p="10px 16px"
                       minW="90px"
                     >
-                      {isLiked ? likeCount : 'Like'}
+                      {isLiked ? likes?.length : 'Like'}
                     </Button>
                   </Box>
                 </Flex>
