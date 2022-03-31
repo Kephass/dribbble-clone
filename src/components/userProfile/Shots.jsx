@@ -34,7 +34,7 @@ export const Shots = ({ posts, setPosts }) => {
             direction="column"
             gap="2"
             key={`${post.docId}${i}`}
-            onClick={() => (modalOpen ? close(post) : open(post))}
+            onClick={() => (modalOpen ? close() : open(post))}
           >
             <Card
               item={post}
