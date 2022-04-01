@@ -38,12 +38,9 @@ export function Body() {
     setMoreShotsIsLoading(true);
     getNewPost(filter, tag).then((result) => {
       if (result !== undefined) {
-        if (result.length <= 0) {
-          setMoreShots(false);
-        } else {
-          setPosts((old) => [...old, ...result]);
-          setMoreShots(true);
-        }
+        if (result.length <= 0) return setMoreShots(false);
+        setPosts((old) => [...old, ...result]);
+        setMoreShots(true);
         setMoreShotsIsLoading(false);
       }
     });
@@ -62,6 +59,7 @@ export function Body() {
   return (
     <Container maxW="95%" overflow="hidden">
       <FilterNav tag={tag} filter={checkMenuItemLabel(filter)} />
+
       <Shots posts={posts} setPosts={setPosts} />
       {logInModal && <ModalNoUser />}
 
