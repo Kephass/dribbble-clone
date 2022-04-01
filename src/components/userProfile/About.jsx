@@ -22,7 +22,6 @@ export const About = ({ user }) => {
   useEffect(() => {
     user &&
       handleUserFromFirestore(user.localId).then((res) => {
-        console.log(res);
         setUserInfo(res);
       });
   }, []);

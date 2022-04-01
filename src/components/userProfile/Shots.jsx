@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useSetRecoilState } from 'recoil';
 
 import { Container, Flex, Grid } from '@chakra-ui/react';
@@ -29,22 +29,31 @@ export const Shots = ({ posts, setPosts }) => {
         }}
       >
         {posts.map((post, i) => (
-          <Flex
-            width="100%"
-            direction="column"
-            gap="2"
-            key={`${post.docId}${i}`}
-            onClick={() => (modalOpen ? close() : open(post))}
-          >
-            <Card
-              item={post}
-              id={post.docId}
-              height="250px"
-              objectFit="cover"
-              setPosts={setPosts}
-            />
-            <CardText item={post} id={post.docId} />
-          </Flex>
+          <AnimatePresence key={`${post.docId}${i}`} exitBeforeEnter>
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Flex
+                width="100%"
+                direction="column"
+                gap="2"
+                key={`${post.docId}${i}`}
+                onClick={() => (modalOpen ? close() : open(post))}
+              >
+                <Card
+                  item={post}
+                  id={post.docId}
+                  height="250px"
+                  objectFit="cover"
+                  setPosts={setPosts}
+                />
+                <CardText item={post} id={post.docId} />
+              </Flex>
+            </motion.div>
+          </AnimatePresence>
         ))}
       </Grid>
       <AnimatePresence
