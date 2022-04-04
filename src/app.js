@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     return onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
-        setUserAtom(user.reloadUserInfo);
+        setUserAtom(userRes.reloadUserInfo);
         setLogInModal(false);
       } else {
         setUserAtom(null);
