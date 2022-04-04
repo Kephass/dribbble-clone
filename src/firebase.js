@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   sendPasswordResetEmail,
+  signInWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -31,6 +32,12 @@ import { auth, db } from './firestore.collections';
 
 const googleProvider = new GoogleAuthProvider();
 const storage = getStorage();
+const handleCredentialResponse = (response) => {
+  if (response) {
+    const cred = GoogleAuthProvider.credential(response.credential);
+    return signInWithCredential(auth, cred);
+  }
+};
 const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -172,6 +179,7 @@ export {
   createPost,
   db,
   deletePost,
+  handleCredentialResponse,
   likePost,
   logInWithEmailAndPassword,
   logout,

@@ -19,6 +19,7 @@ import { userLogInModal, userStateAtom } from './data/atoms';
 import { ForgotPassword, SignIn, SignUp } from './screens/authentication';
 import { DesignerSearch, Freelance, Jobs } from './screens/findwork';
 import HireDesigners from './screens/HireDesigners';
+import { handleCredentialResponse } from './firebase';
 
 function App() {
   const [user, setUserAtom] = useRecoilState(userStateAtom);
@@ -26,12 +27,17 @@ function App() {
   const auth = getAuth();
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (user) => {
-      if (user) {
+    return onAuthStateChanged(auth, (userRes) => {
+      if (userRes) {
         setUserAtom(user.reloadUserInfo);
         setLogInModal(false);
       } else {
         setUserAtom(null);
+        google.accounts.id.initialize({
+          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+          callback: handleCredentialResponse,
+        });
+        google.accounts.id.prompt();
       }
     });
   }, [user]);
@@ -42,9 +48,11 @@ function App() {
   useEffect(() => {
     setIsAuthPath(AuthPaths.includes(currentLocation));
   }, [currentLocation]);
+
   return (
     <>
       {!isAuthPath && <Header user={user} />}
+
       <Routes>
         {/* Authentication paths */}
         <Route path="/signup" element={<SignUp />} />
@@ -67,6 +75,12 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
       </Routes>
+      {/* <div
+        id="g_id_onload"
+        data-client_id="237649064676-i7ueb5crtq345ne7gs45nki18dddqbjo.apps.googleusercontent.com"
+        data-context="signin"
+        data-callback={() => handleCredentialResponse()}
+      ></div> */}
       {!isAuthPath && <Footer />}
     </>
   );
