@@ -56,7 +56,7 @@ export function Card({
           <DuplicateIcon color="white" width="28px" />
         </Box>
       )}
-      <Box>
+      <Box overflow={'hidden'} borderRadius={borderRadius}>
         <Flex position="relative" height={height}>
           {images?.map((image, i) => (
             <Box
@@ -74,6 +74,7 @@ export function Card({
                 opacity={i !== activeIndex && '0'}
                 fallbackSrc="/images/default/default_card.svg"
                 borderRadius={borderRadius}
+                transform={isVisible && 'scale(1.05)'}
                 _hover={{ cursor: 'pointer' }}
               />
             </Box>
