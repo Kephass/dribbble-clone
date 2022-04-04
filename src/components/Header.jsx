@@ -60,7 +60,7 @@ export const Header = ({ user }) => {
         fontWeight="bold"
         fontSize="sm"
         color="siteGray"
-        px={4}
+        px={6}
         py={2}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
@@ -75,12 +75,12 @@ export const Header = ({ user }) => {
             <Link to="/">
               <Image
                 src={`${process.env.REACT_APP_DOMAIN}/images/brand/logo.svg`}
-                height="25px"
+                height="19px"
               />
             </Link>
             <HStack
               as={'nav'}
-              spacing={4}
+              spacing={6}
               display={{ base: 'none', md: 'flex' }}
             >
               {Links.map((link) => (
@@ -155,6 +155,7 @@ export const Header = ({ user }) => {
                 ml="20px"
                 my="40px"
                 colorScheme="pink"
+                fontSize="14px"
                 display={{ base: 'none', md: 'flex' }}
               >
                 Start a free project

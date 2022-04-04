@@ -75,12 +75,7 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
       </Routes>
-      {/* <div
-        id="g_id_onload"
-        data-client_id="237649064676-i7ueb5crtq345ne7gs45nki18dddqbjo.apps.googleusercontent.com"
-        data-context="signin"
-        data-callback={() => handleCredentialResponse()}
-      ></div> */}
+
       {!isAuthPath && <Footer />}
     </>
   );

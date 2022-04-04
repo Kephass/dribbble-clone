@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InnerImageZoom from 'react-inner-image-zoom';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
@@ -50,7 +49,6 @@ const dropIn = {
 };
 
 const Modal = ({ handleClose, setPosts }) => {
-  const navigate = useNavigate();
   const setLogInModal = useSetRecoilState(userLogInModal);
   const [selectedPost, setSelectedPost] = useRecoilState(selectedPostAtom);
   const user = useRecoilValue(userStateAtom);
@@ -69,6 +67,11 @@ const Modal = ({ handleClose, setPosts }) => {
     title,
     uid,
   } = selectedPost;
+  const escFunction = useCallback((event) => {
+    if (event.key === 'Escape') {
+      handleClose();
+    }
+  }, []);
 
   useEffect(() => {
     const viewKey = user ? user?.localId : 'views';
@@ -87,6 +90,11 @@ const Modal = ({ handleClose, setPosts }) => {
         setIsUserPost(true);
       }
     }
+    document.addEventListener('keydown', escFunction, false);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction, false);
+    };
   }, []);
 
   useEffect(() => {
