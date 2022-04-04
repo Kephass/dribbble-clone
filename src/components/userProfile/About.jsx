@@ -28,9 +28,8 @@ export const About = ({ user }) => {
       });
     }
   }, [user]);
-  console.log(user.createdAt);
   return (
-    <Container maxW={'7xl'} marginBottom="15">
+    <Container maxW={'6xl'} marginBottom="15">
       {userInfo ? (
         <Stack
           align={'center'}
