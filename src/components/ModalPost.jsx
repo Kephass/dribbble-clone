@@ -141,12 +141,12 @@ const Modal = ({ handleClose, setPosts }) => {
       >
         <Box position="relative" cursor="initial">
           {/* Post content */}
-          <Box p="64px 120px">
-            <Container maxW="1172px" w="100%">
+          <Box p={{ base: '64px 0px', md: '64px 120px' }}>
+            <Container maxW="1172px" w="100%" p="0">
               {/* User */}
               <Container maxW="768px">
-                <Flex>
-                  <Box>
+                <Flex direction={{ base: 'column', md: 'row' }}>
+                  <Box mb={{ base: '1em', md: '0' }}>
                     <Flex>
                       <Image
                         height="48px"
@@ -156,11 +156,15 @@ const Modal = ({ handleClose, setPosts }) => {
                       />
                       <Flex direction="column">
                         <Text fontWeight="bold">{displayName}</Text>
-                        <Flex>
+                        <Flex direction={{ base: 'column', md: 'row' }}>
                           <Text fontWeight="light">
                             Risang Kuncoro for Plainthing Studio • Follow •
                           </Text>
-                          <Text fontWeight="light" color="pink.100" ml="8px">
+                          <Text
+                            fontWeight="light"
+                            color="pink.100"
+                            ml={{ base: '0', md: '8px' }}
+                          >
                             Hire Us
                           </Text>
                         </Flex>
@@ -202,12 +206,12 @@ const Modal = ({ handleClose, setPosts }) => {
                   </Box>
                 </Flex>
               </Container>
-              <Container maxW="925px" my="40px">
+              <Container maxW="925px" my="40px" p="0">
                 {/* Image */}
                 <Box>
                   {/* <Image width="100%" objectFit="cover" src={images} /> */}
                   <Box
-                    borderRadius="10px"
+                    borderRadius={{ base: '0px', md: '10px' }}
                     _hover={{ cursor: 'pointer' }}
                     overflow="hidden"
                     objectFit="cover"
@@ -215,6 +219,7 @@ const Modal = ({ handleClose, setPosts }) => {
                     {images && (
                       <InnerImageZoom
                         className="imageZoom"
+                        borderRadius={{ base: '0px', md: '10px' }}
                         src={
                           images.length > 0
                             ? images?.[activeImage]
@@ -252,7 +257,7 @@ const Modal = ({ handleClose, setPosts }) => {
                   </Flex>
                 </Box>
                 {/* Description */}
-                <Box>
+                <Box p={{ base: '1em', md: '0' }}>
                   <Text>{caption}</Text>
                 </Box>
                 {/* USER EDIT POST */}
@@ -304,7 +309,10 @@ const Modal = ({ handleClose, setPosts }) => {
             </Container>
           </Box>
           {/* Floating user section */}
-          <Box className="floating-user">
+          <Box
+            className="floating-user"
+            display={{ base: 'none', md: 'block' }}
+          >
             <Flex position="sticky" top="60px">
               <Box>
                 <Flex direction="column">

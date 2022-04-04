@@ -65,7 +65,11 @@ export function Body() {
 
       {moreShots && (
         <Center my="2em">
-          <Button onClick={handleNewPosts}>
+          <Button
+            onClick={handleNewPosts}
+            _active={{ transform: 'scale(0.95)' }}
+            transition="0.25s ease-in-out"
+          >
             {moreShotsIsLoading ? (
               <Spinner size="sm" mr="3" />
             ) : (
