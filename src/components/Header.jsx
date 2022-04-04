@@ -111,7 +111,7 @@ export const Header = ({ user }) => {
                 <MenuList>
                   <MenuItem
                     onClick={() =>
-                      navigate(`/users/${user.displayName.split(' ')[0]}`)
+                      navigate(`/users/${user.displayName.split(' ')[0]}/shots`)
                     }
                   >
                     Profile

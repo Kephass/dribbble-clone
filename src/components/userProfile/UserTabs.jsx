@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
@@ -20,11 +21,38 @@ import {
 import { getUserAndLikedPosts } from '../../firestore.collections';
 
 export const UserTabs = () => {
+  let { tab } = useParams();
+  const [defaultIndex, setDefaultIndex] = useState(0);
+
+  const navigate = useNavigate();
   const user = useRecoilValue(userStateAtom);
   const [userPosts, setUserPosts] = useRecoilState(userPostsStateAtom);
   const [userLikedPosts, setUserLikedPosts] = useRecoilState(
     userLikedPostsStateAtom
   );
+  const [tabs, setTabs] = useState([
+    { key: 0, value: 'shots', title: `Shots`, shotsLength: 0 },
+    { key: 1, value: 'boosted', title: `Boosted` },
+    { key: 2, value: 'collections', title: 'Collections' },
+    { key: 3, value: 'likes', title: `Liked Shots`, shotsLength: 0 },
+    { key: 4, value: 'about', title: 'About' },
+  ]);
+
+  useEffect(() => {
+    const newTabs = [...tabs].map((tab) => {
+      if (tab.value === 'shots') tab.shotsLength = userPosts.length;
+      if (tab.value === 'likes') tab.shotsLength = userLikedPosts.length;
+
+      return tab;
+    });
+    setTabs(newTabs);
+  }, [userPosts, userLikedPosts]);
+
+  useEffect(() => {
+    tabs.forEach((currentTab) => {
+      if (currentTab.value === tab) setDefaultIndex(currentTab.key);
+    });
+  }, [tab, tabs]);
 
   useEffect(() => {
     if (user) {
@@ -38,48 +66,23 @@ export const UserTabs = () => {
   }, [user]);
   return (
     <Container maxW="9xl" p="3rem">
-      <Tabs pb="4rem" fontWeight="medium" isLazy>
+      <Tabs pb="4rem" fontWeight="medium" isLazy index={defaultIndex}>
         <TabList>
-          <Tab
-            _focus={{
-              outline: 'none',
-              ring: 'none',
-            }}
-          >
-            Shots {userPosts.length}
-          </Tab>
-          <Tab
-            _focus={{
-              outline: 'none',
-              ring: 'none',
-            }}
-          >
-            Boosted Shots
-          </Tab>
-          <Tab
-            _focus={{
-              outline: 'none',
-              ring: 'none',
-            }}
-          >
-            Collections
-          </Tab>
-          <Tab
-            _focus={{
-              outline: 'none',
-              ring: 'none',
-            }}
-          >
-            Liked Shots {userLikedPosts.length}
-          </Tab>
-          <Tab
-            _focus={{
-              outline: 'none',
-              ring: 'none',
-            }}
-          >
-            About
-          </Tab>
+          {tabs.map(({ key, value, title, shotsLength }) => (
+            <Tab
+              key={key}
+              onClick={() =>
+                navigate(`/users/${user?.displayName.split(' ')[0]}/${value}`)
+              }
+              id={value}
+              _focus={{
+                outline: 'none',
+                ring: 'none',
+              }}
+            >
+              {title} {shotsLength}
+            </Tab>
+          ))}
         </TabList>
 
         <TabPanels>
