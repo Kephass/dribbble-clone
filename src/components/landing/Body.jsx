@@ -1,18 +1,9 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import {
-  Button,
-  Center,
-  Container,
-  Flex,
-  Grid,
-  Image,
-  Spinner,
-} from '@chakra-ui/react';
-import { Card, CardText, ModalNoUser } from '@components';
+import { Button, Center, Container, Image, Spinner } from '@chakra-ui/react';
+import { ModalNoUser } from '@components';
 import { FilterNav } from '@components/landing';
 import { allPostsStateAtom, userLogInModal } from '@data/atoms';
 
@@ -21,13 +12,11 @@ import {
   getNewPost,
   limitNumber,
 } from '../../firestore.collections';
-import Modal from '../ModalPost';
+import { Shots } from '../userProfile/Shots';
 
 export function Body() {
   // Variables
   let { tag, filter } = useParams();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState({});
   const [posts, setPosts] = useRecoilState(allPostsStateAtom);
   const logInModal = useRecoilValue(userLogInModal);
   const [moreShots, setMoreShots] = useState(false);
@@ -49,25 +38,14 @@ export function Body() {
     setMoreShotsIsLoading(true);
     getNewPost(filter, tag).then((result) => {
       if (result !== undefined) {
-        if (result.length <= 0) {
-          setMoreShots(false);
-        } else {
-          setPosts((old) => [...old, ...result]);
-          setMoreShots(true);
-        }
+        if (result.length <= 0) return setMoreShots(false);
+        setPosts((old) => [...old, ...result]);
+        setMoreShots(true);
         setMoreShotsIsLoading(false);
       }
     });
   };
 
-  const close = (post) => {
-    setModalOpen(false);
-    setSelectedPost(post);
-  };
-  const open = (post) => {
-    setModalOpen(true);
-    setSelectedPost(post);
-  };
   const checkMenuItemLabel = (f) => {
     switch (f) {
       case 'popular':
@@ -81,59 +59,17 @@ export function Body() {
   return (
     <Container maxW="95%" overflow="hidden">
       <FilterNav tag={tag} filter={checkMenuItemLabel(filter)} />
-      <Grid
-        py="32px"
-        gap="10"
-        templateColumns={{
-          base: 'repeat(auto-fill, minmax(250px, 1fr))',
-          md: 'repeat(auto-fill, minmax(350px, 1fr))',
-        }}
-      >
-        {posts.map((post, i) => (
-          <AnimatePresence key={`${post.docId}${i}`} exitBeforeEnter>
-            <motion.div
-              animate={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.15 }}
-            >
-              <Flex
-                width="100%"
-                direction="column"
-                gap="2"
-                key={`${post.docId}${i}`}
-                onClick={() => (modalOpen ? close(post) : open(post))}
-              >
-                <Card
-                  item={post}
-                  id={post.docId}
-                  height="250px"
-                  objectFit="cover"
-                  setPosts={setPosts}
-                />
-                <CardText item={post} id={post.docId} />
-              </Flex>
-            </motion.div>
-          </AnimatePresence>
-        ))}
-      </Grid>
+
+      <Shots posts={posts} setPosts={setPosts} />
       {logInModal && <ModalNoUser />}
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
-      >
-        {modalOpen && (
-          <Modal
-            modalOpen={modalOpen}
-            handleClose={close}
-            item={selectedPost}
-          />
-        )}
-      </AnimatePresence>
+
       {moreShots && (
         <Center my="2em">
-          <Button onClick={handleNewPosts}>
+          <Button
+            onClick={handleNewPosts}
+            _active={{ transform: 'scale(0.95)' }}
+            transition="0.25s ease-in-out"
+          >
             {moreShotsIsLoading ? (
               <Spinner size="sm" mr="3" />
             ) : (

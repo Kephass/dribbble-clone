@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   sendPasswordResetEmail,
+  signInWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -11,6 +12,7 @@ import {
   arrayRemove,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   query,
@@ -30,6 +32,12 @@ import { auth, db } from './firestore.collections';
 
 const googleProvider = new GoogleAuthProvider();
 const storage = getStorage();
+const handleCredentialResponse = (response) => {
+  if (response) {
+    const cred = GoogleAuthProvider.credential(response.credential);
+    return signInWithCredential(auth, cred);
+  }
+};
 const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -121,6 +129,12 @@ const createPost = async (postData, user, loading) => {
     return 'Post created';
   });
 };
+// Delete POST
+const deletePost = async ({ docId, title }) => {
+  await deleteDoc(doc(db, 'posts', docId)).then(() => {
+    return `${title} deleted succesfully`;
+  });
+};
 // Update view POST
 const viewPost = async (docId, setPosts, views = 0) => {
   const docRef = doc(db, 'posts', docId);
@@ -140,6 +154,7 @@ const likePost = async (user, docId, setPosts, isLiked) => {
     likes: isLiked ? arrayRemove(user.localId) : arrayUnion(user.localId),
   });
 };
+
 const setPost = (setPosts, docId, user, isLiked) => {
   setPosts((oldPosts) => {
     return [...oldPosts].map((post) => {
@@ -158,10 +173,13 @@ const setPost = (setPosts, docId, user, isLiked) => {
     });
   });
 };
+
 export {
   auth,
   createPost,
   db,
+  deletePost,
+  handleCredentialResponse,
   likePost,
   logInWithEmailAndPassword,
   logout,

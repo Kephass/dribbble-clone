@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InnerImageZoom from 'react-inner-image-zoom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { HeartFilled } from '@ant-design/icons';
 import { ChatIcon, ExternalLinkIcon, InfoOutlineIcon } from '@chakra-ui/icons';
@@ -18,10 +18,10 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { allPostsStateAtom, userStateAtom } from '@data/atoms';
+import { selectedPostAtom, userStateAtom } from '@data/atoms';
 
 import { userLogInModal } from '../data/atoms';
-import { likePost, viewPost } from '../firebase';
+import { deletePost, likePost, viewPost } from '../firebase';
 
 import Backdrop from './Backdrop';
 
@@ -48,7 +48,14 @@ const dropIn = {
   },
 };
 
-const Modal = ({ handleClose, item }) => {
+const Modal = ({ handleClose, setPosts }) => {
+  const setLogInModal = useSetRecoilState(userLogInModal);
+  const [selectedPost, setSelectedPost] = useRecoilState(selectedPostAtom);
+  const user = useRecoilValue(userStateAtom);
+  const [activeImage, setActiveImage] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isUserPost, setIsUserPost] = useState(false);
   const {
     docId,
     images,
@@ -57,14 +64,14 @@ const Modal = ({ handleClose, item }) => {
     profileImg,
     displayName,
     caption,
-  } = item;
-  const setPosts = useSetRecoilState(allPostsStateAtom);
-  const setLogInModal = useSetRecoilState(userLogInModal);
-  const user = useRecoilValue(userStateAtom);
-  const [activeImage, setActiveImage] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-
-  const [loading, setLoading] = useState(false);
+    title,
+    uid,
+  } = selectedPost;
+  const escFunction = useCallback((event) => {
+    if (event.key === 'Escape') {
+      handleClose();
+    }
+  }, []);
 
   useEffect(() => {
     const viewKey = user ? user?.localId : 'views';
@@ -77,6 +84,17 @@ const Modal = ({ handleClose, item }) => {
       );
       viewPost(docId, setPosts, views);
     }
+    // Check if is user post
+    if (user) {
+      if (user.localId === uid) {
+        setIsUserPost(true);
+      }
+    }
+    document.addEventListener('keydown', escFunction, false);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction, false);
+    };
   }, []);
 
   useEffect(() => {
@@ -93,7 +111,23 @@ const Modal = ({ handleClose, item }) => {
     }
     setLoading(true);
     setIsLiked((old) => !old);
-    likePost(user, docId, setPosts, isLiked).then(() => setLoading(false));
+    setSelectedPost((oldPosts) => {
+      const newPost = { ...oldPosts };
+      if (newPost.docId === docId) {
+        if (isLiked) {
+          newPost.likes = newPost.likes.filter(
+            (filterPost) => filterPost !== user?.localId
+          );
+        } else {
+          const likes = newPost.likes ?? [];
+          newPost.likes = [...likes, user?.localId];
+        }
+      }
+      return newPost;
+    });
+    likePost(user, docId, setPosts, isLiked, likes).then((res) =>
+      setLoading(false)
+    );
   };
   return (
     <Backdrop onClick={handleClose}>
@@ -107,12 +141,12 @@ const Modal = ({ handleClose, item }) => {
       >
         <Box position="relative" cursor="initial">
           {/* Post content */}
-          <Box p="64px 120px">
-            <Container maxW="1172px" w="100%">
+          <Box p={{ base: '64px 0px', md: '64px 120px' }}>
+            <Container maxW="1172px" w="100%" p="0">
               {/* User */}
               <Container maxW="768px">
-                <Flex>
-                  <Box>
+                <Flex direction={{ base: 'column', md: 'row' }}>
+                  <Box mb={{ base: '1em', md: '0' }}>
                     <Flex>
                       <Image
                         height="48px"
@@ -122,11 +156,15 @@ const Modal = ({ handleClose, item }) => {
                       />
                       <Flex direction="column">
                         <Text fontWeight="bold">{displayName}</Text>
-                        <Flex>
+                        <Flex direction={{ base: 'column', md: 'row' }}>
                           <Text fontWeight="light">
                             Risang Kuncoro for Plainthing Studio • Follow •
                           </Text>
-                          <Text fontWeight="light" color="pink.100" ml="8px">
+                          <Text
+                            fontWeight="light"
+                            color="pink.100"
+                            ml={{ base: '0', md: '8px' }}
+                          >
                             Hire Us
                           </Text>
                         </Flex>
@@ -163,26 +201,33 @@ const Modal = ({ handleClose, item }) => {
                       p="10px 16px"
                       minW="90px"
                     >
-                      {isLiked ? likes.length : 'Like'}
+                      {isLiked ? likes?.length : 'Like'}
                     </Button>
                   </Box>
                 </Flex>
               </Container>
-              <Container maxW="925px" my="40px">
+              <Container maxW="925px" my="40px" p="0">
                 {/* Image */}
                 <Box>
                   {/* <Image width="100%" objectFit="cover" src={images} /> */}
                   <Box
-                    borderRadius="10px"
+                    borderRadius={{ base: '0px', md: '10px' }}
                     _hover={{ cursor: 'pointer' }}
                     overflow="hidden"
                     objectFit="cover"
                   >
-                    <InnerImageZoom
-                      className="imageZoom"
-                      src={images[activeImage]}
-                      fallbackSrc="/images/default/default_card.svg"
-                    />
+                    {images && (
+                      <InnerImageZoom
+                        className="imageZoom"
+                        borderRadius={{ base: '0px', md: '10px' }}
+                        src={
+                          images.length > 0
+                            ? images?.[activeImage]
+                            : '/images/default/default_card.svg'
+                        }
+                        fallbackSrc="/images/default/default_card.svg"
+                      />
+                    )}
                   </Box>
 
                   <Flex
@@ -212,14 +257,62 @@ const Modal = ({ handleClose, item }) => {
                   </Flex>
                 </Box>
                 {/* Description */}
-                <Box>
+                <Box p={{ base: '1em', md: '0' }}>
                   <Text>{caption}</Text>
                 </Box>
+                {/* USER EDIT POST */}
+                {isUserPost && (
+                  <Flex justifyContent="center" my="2em">
+                    <Box borderRadius="10px" bg="lightgray" overflow="hidden">
+                      <Button
+                        color="siteGray"
+                        fontWeight="normal"
+                        borderRadius={0}
+                        bg="lightGray"
+                        py="2em"
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        color="siteGray"
+                        fontWeight="normal"
+                        borderRadius={0}
+                        bg="lightGray"
+                        py="2em"
+                      >
+                        Edit shot details
+                      </Button>
+                      <Button
+                        color="red.100"
+                        fontWeight="normal"
+                        borderRadius={0}
+                        bg="lightGray"
+                        py="2em"
+                        onClick={async () => {
+                          let result = confirm(
+                            'Are you sure you want to delete this screenshot?'
+                          );
+                          if (result) {
+                            deletePost(selectedPost).then(() => {
+                              handleClose();
+                              location.reload(true);
+                            });
+                          }
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </Box>
+                  </Flex>
+                )}
               </Container>
             </Container>
           </Box>
           {/* Floating user section */}
-          <Box className="floating-user">
+          <Box
+            className="floating-user"
+            display={{ base: 'none', md: 'block' }}
+          >
             <Flex position="sticky" top="60px">
               <Box>
                 <Flex direction="column">

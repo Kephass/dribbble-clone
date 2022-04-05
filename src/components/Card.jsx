@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { FolderAddFilled, HeartFilled } from '@ant-design/icons/lib/icons';
-import { Box, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import { userStateAtom } from '@data/atoms';
+import { DuplicateIcon } from '@heroicons/react/solid';
 
 import { userLogInModal } from '../data/atoms';
 import { likePost } from '../firebase';
@@ -19,6 +20,7 @@ export function Card({
   const user = useRecoilValue(userStateAtom);
   const { docId, images, title, likes = [] } = item;
   const [isVisible, setIsVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const setLogInModal = useSetRecoilState(userLogInModal);
 
@@ -32,33 +34,61 @@ export function Card({
     e.stopPropagation();
     if (!user) return setLogInModal(true);
     setIsLiked((old) => !old);
-    likePost(user, docId, setPosts, isLiked);
+    likePost(user, docId, setPosts, isLiked, likes);
   };
 
   return (
     <Box
       background="gray"
       position="relative"
-      onMouseEnter={() => setIsVisible(true)}
+      onMouseOver={() => {
+        setIsVisible(true);
+        images.length > 1 && setActiveIndex(1);
+      }}
       borderRadius={borderRadius}
-      onMouseLeave={() => setIsVisible(false)}
+      onMouseOut={() => {
+        setIsVisible(false);
+        images.length > 1 && setActiveIndex(0);
+      }}
     >
-      <Image
-        width={width}
-        height={height}
-        objectFit={objectFit}
-        src={images}
-        fallbackSrc="/images/default/default_card.svg"
-        borderRadius={borderRadius}
-        _hover={{ cursor: 'pointer' }}
-      />
-      <Box
-        display={isVisible ? 'flex' : 'none'}
+      {images?.length > 1 && (
+        <Box position="absolute" zIndex={1} right={1} top={1}>
+          <DuplicateIcon color="white" width="28px" />
+        </Box>
+      )}
+      <Box overflow={'hidden'} borderRadius={borderRadius}>
+        <Flex position="relative" height={height}>
+          {images?.map((image, i) => (
+            <Box
+              position="absolute"
+              key={`cardImage${i}`}
+              height={height}
+              width={width}
+            >
+              <Image
+                width={width}
+                height={height}
+                objectFit={objectFit}
+                src={image}
+                transition="0.3s ease-in-out "
+                opacity={i !== activeIndex && '0'}
+                fallbackSrc="/images/default/default_card.svg"
+                borderRadius={borderRadius}
+                transform={isVisible && 'scale(1.05)'}
+                _hover={{ cursor: 'pointer' }}
+              />
+            </Box>
+          ))}
+        </Flex>
+      </Box>
+      <Flex
+        opacity={isVisible ? '1' : '0'}
         cursor={isVisible ? 'pointer' : 'default'}
         borderRadius="10"
         position="absolute"
         alignItems="flex-end"
         alignContent="space-between"
+        transition="0.25s ease-in-out "
         top="0"
         left="0"
         right="0"
@@ -89,7 +119,7 @@ export function Card({
             <Icon color={user && isLiked && 'pink.500'} as={HeartFilled} />
           </VStack>
         </HStack>
-      </Box>
+      </Flex>
     </Box>
   );
 }

@@ -75,7 +75,7 @@ function Upload() {
               setLoading(true);
               await createPost(newPostInfo, user, loading);
               setLoading(false);
-              navigate(`/users/${user?.uid}`);
+              navigate(`/users/${user.displayName.split(' ')[0]}`);
             }}
           >
             {loading ? 'Uploading...' : 'Save'}
