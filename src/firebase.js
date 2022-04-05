@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  TwitterAuthProvider,
 } from 'firebase/auth';
 import {
   addDoc,
@@ -31,11 +32,35 @@ import {
 import { auth, db } from './firestore.collections';
 
 const googleProvider = new GoogleAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
 const storage = getStorage();
 const handleCredentialResponse = (response) => {
   if (response) {
     const cred = GoogleAuthProvider.credential(response.credential);
     return signInWithCredential(auth, cred);
+  }
+};
+const signInWithTwitter = async () => {
+  try {
+    const res = await signInWithPopup(auth, twitterProvider);
+    const user = res.user;
+    const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+    const docs = await getDocs(q);
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, 'users'), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'google',
+        email: user.email,
+        likedShots: [],
+        following: [],
+        posts: [],
+        collection: [],
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
   }
 };
 const signInWithGoogle = async () => {
@@ -186,6 +211,7 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   signInWithGoogle,
+  signInWithTwitter,
   storage,
   viewPost,
 };

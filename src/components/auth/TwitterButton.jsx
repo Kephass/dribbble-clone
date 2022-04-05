@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Button } from '@chakra-ui/react';
 
+import { signInWithTwitter } from '../../firebase';
 import { ReactComponent as TwitterLogo } from '../../svg/twitterlogo.svg';
 
 export function TwitterButton() {
@@ -14,6 +15,7 @@ export function TwitterButton() {
       p="10px 16px"
       ml="16px"
       color="#6e6d7a"
+      onClick={() => signInWithTwitter()}
     >
       <TwitterLogo />
     </Button>
