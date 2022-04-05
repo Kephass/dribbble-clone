@@ -117,10 +117,22 @@ export const Header = ({ user }) => {
                     Profile
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem>Edit Profile</MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      navigate(`/users/${user.displayName.split(' ')[0]}/about`)
+                    }
+                  >
+                    Edit Profile
+                  </MenuItem>
                   <MenuItem>Edit Work Preferences</MenuItem>
                   <MenuDivider />
-                  <MenuItem>My Likes</MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      navigate(`/users/${user.displayName.split(' ')[0]}/likes`)
+                    }
+                  >
+                    My Likes
+                  </MenuItem>
                   <MenuDivider />
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
