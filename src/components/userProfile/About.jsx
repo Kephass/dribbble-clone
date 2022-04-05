@@ -23,9 +23,25 @@ export const About = ({ user }) => {
 
   useEffect(() => {
     if (user) {
+      const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
       const epoch = new Date(null);
       epoch.setSeconds(new Timestamp(user.createdAt / 1000).seconds);
-      setMemberSince(epoch.toLocaleDateString());
+      const month = monthNames[epoch.getMonth()];
+      const year = epoch.getFullYear();
+      setMemberSince(`${month} / ${year}`);
       handleUserFromFirestore(user.localId).then((res) => {
         setUserInfo(res);
       });
