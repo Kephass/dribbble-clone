@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Timestamp } from 'firebase/firestore';
 
 import { FacebookFilled, LinkOutlined, ProfileFilled } from '@ant-design/icons';
 import {
@@ -22,7 +23,9 @@ export const About = ({ user }) => {
 
   useEffect(() => {
     if (user) {
-      setMemberSince(new Date(user.createdAt * 1000).toLocaleDateString());
+      const epoch = new Date(null);
+      epoch.setSeconds(new Timestamp(user.createdAt / 1000).seconds);
+      setMemberSince(epoch.toLocaleDateString());
       handleUserFromFirestore(user.localId).then((res) => {
         setUserInfo(res);
       });
