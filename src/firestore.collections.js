@@ -104,6 +104,20 @@ const handleUserFromFirestore = async (uid) => {
   return user;
 };
 
+//Update user profile information
+const handleUpdateUserProfile = async (uid) => {
+  const userProfileUpdate = query(
+    collection(db, 'users'),
+    where('uid', '==', uid),
+    limit(1)
+  );
+
+  // Set the given fields to new value
+  await updateDoc(userProfileUpdate, {
+    biography: biography,
+  });
+};
+
 // Remove duplicates
 const removeDuplicates = (dupArray) => {
   return dupArray.reduce((item, pos) => {
@@ -128,4 +142,13 @@ const checkFilterName = (filter) => {
   return filter;
 };
 
-export { auth, db, getAllPosts, getNewPost, getUserAndLikedPosts, handleUserFromFirestore, limitNumber };
+export {
+  auth,
+  db,
+  getAllPosts,
+  getNewPost,
+  getUserAndLikedPosts,
+  handleUpdateUserProfile,
+  handleUserFromFirestore,
+  limitNumber,
+};
