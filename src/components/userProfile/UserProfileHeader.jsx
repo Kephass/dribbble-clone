@@ -44,13 +44,13 @@ export const UserProfileHeader = () => {
 
   //set user information
   const biographyRef = useRef();
-  const skillsRef = useRef();
+  const skillsRef = useRef(new Array());
   const locationRef = useRef();
 
   let updateUserData = () => {
     const userData = {
       biography: biographyRef.current.value,
-      skills: skillsRef.current.value,
+      skills: skillsRef.current.value.split(','),
       location: locationRef.current.value,
     };
     setUserInfo({ ...userInfo, ...userData });

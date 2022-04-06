@@ -58,7 +58,7 @@ export const About = ({ user }) => {
           py={{ base: 17, md: 24 }}
           direction={{ base: 'column', md: 'row' }}
         >
-          <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+          <Stack width="100%" flex={1} spacing={{ base: 5, md: 10 }}>
             <Text fontSize="md" fontWeight="bold">
               Biography
             </Text>
@@ -74,15 +74,27 @@ export const About = ({ user }) => {
             <Text as={'span'} fontSize="md" fontWeight="bold">
               Skills
             </Text>
-            {userInfo.skills ? (
-              <Text as={'span'} mt="10px !important">
-                {userInfo.skills}
-              </Text>
-            ) : (
-              <Text as={'span'} color="pink.100" mt="10px !important">
-                Add Skills
-              </Text>
-            )}
+            <Flex flexFlow="wrap">
+              {userInfo.skills ? (
+                userInfo.skills.map((skill) => (
+                  <Text
+                    as={'span'}
+                    key={skill}
+                    backgroundColor="#fafafb"
+                    p=".8rem"
+                    mt="10px !important"
+                    borderRadius="1.5rem"
+                    mr=".5rem"
+                  >
+                    {skill}
+                  </Text>
+                ))
+              ) : (
+                <Text as={'span'} color="pink.100" mt="10px !important">
+                  Add Skills
+                </Text>
+              )}
+            </Flex>
             <Divider />
             <HStack color="siteGray" gap="5">
               <Text>0 followers</Text>
