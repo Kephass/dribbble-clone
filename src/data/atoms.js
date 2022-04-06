@@ -8,6 +8,10 @@ export const userStateAtom = atom({
   key: 'user',
   default: null,
 });
+export const userInfoStateAtom = atom({
+  key: 'userInfo',
+  default: {},
+});
 export const selectedPostAtom = atom({
   key: 'selectedPost',
   default: {},

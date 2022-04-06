@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Timestamp } from 'firebase/firestore';
+import { useRecoilState } from 'recoil';
 
 import { FacebookFilled, LinkOutlined, ProfileFilled } from '@ant-design/icons';
 import {
@@ -15,10 +16,11 @@ import {
 } from '@chakra-ui/react';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
 
+import { userInfoStateAtom } from '../../data/atoms';
 import { handleUserFromFirestore } from '../../firestore.collections';
 
 export const About = ({ user }) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoStateAtom);
   const [memberSince, setMemberSince] = useState(null);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export const About = ({ user }) => {
       epoch.setSeconds(new Timestamp(user.createdAt / 1000).seconds);
       const month = monthNames[epoch.getMonth()];
       const year = epoch.getFullYear();
-      setMemberSince(`${month} / ${year}`);
+      setMemberSince(`${month} ${year}`);
       handleUserFromFirestore(user.localId).then((res) => {
         setUserInfo(res);
       });

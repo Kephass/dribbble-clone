@@ -2,12 +2,14 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import {
   collection,
+  doc,
   getDocs,
   getFirestore,
   limit,
   orderBy,
   query,
   startAfter,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -109,22 +111,18 @@ const handleUserFromFirestore = async (uid) => {
   const res = await getDocs(userQuery);
   let user;
   res.forEach((doc) => {
-    user = doc.data();
+    const docId = doc.id;
+    user = { ...doc.data(), docId };
   });
   return user;
 };
 
 //Update user profile information
-const handleUpdateUserProfile = async (uid) => {
-  const userProfileUpdate = query(
-    collection(db, 'users'),
-    where('uid', '==', uid),
-    limit(1)
-  );
-
-  // Set the given fields to new value
-  await updateDoc(userProfileUpdate, {
-    biography: biography,
+const handleUpdateUserProfile = async (docId, userData) => {
+  updateDoc(doc(db, 'users', docId), {
+    biography: userData.biography,
+    skills: userData.skills,
+    location: userData.location,
   });
 };
 
