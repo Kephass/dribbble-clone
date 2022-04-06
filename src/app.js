@@ -11,6 +11,7 @@ import {
   Landing,
   LearnDesign,
   Marketplace,
+  Search,
   Upload,
   UserProfile,
 } from '@screens';
@@ -73,6 +74,8 @@ function App() {
         <Route path="hiring" element={<HireDesigners />} />
         <Route path="users/:username" element={<UserProfile />} />
         <Route path="users/:username/:tab" element={<UserProfile />} />
+        <Route path="search/:query" element={<Search />} />
+        <Route path="search/*" element={<Search />} />
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
       </Routes>

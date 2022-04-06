@@ -1,5 +1,9 @@
 import { atom } from 'recoil';
 
+export const searchStateAtom = atom({
+  key: 'searchKey',
+  default: '',
+});
 export const userStateAtom = atom({
   key: 'user',
   default: null,

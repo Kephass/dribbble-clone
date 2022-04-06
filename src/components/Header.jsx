@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 
 import { CloseIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import {
@@ -24,12 +25,13 @@ import {
 } from '@chakra-ui/react';
 import { routes } from '@data/routes';
 
+import { searchStateAtom } from '../data/atoms';
 import { logout } from '../firebase';
 
 export const Header = ({ user }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [searchKey, setSearchKey] = useRecoilState(searchStateAtom);
   const handleEnterPressed = (event) => {
     if (event.key === 'Enter') {
       handleSearch(event.target.value);
@@ -37,7 +39,8 @@ export const Header = ({ user }) => {
   };
 
   const handleSearch = (value) => {
-    console.log(value);
+    setSearchKey(value);
+    navigate(`search/${value}`);
   };
   return (
     <Box
@@ -114,6 +117,8 @@ export const Header = ({ user }) => {
                 fontSize="sm"
                 color="black"
                 w="150px"
+                value={searchKey}
+                onChange={(e) => setSearchKey(e.target.value)}
                 onKeyDown={handleEnterPressed}
                 _focus={{
                   border: '1px solid pink',
@@ -241,6 +246,7 @@ export const Header = ({ user }) => {
                 <SearchIcon color="gray.400" />
               </InputLeftElement>
               <Input
+                value={searchKey}
                 type="text"
                 placeholder="Search"
                 bg="btnGray"
@@ -248,6 +254,7 @@ export const Header = ({ user }) => {
                 fontSize="lg"
                 color="black"
                 w="100%"
+                onChange={(e) => setSearchKey(e.target.value)}
                 onKeyDown={handleEnterPressed}
                 _focus={{
                   backgroundColor: 'white',

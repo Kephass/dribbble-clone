@@ -77,6 +77,16 @@ async function getNewPost(filter, tag = null) {
 }
 
 //?  ==== HELPERS ==== //
+// Get SEARCH result
+export const handleSearchResult = async (res) => {
+  const querySelector = query(
+    postsRef,
+    where('captionIndex', 'array-contains', res.toLowerCase()),
+    orderBy('timestamp', 'desc'),
+    limit(limitNumber)
+  );
+  return handlePostsFromFirestore(querySelector);
+};
 // Get SHOTS from firestore
 const handlePostsFromFirestore = async (querySelector, isUserData = null) => {
   const res = await getDocs(querySelector);

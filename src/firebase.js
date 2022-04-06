@@ -132,6 +132,8 @@ const createPost = async (postData, user, loading) => {
     profileImg: user?.photoURL,
     displayName: user?.displayName,
     tags: postData?.tags,
+    titleIndex: postData?.title.toLowerCase().split(' '),
+    captionIndex: postData?.caption.toLowerCase().split(' '),
     timestamp: serverTimestamp(),
   });
 

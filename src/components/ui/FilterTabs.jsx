@@ -85,6 +85,8 @@ export function FilterTabs({ links, display = { base: 'flex', md: 'flex' } }) {
                     outline: 'none',
                     ring: 'none',
                   }}
+                  color="gray.500"
+                  fontWeight="normal"
                   className="filter-btn"
                 >
                   {link.title}
