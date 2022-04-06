@@ -17,11 +17,7 @@ export function Banner() {
   return (
     <Box bg="purple.25" pb="1em">
       <Container maxW="container.xl" centerContent>
-        <Flex
-          minH="50vh"
-          align="center"
-          direction={{ base: 'column-reverse', md: 'row' }}
-        >
+        <Flex align="center" direction={{ base: 'column-reverse', md: 'row' }}>
           <VStack
             w="full"
             h="full"

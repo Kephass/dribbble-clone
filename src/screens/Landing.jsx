@@ -8,7 +8,7 @@ import { auth } from '../firebase';
 function Landing() {
   const [user] = useAuthState(auth);
   return (
-    <Box>
+    <Box mt={{ base: '62px', md: '0px' }}>
       {!user && <Banner />}
       <Body />
     </Box>

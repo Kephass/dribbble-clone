@@ -241,7 +241,10 @@ export const Header = ({ user }) => {
             px="6"
             boxSizing="border-box"
           >
-            <InputGroup display={{ base: 'flex', md: 'none' }}>
+            <InputGroup
+              display={{ base: 'flex', md: 'none' }}
+              mt={{ base: '24px', md: '0px' }}
+            >
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.400" />
               </InputLeftElement>

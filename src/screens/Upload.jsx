@@ -54,7 +54,7 @@ function Upload() {
   }, [newPostInfo]);
 
   return (
-    <Container maxW="95%">
+    <Container maxW="95%" mt={{ base: '80px', md: '0px' }}>
       <Box my="32px">
         <Flex>
           <Link href="/">
