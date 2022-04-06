@@ -11,7 +11,7 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-import { About, Shots } from '@components/userProfile';
+import { About, Collections, Shots } from '@components/userProfile';
 import {
   userLikedPostsStateAtom,
   userPostsStateAtom,
@@ -103,7 +103,7 @@ export const UserTabs = () => {
             </AnimatePresence>
           </TabPanel>
           <TabPanel p={0}>
-            <p>three!</p>
+            <Collections />
           </TabPanel>
           <TabPanel p={0}>
             <AnimatePresence exitBeforeEnter>
