@@ -140,7 +140,7 @@ export default function Search() {
             <Image
               width="800px"
               fit="contain"
-              src="/images/banners/no-results.png"
+              src={`${process.env.REACT_APP_DOMAIN}/images/default/no-results.png`}
             />
           </Center>
         )}
