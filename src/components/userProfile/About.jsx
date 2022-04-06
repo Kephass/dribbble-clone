@@ -90,7 +90,7 @@ export const About = ({ user }) => {
             </HStack>
           </Stack>
 
-          <VStack w="30%">
+          <VStack>
             <HStack
               m="1rem 0"
               justifyContent="space-around"

@@ -32,10 +32,9 @@ export const UserTabs = () => {
   );
   const [tabs, setTabs] = useState([
     { key: 0, value: 'shots', title: `Shots`, shotsLength: 0 },
-    { key: 1, value: 'boosted', title: `Boosted` },
-    { key: 2, value: 'collections', title: 'Collections' },
-    { key: 3, value: 'likes', title: `Liked Shots`, shotsLength: 0 },
-    { key: 4, value: 'about', title: 'About' },
+    { key: 1, value: 'collections', title: 'Collections' },
+    { key: 2, value: 'likes', title: `Liked Shots`, shotsLength: 0 },
+    { key: 3, value: 'about', title: 'About' },
   ]);
 
   useEffect(() => {
@@ -67,7 +66,12 @@ export const UserTabs = () => {
   return (
     <Container maxW="9xl" p="3rem">
       <Tabs pb="4rem" fontWeight="medium" isLazy index={defaultIndex}>
-        <TabList>
+        <TabList
+          whiteSpace="nowrap"
+          width="100%"
+          overflowX="auto"
+          overflowY="hidden"
+        >
           {tabs.map(({ key, value, title, shotsLength }) => (
             <Tab
               key={key}
@@ -97,9 +101,6 @@ export const UserTabs = () => {
                 <Shots posts={userPosts} setPosts={setUserPosts} />
               </motion.div>
             </AnimatePresence>
-          </TabPanel>
-          <TabPanel p={0}>
-            <p>two!</p>
           </TabPanel>
           <TabPanel p={0}>
             <p>three!</p>

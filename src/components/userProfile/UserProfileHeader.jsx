@@ -55,7 +55,6 @@ export const UserProfileHeader = () => {
     };
     setUserInfo({ ...userInfo, ...userData });
     handleUpdateUserProfile(userInfo.docId, userData).then(() => onClose());
-    console.log(userData);
   };
   useEffect(() => {
     if (user) {
@@ -64,22 +63,16 @@ export const UserProfileHeader = () => {
       });
     }
   }, [user]);
-  console.log(userInfo);
 
   return (
     <>
       {userInfo ? (
         <HStack justifyContent="center" spacing="12" p="4rem">
           <Box>
-            <Image
-              borderRadius="full"
-              boxSize="130px"
-              src={avatar}
-              alt={title}
-            />
+            <Image borderRadius="full" width="130px" src={avatar} alt={title} />
           </Box>
           <VStack alignSelf="flex-start">
-            <Heading align="center">{title}</Heading>
+            <Heading>{title}</Heading>
             <Text alignSelf="flex-start" color="siteGray">
               {userInfo.location}
             </Text>
