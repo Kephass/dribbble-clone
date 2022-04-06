@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useEffect, useRef } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
   Box,
@@ -23,7 +23,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-import { userStateAtom } from '../../data/atoms';
+import { userInfoStateAtom, userStateAtom } from '../../data/atoms';
 import {
   handleUpdateUserProfile,
   handleUserFromFirestore,
@@ -35,21 +35,27 @@ export const UserProfileHeader = () => {
 
   //Open user info form modal
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = useRef();
   const finalRef = useRef();
 
   //User info
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoStateAtom);
   const title = user?.displayName;
   const avatar = user?.photoUrl;
 
   //set user information
-  const [biography, setBiography] = useState();
+  const biographyRef = useRef();
+  const skillsRef = useRef();
+  const locationRef = useRef();
 
-  let handleBiographyChange = (e) => {
-    let inputValue = e.target.value;
-    setBiography(inputValue);
-    console.log(biography);
+  let updateUserData = () => {
+    const userData = {
+      biography: biographyRef.current.value,
+      skills: skillsRef.current.value,
+      location: locationRef.current.value,
+    };
+    setUserInfo({ ...userInfo, ...userData });
+    handleUpdateUserProfile(userInfo.docId, userData).then(() => onClose());
+    console.log(userData);
   };
   useEffect(() => {
     if (user) {
@@ -99,7 +105,7 @@ export const UserProfileHeader = () => {
             </HStack>
           </VStack>
           <Modal
-            initialFocusRef={initialRef}
+            initialFocusRef={biographyRef}
             finalFocusRef={finalRef}
             isOpen={isOpen}
             onClose={onClose}
@@ -113,20 +119,19 @@ export const UserProfileHeader = () => {
                 <FormControl>
                   <FormLabel>Biography</FormLabel>
                   <Textarea
-                    ref={initialRef}
+                    ref={biographyRef}
                     defaultValue={userInfo.biography}
-                    onChange={handleBiographyChange}
                   />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel>Skills</FormLabel>
-                  <Textarea defaultValue={userInfo.skills} />
+                  <Textarea ref={skillsRef} defaultValue={userInfo.skills} />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel>Location</FormLabel>
-                  <Input defaultValue={userInfo.location} />
+                  <Input ref={locationRef} defaultValue={userInfo.location} />
                 </FormControl>
               </ModalBody>
 
@@ -134,7 +139,7 @@ export const UserProfileHeader = () => {
                 <Button
                   colorScheme="pink"
                   mr={3}
-                  onClick={handleUpdateUserProfile}
+                  onClick={() => updateUserData()}
                 >
                   Save
                 </Button>
