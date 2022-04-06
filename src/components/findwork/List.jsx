@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import TimeAgo from 'react-timeago';
 
 import {
+  Avatar,
   Box,
   Button,
   Flex,
-  Image,
   Spacer,
   StackDivider,
   Text,
@@ -31,33 +31,40 @@ export function List({ jobs }) {
           px="24px"
           position="relative"
         >
-          <Flex align="center">
+          <Flex align={{ base: 'start', md: 'center' }}>
             {/* LOGO */}
             {logo && (
               <Box mr="5">
-                <Image
-                  src={logo}
-                  borderRadius="50%"
-                  width="60px"
-                  height="60px"
-                />
+                <Avatar src={logo} borderRadius="50%" size={'md'} />
               </Box>
             )}
             {/* LEFT */}
             <Box>
-              <Text fontWeight="bold" fontSize="xl" mb="1">
+              <Text
+                fontWeight="bold"
+                fontSize={{ width: 'md', height: 'xl' }}
+                mb="1"
+              >
                 {title}
               </Text>
-              <Flex align="center" justify="flex-end">
+              <Flex
+                align="center"
+                justify={{ base: 'flex-start', md: 'flex-end' }}
+              >
                 <Text
                   display="flex"
-                  fontSize="lg"
+                  fontSize={{ width: 'md', height: 'lg' }}
                   fontWeight="bold"
                   color="siteGray"
                 >
                   {post}
                 </Text>
-                <Text ml="1" fontWeight="light" color="gray">
+                <Text
+                  ml="1"
+                  fontWeight="light"
+                  color="gray"
+                  display={{ base: 'none', md: 'initital' }}
+                >
                   • {type}
                 </Text>
               </Flex>
@@ -66,7 +73,13 @@ export function List({ jobs }) {
             {/* RIGHT */}
             <Box className="findwork-item-info">
               <Flex align="center" justify="flex-end">
-                <Text fontWeight="normal" fontSize="md" mb="1" align="right">
+                <Text
+                  fontWeight="normal"
+                  fontSize="md"
+                  mb="1"
+                  align="right"
+                  display={{ base: 'none', md: 'initital' }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     style={{ width: '15px', height: '15px' }}
@@ -90,7 +103,12 @@ export function List({ jobs }) {
                   {location}
                 </Text>
               </Flex>
-              <Box color="siteGray" fontSize="md" fontWeight="medium">
+              <Box
+                color="siteGray"
+                fontSize="md"
+                fontWeight="medium"
+                display={{ base: 'none', md: 'initital' }}
+              >
                 <TimeAgo live={false} date={timeStamp} />
               </Box>
             </Box>

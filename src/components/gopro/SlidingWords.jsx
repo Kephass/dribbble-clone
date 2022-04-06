@@ -45,6 +45,7 @@ export function SlidingWords({ moveRight, secondList }) {
   return (
     <MotionBox
       position="relative"
+      display={{ base: 'none', md: 'initial' }}
       left="0"
       animate={{ x: direction }}
       transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
@@ -61,8 +62,12 @@ export function SlidingWords({ moveRight, secondList }) {
         color="gray.200"
       >
         {secondList
-          ? arr2.map((item,i) => <Text key={`slidingwordlist1${i}`}>{item}</Text>)
-          : arr.map((item,i) => <Text key={`slidingwordlist2${i}`}>{item}</Text>)}
+          ? arr2.map((item, i) => (
+              <Text key={`slidingwordlist1${i}`}>{item}</Text>
+            ))
+          : arr.map((item, i) => (
+              <Text key={`slidingwordlist2${i}`}>{item}</Text>
+            ))}
       </Box>
     </MotionBox>
   );

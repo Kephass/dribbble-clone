@@ -9,7 +9,7 @@ import {
   Flex,
   Image,
   Text,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 
 export const Banner = ({
@@ -21,11 +21,11 @@ export const Banner = ({
   video = null,
   mediaOptions = null,
   buttons = [],
-  children = null
+  children = null,
 }) => {
   return (
-    <Box py={10}>
-      <Container maxW="container.xl" centerContent>
+    <Box py={{ base: '0', md: '10' }}>
+      <Container maxW="7xl">
         <Flex
           minH="30vh"
           align="center"
@@ -35,7 +35,7 @@ export const Banner = ({
             width={{ base: '100%', lg: '50%' }}
             h="full"
             py="10"
-            pr="20"
+            pr={{ base: '0', md: '20' }}
             spacing="8"
             alignItems="flex-start"
           >
@@ -56,7 +56,7 @@ export const Banner = ({
                 descriptionOptions?.fontSize || {
                   base: 'lg',
                   md: 'xl',
-                  lg: '2xl'
+                  lg: '2xl',
                 }
               }
               lineHeight={descriptionOptions?.lineHeight || 'normal'}
@@ -125,5 +125,5 @@ Banner.propTypes = {
   video: PropTypes.string,
   mediaOptions: PropTypes.object,
   buttons: PropTypes.array,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

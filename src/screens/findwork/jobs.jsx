@@ -19,7 +19,7 @@ export const Jobs = () => {
             to discover and connect with designers and jobs worldwide."
         image="images/banners/jobs.png"
         buttons={[
-          { text: 'Post a job—Starting at $249/mo' },
+          { text: 'Post a job' },
           { text: 'Learn more', color: 'gray' },
         ]}
         titleOptions={{

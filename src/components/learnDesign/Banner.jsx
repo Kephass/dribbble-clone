@@ -16,7 +16,7 @@ import {
 
 export const Banner = () => {
   return (
-    <Container maxW={'7xl'} marginBottom="20">
+    <Container maxW={'7xl'} marginBottom="20" mt={{ base: '40px', md: '0px' }}>
       <Stack
         align={'center'}
         spacing={{ base: 8, md: 10 }}

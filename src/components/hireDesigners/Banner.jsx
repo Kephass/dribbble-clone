@@ -9,10 +9,13 @@ export function Banner() {
       align="center"
       overflowX="hidden"
       py="20"
-      gap="40"
-      pl={{ base: '10', xl: '20' }}
+      gap={{ base: '6', md: '40' }}
+      boxSizing="border-box"
+      pl={{ base: '0', xl: '20' }}
+      px={{ base: '6', md: '20' }}
+      mt={{ base: '30px', md: '0' }}
     >
-      <Box minW="450px">
+      <Box minW={{ base: '0', md: '450px' }}>
         <Text
           mb="2"
           lineHeight="normal"

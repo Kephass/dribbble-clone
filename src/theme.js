@@ -10,6 +10,7 @@ const theme = extendTheme({
       150: '#4f3cc9',
       100: '#201850',
       50: '#f9f8fd',
+      25: '#E9ECFF',
     },
     pink: {
       100: '#ea4c89',

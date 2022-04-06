@@ -15,18 +15,18 @@ export function Banner() {
   const navigate = useNavigate();
 
   return (
-    <Box bg="purple.50" pb="10">
+    <Box bg="purple.25" pb="1em">
       <Container maxW="container.xl" centerContent>
         <Flex
           minH="50vh"
-          align="flex-end"
+          align="center"
           direction={{ base: 'column-reverse', md: 'row' }}
         >
           <VStack
             w="full"
             h="full"
             py="10"
-            px={{ base: '0', md: '10' }}
+            px={{ base: '0', md: '0' }}
             spacing="10"
             alignItems={{ base: 'center', md: 'flex-start' }}
           >
@@ -42,6 +42,7 @@ export function Banner() {
               fontWeight="medium"
               fontSize="md"
               align={{ base: 'center', md: 'left' }}
+              mt="12px !important"
             >
               Dribbble is the leading destination to find & showcase creative
               work and home to the world&apos;`s best design professionals.
@@ -57,15 +58,21 @@ export function Banner() {
           <Box px="10">
             <Image
               width="800px"
-              height="522px"
               fit="contain"
               src="images/banners/landing.png"
-              mb="-14"
             />
-            <Text color="gray.400" align={{ base: 'center', md: 'right' }}>
-              Art by{' '}
-              <Link href="https://dribbble.com/romainbriaux">
-                Romain Briaux
+            <Text
+              color="gray.400"
+              fontSize="xs"
+              align={{ base: 'center', md: 'right' }}
+            >
+              Learn more about how we’re supporting Ukraine. Art by
+              <Link
+                href="https://dribbble.com/mergedevt"
+                textDecoration="underline"
+                ml="5px"
+              >
+                Merge Development
               </Link>
             </Text>
           </Box>

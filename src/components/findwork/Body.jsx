@@ -27,12 +27,12 @@ export const Body = () => {
 
   return (
     <Container maxW="container.xl" mt="5">
-      <Flex>
+      <Flex align="center">
         <Box>
-          <Text fontWeight="black" fontSize="2xl">
+          <Text fontWeight="black" fontSize={{ base: 'xl', md: '2xl' }}>
             Recent new opportunities
           </Text>
-          <Text fontWeight="light" fontSize="sm" mb="1">
+          <Text fontWeight="light" fontSize="sm">
             {jobsDummy.length} new opportunities posted today!
           </Text>
         </Box>
@@ -40,7 +40,6 @@ export const Body = () => {
         <Button
           colorScheme="pink"
           variant="solid"
-          mt="5"
           display={{ base: 'block', md: 'none' }}
         >
           Filter

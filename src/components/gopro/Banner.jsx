@@ -5,7 +5,8 @@ import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 export function Banner() {
   return (
     <Flex
-      my={{ base: '20', md: '40' }}
+      mt={{ base: '80px', md: '40' }}
+      mb={{ base: '20', md: '40' }}
       direction={{
         base: 'column',
         md: 'row',

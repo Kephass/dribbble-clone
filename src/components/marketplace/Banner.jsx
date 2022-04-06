@@ -8,11 +8,12 @@ export function Banner() {
       align="center"
       gap="16"
       justify="space-between"
-      my={{ base: '20', md: '40' }}
+      mb={{ base: '20', md: '40' }}
+      mt={{ base: '100px', md: '40' }}
     >
       <Flex
         gap="10"
-        px="10"
+        px={{ base: '6', md: '10' }}
         direction="column"
         maxW={{ base: '100%', lg: '45%' }}
       >

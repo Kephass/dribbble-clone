@@ -9,7 +9,11 @@ export function DesignerSearch() {
       gap="20"
       justify="space-between"
     >
-      <Image minW="600px" src="images/hiring/designer-search.png" />
+      <Image
+        minW="600px"
+        src="images/hiring/designer-search.png"
+        display={{ base: 'none', md: 'initial' }}
+      />
       <Flex
         pr={{ base: '10', xl: '20' }}
         pl={{ base: '10', xl: '0' }}
