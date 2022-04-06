@@ -22,39 +22,23 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
+import { routes } from '@data/routes';
 
 import { logout } from '../firebase';
-
-const Links = [
-  {
-    title: 'Inspiration',
-    url: 'shots',
-  },
-  {
-    title: 'Find Work',
-    url: 'jobs',
-  },
-  {
-    title: 'Learn Design',
-    url: 'learn',
-  },
-  {
-    title: 'Go Pro',
-    url: 'pro',
-  },
-  {
-    title: 'Marketplace',
-    url: 'marketplace',
-  },
-  {
-    title: 'Hire Designers',
-    url: 'hiring',
-  },
-];
 
 export const Header = ({ user }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleEnterPressed = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch(event.target.value);
+    }
+  };
+
+  const handleSearch = (value) => {
+    console.log(value);
+  };
   return (
     <Box
       position={{ base: 'fixed', md: 'inherit' }}
@@ -110,7 +94,7 @@ export const Header = ({ user }) => {
               spacing={6}
               display={{ base: 'none', md: 'flex' }}
             >
-              {Links.map((link) => (
+              {routes.map((link) => (
                 <Link to={link.url} key={link.url}>
                   <Text _hover={{ color: '#E26D5C' }}>{link.title}</Text>
                 </Link>
@@ -130,6 +114,7 @@ export const Header = ({ user }) => {
                 fontSize="sm"
                 color="black"
                 w="150px"
+                onKeyDown={handleEnterPressed}
                 _focus={{
                   border: '1px solid pink',
                   boxShadow: ' 0 0 0 4px rgb(234 76 137 / 10%)',
@@ -263,6 +248,7 @@ export const Header = ({ user }) => {
                 fontSize="lg"
                 color="black"
                 w="100%"
+                onKeyDown={handleEnterPressed}
                 _focus={{
                   backgroundColor: 'white',
                   border: '1px solid pink',
@@ -271,7 +257,7 @@ export const Header = ({ user }) => {
               />
             </InputGroup>
             <Stack as={'nav'} spacing={4} mt="1.5em">
-              {Links.map((link) => (
+              {routes.map((link) => (
                 <Link to={link.url} key={link.url} onClick={onClose}>
                   <Text fontSize="lg"> {link.title}</Text>
                 </Link>
