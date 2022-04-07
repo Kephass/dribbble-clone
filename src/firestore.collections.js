@@ -125,6 +125,11 @@ const handleUpdateUserProfile = async (docId, userData) => {
     location: userData.location,
   });
 };
+const handleUpdateUserPremium = async (docId) => {
+  updateDoc(doc(db, 'users', docId), {
+    premium: true,
+  });
+};
 
 // Remove duplicates
 const removeDuplicates = (dupArray) => {
@@ -156,6 +161,7 @@ export {
   getAllPosts,
   getNewPost,
   getUserAndLikedPosts,
+  handleUpdateUserPremium,
   handleUpdateUserProfile,
   handleUserFromFirestore,
   limitNumber,

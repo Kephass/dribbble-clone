@@ -292,6 +292,7 @@ export const Header = ({ user }) => {
                       size={'md'}
                       mr="1em"
                     />
+
                     <Text fontSize="lg" color="black">
                       {user?.displayName}
                     </Text>

@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { StarIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -68,8 +70,21 @@ export const UserProfileHeader = () => {
     <>
       {userInfo ? (
         <HStack justifyContent="center" spacing="12" p="4rem">
-          <Box>
+          <Box position="relative">
             <Image borderRadius="full" width="130px" src={avatar} alt={title} />
+            {userInfo.premium && (
+              <Flex
+                bg="white"
+                position="absolute"
+                right="-10px"
+                bottom="5px"
+                borderRadius="50%"
+                p="10px"
+                boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
+              >
+                <StarIcon color="pink.100" fontSize="2xl" />
+              </Flex>
+            )}
           </Box>
           <VStack alignSelf="flex-start">
             <Heading>{title}</Heading>

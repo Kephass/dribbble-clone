@@ -11,6 +11,7 @@ import {
   Landing,
   LearnDesign,
   Marketplace,
+  Premium,
   Search,
   Upload,
   UserProfile,
@@ -78,6 +79,7 @@ function App() {
         <Route path="search/*" element={<Search />} />
         <Route path="*" element={<Error />} />
         <Route path="uploads" element={<Upload />} />
+        <Route path="premium/success" element={<Premium />} />
       </Routes>
 
       {!isAuthPath && <Footer />}
