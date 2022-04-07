@@ -173,6 +173,25 @@ function Upload() {
                   setNewPostInfo({ ...newPostInfo, tags: tags });
                 }}
               />
+              <Flex justifyContent={'flex-end'} mt="24px">
+                <Button fontSize="sm" disabled={!hasImages} mr="12px">
+                  Save as draft
+                </Button>
+                <Button
+                  fontSize="sm"
+                  disabled={!hasImages || loading ? true : false}
+                  colorScheme="pink"
+                  onClick={async () => {
+                    setLoading(true);
+                    await createPost(newPostInfo, user, loading).then(() => {
+                      setLoading(false);
+                      navigate(`/users/${user.displayName.split(' ')[0]}`);
+                    });
+                  }}
+                >
+                  {loading ? 'Uploading...' : 'Save'}
+                </Button>
+              </Flex>
             </Container>
           )}
         </form>
