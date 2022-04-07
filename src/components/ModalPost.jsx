@@ -125,7 +125,7 @@ const Modal = ({ handleClose, setPosts }) => {
       }
       return newPost;
     });
-    likePost(user, docId, setPosts, isLiked, likes).then((res) =>
+    likePost(user, docId, setPosts, isLiked, likes).then(() =>
       setLoading(false)
     );
   };
