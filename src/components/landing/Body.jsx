@@ -57,7 +57,7 @@ export function Body() {
     }
   };
   return (
-    <Container maxW="95%" overflow="hidden" mt={{ base: '10px', md: '0px' }}>
+    <Container maxW="95%" overflow="hidden" mt={{ base: '70px', md: '0px' }}>
       <FilterNav tag={tag} filter={checkMenuItemLabel(filter)} />
 
       <Shots posts={posts} setPosts={setPosts} />
