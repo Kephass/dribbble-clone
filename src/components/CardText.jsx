@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { EyeFilled, HeartFilled } from '@ant-design/icons';
@@ -12,6 +12,11 @@ export function CardText({ item, setPosts = null }) {
   const { docId, profileImg, displayName, likes, views } = item;
   const [isLiked, setIsLiked] = useState(false);
   const setLogInModal = useSetRecoilState(userLogInModal);
+  useEffect(() => {
+    if (user) {
+      setIsLiked(likes?.includes(user?.localId));
+    }
+  }, [docId, likes]);
   const handleLikePost = (e) => {
     e.stopPropagation();
     if (!user) return setLogInModal(true);
