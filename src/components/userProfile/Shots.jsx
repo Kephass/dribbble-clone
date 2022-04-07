@@ -50,7 +50,7 @@ export const Shots = ({ posts, setPosts }) => {
                   objectFit="cover"
                   setPosts={setPosts}
                 />
-                <CardText item={post} id={post.docId} />
+                <CardText item={post} setPosts={setPosts} />
               </Flex>
             </motion.div>
           </AnimatePresence>

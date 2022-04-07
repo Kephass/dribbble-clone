@@ -73,9 +73,10 @@ function Upload() {
             ml="12px"
             onClick={async () => {
               setLoading(true);
-              await createPost(newPostInfo, user, loading);
-              setLoading(false);
-              navigate(`/users/${user.displayName.split(' ')[0]}`);
+              await createPost(newPostInfo, user, loading).then(() => {
+                setLoading(false);
+                navigate(`/users/${user.displayName.split(' ')[0]}`);
+              });
             }}
           >
             {loading ? 'Uploading...' : 'Save'}

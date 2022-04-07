@@ -148,13 +148,13 @@ const createPost = async (postData, user, loading) => {
       });
     });
   });
-  upload.then(async () => {
-    await updateDoc(doc(db, 'posts', docRef.id), {
+  await upload.then(async () => {
+    return updateDoc(doc(db, 'posts', docRef.id), {
       images: imageUrls,
       timestamp: serverTimestamp(),
     });
-    return 'Post created';
   });
+  return 'Post created';
 };
 // Delete POST
 const deletePost = async ({ docId, title }) => {
