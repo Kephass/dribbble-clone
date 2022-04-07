@@ -157,9 +157,7 @@ const Modal = ({ handleClose, setPosts }) => {
                       <Flex direction="column">
                         <Text fontWeight="bold">{displayName}</Text>
                         <Flex direction={{ base: 'column', md: 'row' }}>
-                          <Text fontWeight="light">
-                            Risang Kuncoro for Plainthing Studio • Follow •
-                          </Text>
+                          <Text fontWeight="light">{title} • Follow •</Text>
                           <Text
                             fontWeight="light"
                             color="pink.100"
