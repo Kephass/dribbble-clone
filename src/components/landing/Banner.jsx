@@ -15,7 +15,7 @@ export function Banner() {
   const navigate = useNavigate();
 
   return (
-    <Box bg="purple.25" pb="1em">
+    <Box bg="purple.25" py="3em">
       <Container maxW="container.xl" centerContent>
         <Flex align="center" direction={{ base: 'column-reverse', md: 'row' }}>
           <VStack
