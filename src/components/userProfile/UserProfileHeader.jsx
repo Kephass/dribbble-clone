@@ -9,7 +9,6 @@ import {
   Heading,
   HStack,
   Image,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -17,6 +16,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   Text,
   Textarea,
   useDisclosure,
@@ -24,6 +24,7 @@ import {
 } from '@chakra-ui/react';
 
 import { userInfoStateAtom, userStateAtom } from '../../data/atoms';
+import data from '../../data/regions.json';
 import {
   handleUpdateUserProfile,
   handleUserFromFirestore,
@@ -63,6 +64,7 @@ export const UserProfileHeader = () => {
       });
     }
   }, [user]);
+  data.map((p) => console.log(p.title));
 
   return (
     <>
@@ -124,7 +126,17 @@ export const UserProfileHeader = () => {
 
                 <FormControl mt={4}>
                   <FormLabel>Location</FormLabel>
-                  <Input ref={locationRef} defaultValue={userInfo.location} />
+                  <Select
+                    placeholder="Select your province"
+                    ref={locationRef}
+                    defaultValue={userInfo.location}
+                  >
+                    {data.map((province) => (
+                      <option key={province.title} value={province.title}>
+                        {province.title}
+                      </option>
+                    ))}
+                  </Select>
                 </FormControl>
               </ModalBody>
 
