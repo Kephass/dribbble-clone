@@ -9,6 +9,7 @@ import {
   Container,
   Flex,
   Grid,
+  HStack,
   Image,
   Link,
   Spacer,
@@ -33,22 +34,14 @@ export function Footer() {
               <Text>and get hired.</Text>
             </Box>
             <Spacer />
-            <Box>
-              <Link
-                href="https://dribbble.com/dribbble"
-                cursor="pointer"
-                mr="4"
-              >
+            <HStack>
+              <Link href="https://dribbble.com/dribbble" cursor="pointer">
                 <DribbbleOutlined />
               </Link>
               <Link href="https://twitter.com/dribbble" cursor="pointer" mr="4">
                 <TwitterOutlined />
               </Link>
-              <Link
-                href="https://www.facebook.com/dribbble"
-                cursor="pointer"
-                mr="4"
-              >
+              <Link href="https://www.facebook.com/dribbble" cursor="pointer">
                 <FacebookFilled />
               </Link>
               <Link
@@ -57,7 +50,7 @@ export function Footer() {
               >
                 <InstagramOutlined />
               </Link>
-            </Box>
+            </HStack>
           </Box>
 
           <Grid
