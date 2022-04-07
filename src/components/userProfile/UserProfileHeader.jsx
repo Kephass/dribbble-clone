@@ -64,7 +64,6 @@ export const UserProfileHeader = () => {
       });
     }
   }, [user]);
-  data.map((p) => console.log(p.title));
 
   return (
     <>
