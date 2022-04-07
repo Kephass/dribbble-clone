@@ -18,7 +18,11 @@ function Premium() {
   useEffect(() => {
     if (user) {
       handleUserFromFirestore(user.localId).then((res) => {
-        handleUpdateUserPremium(res.docId).then(() => navigate);
+        handleUpdateUserPremium(res.docId).then(() =>
+          setTimeout(function () {
+            navigate('/');
+          }, 5000)
+        );
       });
     }
   }, [user]);
