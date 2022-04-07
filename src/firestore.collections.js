@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import {
-  arrayUnion,
   collection,
   doc,
   getDocs,
@@ -122,7 +121,7 @@ const handleUserFromFirestore = async (uid) => {
 const handleUpdateUserProfile = async (docId, userData) => {
   updateDoc(doc(db, 'users', docId), {
     biography: userData.biography,
-    skills: arrayUnion(...userData.skills),
+    skills: userData.skills,
     location: userData.location,
   });
 };

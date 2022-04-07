@@ -24,8 +24,8 @@ export function Pricing() {
         Level up your design career with Dribbble Pro
       </Text>
       <Text fontWeight="medium" fontSize={{ base: 'md', lg: 'lg' }}>
-        Whether you&apos;re looking to build your portfolio, find your next freelance
-        client or showcase your teams work -- we have a plan for you.
+        Whether you&apos;re looking to build your portfolio, find your next
+        freelance client or showcase your teams work -- we have a plan for you.
       </Text>
 
       <FormControl
@@ -55,6 +55,7 @@ export function Pricing() {
         alignItems={{ base: 'center', md: 'flex-start' }}
       >
         <PriceCard
+          link="https://buy.stripe.com/test_9AQ03F6C17Pk7qE000"
           stateChanger={setYearly}
           yearly={yearly}
           title="Dribbble Pro"
@@ -70,6 +71,7 @@ export function Pricing() {
           ]}
         />
         <PriceCard
+          link="https://buy.stripe.com/test_00g17J6C17Pk26kbIJ"
           stateChanger={setYearly}
           yearly={yearly}
           title="Pro Business"

@@ -1,12 +1,5 @@
 import { CheckCircleFilled } from '@ant-design/icons';
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Link,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Link, Text } from '@chakra-ui/react';
 
 import { ReactComponent as Arrow } from '../../svg/arrow.svg';
 
@@ -19,6 +12,7 @@ export function PriceCard({
   percentage,
   yearly,
   stateChanger,
+  link = 'https://buy.stripe.com/test_00g17J6C17Pk26kbIJ',
 }) {
   return (
     <Box
@@ -60,9 +54,16 @@ export function PriceCard({
         >
           Switch to {yearly ? 'montly' : 'yearly'} billing
         </Link>
-        <Button color="white" bgGradient="linear(to-r, orange.400, pink.400)">
-          Get started
-        </Button>
+        <Link
+          isExternal
+          href={link}
+          color="white"
+          _hover={{ textDecoration: 'none', color: 'siteGray' }}
+        >
+          <Button bgGradient="linear(to-r, orange.400, pink.400)">
+            Get started
+          </Button>
+        </Link>
       </Flex>
       <Flex direction="column" gap="4" ml="4" mt="8">
         {options?.map((option) => (
