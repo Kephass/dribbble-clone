@@ -4474,6 +4474,13 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
+chakra-react-select@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/chakra-react-select/-/chakra-react-select-3.2.0.tgz#f6f2596c220be829a83af8cbfbdd6d0bb7562bd7"
+  integrity sha512-pSAqeEFx9061qbxwX4z2jf8aTH/Hvpa0WaSb468osuw9grFitnujt0/nIUq4EscC81iS+99Lu5TXs2hoIErrYA==
+  dependencies:
+    react-select "^5.3.0"
+
 chalk@^2.0.0, chalk@^2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -10246,7 +10253,7 @@ react-scripts@5.0.0:
   optionalDependencies:
     fsevents "^2.3.2"
 
-react-select@^5.2.2:
+react-select@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.3.0.tgz#dc77c1f95e1037ec4cb01c5e5d6272d80be8d3f6"
   integrity sha512-GM6Fbv1+X+kb3e5Fc4oNeyOJkCIesY/D4NBiReKlGY4RxoeztFYm3J0KREgwMaIKQqwTiuLqTlpUBY3SYw5goQ==

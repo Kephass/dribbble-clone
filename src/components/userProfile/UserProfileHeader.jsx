@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { QuestionOutlined } from '@ant-design/icons';
 import { StarIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -21,6 +22,7 @@ import {
   Select,
   Text,
   Textarea,
+  Tooltip,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
@@ -53,7 +55,7 @@ export const UserProfileHeader = () => {
   let updateUserData = () => {
     const userData = {
       biography: biographyRef.current.value,
-      skills: skillsRef.current.value.split(','),
+      skills: skillsRef.current.value.split(', '),
       location: locationRef.current.value,
     };
     setUserInfo({ ...userInfo, ...userData });
@@ -134,8 +136,23 @@ export const UserProfileHeader = () => {
                 </FormControl>
 
                 <FormControl mt={4}>
-                  <FormLabel>Skills</FormLabel>
-                  <Textarea ref={skillsRef} defaultValue={userInfo.skills} />
+                  <FormLabel>
+                    Skills
+                    <Tooltip
+                      hasArrow
+                      label="Skills should be comma separated"
+                      bg="gray.300"
+                      color="black"
+                    >
+                      <QuestionOutlined
+                        style={{ marginLeft: '.5rem', fontSize: '.9rem' }}
+                      />
+                    </Tooltip>
+                  </FormLabel>
+                  <Textarea
+                    ref={skillsRef}
+                    defaultValue={userInfo.skills.join(', ')}
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
