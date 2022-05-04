@@ -20,7 +20,7 @@ To see a live version, please click [this](https://dribble-clone-v1.vercel.app/)
 ## Features
 
 * User Signup | Signin | Signout Functionality 🔒
-* Ability To Create Shots
+* Ability To Create Shots(Posts)
 * Like / Unlike Functionality
 * Modify your shots
 * Delete Shot
